@@ -9,7 +9,15 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-//1st commit
+
+//Express and Mongoose
+//Устанавливаем соединение с mongoose
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb://localhost:27017/RedBalloonDB';
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 // view engine setup
