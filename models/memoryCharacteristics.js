@@ -1,0 +1,2 @@
+//Память
+//Входит в productCharacteristics

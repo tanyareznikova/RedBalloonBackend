@@ -1,0 +1,2 @@
+//Фотокамера
+//Входит в productCharacteristics

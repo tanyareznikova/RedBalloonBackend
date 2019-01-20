@@ -1,0 +1,2 @@
+//Процессор
+//Входит в productCharacteristics

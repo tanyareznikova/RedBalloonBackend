@@ -1,0 +1,2 @@
+//Прочее
+//Входит в productCharacteristics

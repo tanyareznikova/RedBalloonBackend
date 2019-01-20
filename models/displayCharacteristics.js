@@ -1,0 +1,2 @@
+//Дисплей
+//Входит в productCharacteristics

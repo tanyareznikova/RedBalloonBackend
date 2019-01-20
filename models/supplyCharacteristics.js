@@ -1,0 +1,2 @@
+//Питание
+//Входит в productCharacteristics

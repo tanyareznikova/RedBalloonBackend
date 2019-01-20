@@ -1,0 +1,2 @@
+//Связь
+//Входит в productCharacteristics

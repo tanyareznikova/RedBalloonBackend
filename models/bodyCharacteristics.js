@@ -1,0 +1,2 @@
+//Корпус
+//Входит в productCharacteristics

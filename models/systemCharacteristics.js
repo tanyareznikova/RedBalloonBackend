@@ -1,0 +1,2 @@
+//Система
+//Входит в productCharacteristics

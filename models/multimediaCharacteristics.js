@@ -1,0 +1,2 @@
+//Мультимедиа
+//Входит в productCharacteristics
