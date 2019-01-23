@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // img path
-var imgPath = 'C:\\images\\img.png';
+var imgPathToProduct = 'C:\\images\\img.png';
 
 var ProductSchema = new Schema(
     {
