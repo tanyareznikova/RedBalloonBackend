@@ -4,6 +4,9 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
+// img path
+var imgPath = 'C:\\images\\img.png';
+
 var ProductSchema = new Schema(
     {
 
@@ -17,8 +20,8 @@ var ProductSchema = new Schema(
         description: {type: String, required: true},
         //характеристика товара
         productCharacteristics: {type: Schema.ObjectId, ref: 'ProductCharacteristics', required: true},
-        //фото
-        photo: {type: String, required: true},
+        //картинки
+        img: {data: Buffer, contentType: String},
 
     }
 );
