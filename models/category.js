@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 
 var CategorySchema = new Schema(
     {
-        categoryTitle: {type: String, required: true, max: 100, array: ['Все телефоны', 'Android', 'iPhone', 'Huawei']},
+        //categoryTitle: {type: String, required: true, max: 100, array: ['Все телефоны', 'Android', 'iPhone', 'Huawei']},
+        categoryTitle: [{type: String, required: true, max: 100}],
         productID: {type: Schema.ObjectId, ref: 'Product', required: true},
 
     }
