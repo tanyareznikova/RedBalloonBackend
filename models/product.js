@@ -4,8 +4,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-// img path
-var imgPathToProduct = 'C:\\images\\img.png';
+
 
 var ProductSchema = new Schema(
     {
@@ -16,12 +15,14 @@ var ProductSchema = new Schema(
         categoryID: [{type: Schema.ObjectId, ref: 'Category', required: true}],
         //цена
         price: {type: String, required: true},
+        //количество
+        quantity: {type: String, required: true},
         //описание
         description: {type: String, required: true},
         //характеристика товара
         productCharacteristics: {type: Schema.ObjectId, ref: 'ProductCharacteristics', required: true},
         //картинки
-        img: {data: Buffer, contentType: String},
+        img: [{data: Buffer, contentType: String}],
 
     }
 );

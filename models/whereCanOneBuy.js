@@ -4,8 +4,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-// img path
-var imgPathToBuy = 'C:\\images\\img.png';
+
 
 var WhereCanOneBuySchema = new Schema(
     {

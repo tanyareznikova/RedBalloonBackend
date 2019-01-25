@@ -14,10 +14,16 @@ var app = express();
 //Устанавливаем соединение с mongoose
 var mongoose = require('mongoose');
 var mongoDB = 'mongodb://localhost:27017/RedBalloonDB';
+
+// img path
+//var imgPathToProduct = 'C:\\images\\img.png';
+// img path
+
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 
 
 // view engine setup
