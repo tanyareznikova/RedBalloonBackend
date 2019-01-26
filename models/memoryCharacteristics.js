@@ -9,13 +9,13 @@ var MemoryCharacteristicsSchema = new Schema(
     {
 
         //Встроенная память
-        internalMemory: {type: String, required: true},
+        internalMemory: {type: Number, required: true},
         //Оперативная память
-        ram: {type: String, required: true},
+        ram: {type: Number, required: true},
         //Поддержка карт памяти
         memoryCardSupport: [{type: String, required: true}],
         //Макс. объем карты памяти
-        maxMemoryCardCapacity: {type: String, required: true},
+        maxMemoryCardCapacity: {type: Number, required: true},
 
     }
 );

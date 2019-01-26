@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 var BindingCharacteristicsSchema = new Schema(
     {
 
-        lte: [{type: String, required: true}],
+        lte: [{type: Number, required: true}],
         internet: [{type: String, required: true}],
         bluetooth: [{type: String, required: true}],
         wiFi: [{type: String, required: true}],

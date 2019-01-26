@@ -9,13 +9,13 @@ var BodyCharacteristicsSchema = new Schema(
     {
 
         //Высота
-        height: {type: String, required: true},
+        height: {type: Decimal128, required: true},
         //Ширина
-        width: {type: String, required: true},
+        width: {type: Decimal128, required: true},
         //Толщина
-        thickness: {type: String, required: true},
+        thickness: {type: Decimal128, required: true},
         //Вес
-        weight: {type: String, required: true},
+        weight: {type: Number, required: true},
         //Материал корпуса
         bodyMaterial: [{type: String, required: true}],
         //Цвет

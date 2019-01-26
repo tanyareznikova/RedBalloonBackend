@@ -14,9 +14,9 @@ var ProductSchema = new Schema(
         //категория
         categoryID: [{type: Schema.ObjectId, ref: 'Category', required: true}],
         //цена
-        price: {type: String, required: true},
+        price: {type: Number, required: true},
         //количество
-        quantity: {type: String, required: true},
+        quantity: {type: Number, required: true},
         //описание
         description: {type: String, required: true},
         //характеристика товара

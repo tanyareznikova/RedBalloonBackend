@@ -9,7 +9,7 @@ var CameraCharacteristicsSchema = new Schema(
     {
 
         //Фотокамера
-        camera: [{type: String, required: true}],
+        camera: [{type: Number, required: true}],
         //Диафрагма
         diaphragm: {type: String, required: true},
         //Вспышка
@@ -19,7 +19,7 @@ var CameraCharacteristicsSchema = new Schema(
         //Разрешение видеосъемки
         videoResolution: {type: String, required: true},
         //Фронтальная камера
-        frontCamera: [{type: String, required: true}],
+        frontCamera: [{type: Number, required: true}],
 
     }
 );

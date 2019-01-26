@@ -11,7 +11,7 @@ var SimCardCharacteristicsSchema = new Schema(
         //SIM-карта
         simCard : {type: String, required: true},
         //Кол-во SIM-карт
-        numberOfSIMcards: {type: String, required: true},
+        numberOfSIMcards: {type: Number, required: true},
 
     }
 );

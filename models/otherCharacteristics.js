@@ -13,7 +13,7 @@ var OtherCharacteristicsSchema = new Schema(
         //Сканер отпечатков пальцев
         fingerprintScanner: {type: String, required: true, enum: ['да', 'нет']},
         //Срок гарантии
-        guaranteePeriod: {type: String, required: true},
+        guaranteePeriod: {type: Number, required: true},
         //Производитель
         manufacturer: {type: String, required: true},
         //Страна производитель

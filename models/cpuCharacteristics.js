@@ -11,9 +11,9 @@ var CPUсharacteristicsSchema = new Schema(
         //Процессор
         cpu: {type: String, required: true},
         //Частота процессора
-        cpuFrequency: {type: String, required: true},
+        cpuFrequency: {type: Number, required: true},
         //Количество ядер
-        numberOfCores: {type: String, required: true},
+        numberOfCores: {type: Number, required: true},
 
     }
 );

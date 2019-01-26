@@ -12,9 +12,9 @@ var WhereCanOneBuySchema = new Schema(
         //продукт
         productID: [{type: Schema.ObjectId, ref: 'Product', required: true}],
         //ссылка на магазин
-        linkToStore: {data: Buffer, contentType: String},
+        linkToStore: [{data: Buffer, contentType: String}],
         //лого магазина
-        storeLogo: {data: Buffer, contentType: String},
+        storeLogo: [{data: Buffer, contentType: String}],
 
     }
 );

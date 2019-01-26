@@ -11,13 +11,13 @@ var DisplayCharacteristicsSchema = new Schema(
         //Тип дисплея
         displayType: {type: String, required: true},
         //Диагональ
-        diagonal: {type: String, required: true},
+        diagonal: {type: Decimal128, required: true},
         //Разрешение
         screenResolution: {type: String, required: true},
         //Плотность пикселей
-        ppi: {type: String, required: true},
+        ppi: {type: Number, required: true},
         //Количество цветов дисплея
-        numberOfDisplayColors: {type: String, required: true},
+        numberOfDisplayColors: {type: Number, required: true},
         //Сенсорный дисплей
         touchscreen: {type: String, required: true, enum: ['да', 'нет']},
         //Поддержка Multitouch

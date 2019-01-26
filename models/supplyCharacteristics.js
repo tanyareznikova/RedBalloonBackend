@@ -13,7 +13,7 @@ var SupplyCharacteristicsSchema = new Schema(
         //Поддержка технологии быстрой зарядки
         fastCharging: {type: String, required: true, enum: ['да', 'нет']},
         //Аккумулятор
-        battery: {type: String, required: true},
+        battery: {type: Number, required: true},
 
     }
 );
