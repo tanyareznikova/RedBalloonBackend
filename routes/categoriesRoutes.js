@@ -6,14 +6,8 @@ var mongoose = require('mongoose');
 var Category = require('../models/category.js');
 //import category from '../models/category.js';
 
-/* GET ALL Category
-router.get('/', function(req, res, next) {
-    category.find(function (err, categoriesRoutes) {
-        if (err) return next(err);
-        res.json(categoriesRoutes);
-    });
-});
-*/
+//ЗАПРОС REST API
+//curl -i -X POST -d "{\"categoryTitle\": \"iPhone\"}" -H "Content-Type:application/json" localhost:3000/categories
 
 /* GET ALL Category */
 router.get('/', function(req, res, next) {

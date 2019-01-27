@@ -13,7 +13,8 @@ var mongoose = require('mongoose');
 //var imgPathToProduct = 'C:\\images\\img.png';
 // img path
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/RedBalloonDB')
+//mongoose.connect('mongodb://localhost:27017/RedBalloonDB', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/RedBalloonDB', { useNewUrlParser: true })
     .then(() =>  console.log('connection succesful'))
     .catch((err) => console.error(err));
 
