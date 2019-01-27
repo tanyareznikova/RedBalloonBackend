@@ -9,7 +9,20 @@ var usersRouter = require('./routes/users');
 
 var productsRouter = require('./routes/productsRoutes');
 var categoriesRouter = require('./routes/categoriesRoutes');
-
+var bindingCharacteristicsRouter = require('./routes/bindingCharacteristicsRoutes');
+var bodyCharacteristicsRouter = require('./routes/bodyCharacteristicsRoutes');
+var cameraCharacteristicsRouter = require('./routes/cameraCharacteristicsRoutes');
+var cpuCharacteristicsRouter = require('./routes/cpuCharacteristicsRoutes');
+var displayCharacteristicsRouter = require('./routes/displayCharacteristicsRoutes');
+var memoryCharacteristicsRouter = require('./routes/memoryCharacteristicsRoutes');
+var multimediaCharacteristicsRouter = require('./routes/multimediaCharacteristicsRoutes');
+var otherCharacteristicsRouter = require('./routes/otherCharacteristicsRoutes');
+var productCharacteristicsRouter = require('./routes/productCharacteristicsRoutes');
+var productReviewsRouter = require('./routes/productReviewsRoutes');
+var simCardCharacteristicsRouter = require('./routes/simCardCharacteristicsRoutes');
+var supplyCharacteristicsRouter = require('./routes/supplyCharacteristicsRoutes');
+var systemCharacteristicsRouter = require('./routes/systemCharacteristicsRoutes');
+var whereCanOneBuyRouter = require('./routes/whereCanOneBuyRoutes');
 
 var app = express();
 
@@ -45,6 +58,20 @@ app.use('/users', usersRouter);
 
 app.use('/productsRoutes', productsRouter);
 app.use('/categoriesRoutes', categoriesRouter);
+app.use('/bindingCharacteristicsRoutes', bindingCharacteristicsRouter);
+app.use('/bodyCharacteristicsRoutes', bodyCharacteristicsRouter);
+app.use('/cameraCharacteristicsRoutes', cameraCharacteristicsRouter);
+app.use('/cpuCharacteristicsRoutes', cpuCharacteristicsRouter);
+app.use('/displayCharacteristicsRoutes', displayCharacteristicsRouter);
+app.use('/memoryCharacteristicsRoutes', memoryCharacteristicsRouter);
+app.use('/multimediaCharacteristicsRoutes', multimediaCharacteristicsRouter);
+app.use('/otherCharacteristicsRoutes', otherCharacteristicsRouter);
+app.use('/productCharacteristicsRoutes', productCharacteristicsRouter);
+app.use('/productReviewsRoutes', productReviewsRouter);
+app.use('/simCardCharacteristicsRoutes', simCardCharacteristicsRouter);
+app.use('/supplyCharacteristicsRoutes', supplyCharacteristicsRouter);
+app.use('/systemCharacteristicsRoutes', systemCharacteristicsRouter);
+app.use('/whereCanOneBuyRoutes', whereCanOneBuyRouter);
 
 
 // catch 404 and forward to error handler
