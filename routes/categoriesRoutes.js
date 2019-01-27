@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var Category = require('../models/category.js');
 //import category from '../models/category.js';
 
-//ЗАПРОС REST API
+//ЗАПРОС REST API in Terminal
 //curl -i -X POST -d "{\"categoryTitle\": \"iPhone\"}" -H "Content-Type:application/json" localhost:3000/categories
 
 /* GET ALL Category */
