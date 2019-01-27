@@ -3,7 +3,7 @@ var bindingCharacteristicsRouter = express.Router();
 var mongoose = require('mongoose');
 var BindingCharacteristics = require('../models/bindingCharacteristics.js');
 
-/* GET ALL PRODUCTS */
+/* GET ALL BindingCharacteristics */
 bindingCharacteristicsRouter.get('/', function(req, res, next) {
     BindingCharacteristics.find(function (err, bindingCharacteristicsRoutes) {
         if (err) return next(err);
@@ -11,7 +11,7 @@ bindingCharacteristicsRouter.get('/', function(req, res, next) {
     });
 });
 
-/* GET SINGLE PRODUCT BY ID */
+/* GET SINGLE BindingCharacteristics BY ID */
 bindingCharacteristicsRouter.get('/:id', function(req, res, next) {
     BindingCharacteristics.findById(req.params.id, function (err, post) {
         if (err) return next(err);
@@ -19,7 +19,7 @@ bindingCharacteristicsRouter.get('/:id', function(req, res, next) {
     });
 });
 
-/* SAVE PRODUCT */
+/* SAVE BindingCharacteristics */
 bindingCharacteristicsRouter.post('/', function(req, res, next) {
     BindingCharacteristics.create(req.body, function (err, post) {
         if (err) return next(err);
@@ -27,7 +27,7 @@ bindingCharacteristicsRouter.post('/', function(req, res, next) {
     });
 });
 
-/* UPDATE PRODUCT */
+/* UPDATE BindingCharacteristics */
 bindingCharacteristicsRouter.put('/:id', function(req, res, next) {
     BindingCharacteristics.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
@@ -35,7 +35,7 @@ bindingCharacteristicsRouter.put('/:id', function(req, res, next) {
     });
 });
 
-/* DELETE PRODUCT */
+/* DELETE BindingCharacteristics */
 bindingCharacteristicsRouter.delete('/:id', function(req, res, next) {
     BindingCharacteristics.findByIdAndRemove(req.params.id, req.body, function (err, post) {
         if (err) return next(err);

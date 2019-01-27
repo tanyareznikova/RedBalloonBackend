@@ -3,7 +3,7 @@ var categoryRouter = express.Router();
 var mongoose = require('mongoose');
 var Category = require('../models/category.js');
 
-/* GET ALL PRODUCTS */
+/* GET ALL Category */
 categoryRouter.get('/', function(req, res, next) {
     Category.find(function (err, categoriesRoutes) {
         if (err) return next(err);
@@ -11,7 +11,7 @@ categoryRouter.get('/', function(req, res, next) {
     });
 });
 
-/* GET SINGLE PRODUCT BY ID */
+/* GET SINGLE Category BY ID */
 categoryRouter.get('/:id', function(req, res, next) {
     Category.findById(req.params.id, function (err, post) {
         if (err) return next(err);
@@ -19,7 +19,7 @@ categoryRouter.get('/:id', function(req, res, next) {
     });
 });
 
-/* SAVE PRODUCT */
+/* SAVE Category */
 categoryRouter.post('/', function(req, res, next) {
     Category.create(req.body, function (err, post) {
         if (err) return next(err);
@@ -27,7 +27,7 @@ categoryRouter.post('/', function(req, res, next) {
     });
 });
 
-/* UPDATE PRODUCT */
+/* UPDATE Category */
 categoryRouter.put('/:id', function(req, res, next) {
     Category.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
@@ -35,7 +35,7 @@ categoryRouter.put('/:id', function(req, res, next) {
     });
 });
 
-/* DELETE PRODUCT */
+/* DELETE Category */
 categoryRouter.delete('/:id', function(req, res, next) {
     Category.findByIdAndRemove(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
