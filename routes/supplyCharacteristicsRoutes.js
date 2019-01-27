@@ -1,10 +1,10 @@
 var express = require('express');
-var supplyCharacteristicsRouter = express.Router();
+var router = express.Router();
 var mongoose = require('mongoose');
 var SupplyCharacteristics = require('../models/supplyCharacteristics.js');
 
 /* GET ALL SupplyCharacteristics */
-supplyCharacteristicsRouter.get('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
     SupplyCharacteristics.find(function (err, supplyCharacteristicsRoutes) {
         if (err) return next(err);
         res.json(supplyCharacteristicsRoutes);
@@ -12,7 +12,7 @@ supplyCharacteristicsRouter.get('/', function(req, res, next) {
 });
 
 /* GET SINGLE SupplyCharacteristics BY ID */
-supplyCharacteristicsRouter.get('/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     SupplyCharacteristics.findById(req.params.id, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -20,7 +20,7 @@ supplyCharacteristicsRouter.get('/:id', function(req, res, next) {
 });
 
 /* SAVE SupplyCharacteristics */
-supplyCharacteristicsRouter.post('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
     SupplyCharacteristics.create(req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -28,7 +28,7 @@ supplyCharacteristicsRouter.post('/', function(req, res, next) {
 });
 
 /* UPDATE SupplyCharacteristics */
-supplyCharacteristicsRouter.put('/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
     SupplyCharacteristics.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -36,11 +36,11 @@ supplyCharacteristicsRouter.put('/:id', function(req, res, next) {
 });
 
 /* DELETE SupplyCharacteristics */
-supplyCharacteristicsRouter.delete('/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     SupplyCharacteristics.findByIdAndRemove(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
 
-module.exports = supplyCharacteristicsRouter;
+module.exports = router;

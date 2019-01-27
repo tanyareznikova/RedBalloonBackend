@@ -1,10 +1,10 @@
 var express = require('express');
-var multimediaCharacteristicsRouter = express.Router();
+var router = express.Router();
 var mongoose = require('mongoose');
 var MultimediaCharacteristics = require('../models/multimediaCharacteristics.js');
 
 /* GET ALL MultimediaCharacteristics */
-multimediaCharacteristicsRouter.get('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
     MultimediaCharacteristics.find(function (err, multimediaCharacteristicsRoutes) {
         if (err) return next(err);
         res.json(multimediaCharacteristicsRoutes);
@@ -12,7 +12,7 @@ multimediaCharacteristicsRouter.get('/', function(req, res, next) {
 });
 
 /* GET SINGLE MultimediaCharacteristics BY ID */
-multimediaCharacteristicsRouter.get('/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     MultimediaCharacteristics.findById(req.params.id, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -20,7 +20,7 @@ multimediaCharacteristicsRouter.get('/:id', function(req, res, next) {
 });
 
 /* SAVE MultimediaCharacteristics */
-multimediaCharacteristicsRouter.post('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
     MultimediaCharacteristics.create(req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -28,7 +28,7 @@ multimediaCharacteristicsRouter.post('/', function(req, res, next) {
 });
 
 /* UPDATE MultimediaCharacteristics */
-multimediaCharacteristicsRouter.put('/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
     MultimediaCharacteristics.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -36,11 +36,11 @@ multimediaCharacteristicsRouter.put('/:id', function(req, res, next) {
 });
 
 /* DELETE MultimediaCharacteristics */
-multimediaCharacteristicsRouter.delete('/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     MultimediaCharacteristics.findByIdAndRemove(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
 
-module.exports = multimediaCharacteristicsRouter;
+module.exports = router;

@@ -1,10 +1,10 @@
 var express = require('express');
-var memoryCharacteristicsRouter = express.Router();
+var router = express.Router();
 var mongoose = require('mongoose');
 var MemoryCharacteristics = require('../models/memoryCharacteristics.js');
 
 /* GET ALL MemoryCharacteristics */
-memoryCharacteristicsRouter.get('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
     MemoryCharacteristics.find(function (err, memoryCharacteristicsRoutes) {
         if (err) return next(err);
         res.json(memoryCharacteristicsRoutes);
@@ -12,7 +12,7 @@ memoryCharacteristicsRouter.get('/', function(req, res, next) {
 });
 
 /* GET SINGLE MemoryCharacteristics BY ID */
-memoryCharacteristicsRouter.get('/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     MemoryCharacteristics.findById(req.params.id, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -20,7 +20,7 @@ memoryCharacteristicsRouter.get('/:id', function(req, res, next) {
 });
 
 /* SAVE MemoryCharacteristics */
-memoryCharacteristicsRouter.post('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
     MemoryCharacteristics.create(req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -28,7 +28,7 @@ memoryCharacteristicsRouter.post('/', function(req, res, next) {
 });
 
 /* UPDATE MemoryCharacteristics */
-memoryCharacteristicsRouter.put('/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
     MemoryCharacteristics.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -36,11 +36,11 @@ memoryCharacteristicsRouter.put('/:id', function(req, res, next) {
 });
 
 /* DELETE MemoryCharacteristics */
-memoryCharacteristicsRouter.delete('/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     MemoryCharacteristics.findByIdAndRemove(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
 
-module.exports = memoryCharacteristicsRouter;
+module.exports = router;

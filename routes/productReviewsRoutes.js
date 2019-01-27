@@ -1,10 +1,10 @@
 var express = require('express');
-var productReviewsRouter = express.Router();
+var router = express.Router();
 var mongoose = require('mongoose');
 var ProductReviews = require('../models/productReviews.js');
 
 /* GET ALL ProductReviews */
-productReviewsRouter.get('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
     ProductReviews.find(function (err, productReviewsRoutes) {
         if (err) return next(err);
         res.json(productReviewsRoutes);
@@ -12,7 +12,7 @@ productReviewsRouter.get('/', function(req, res, next) {
 });
 
 /* GET SINGLE ProductReviews BY ID */
-productReviewsRouter.get('/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     ProductReviews.findById(req.params.id, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -20,7 +20,7 @@ productReviewsRouter.get('/:id', function(req, res, next) {
 });
 
 /* SAVE ProductReviews */
-productReviewsRouter.post('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
     ProductReviews.create(req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -28,7 +28,7 @@ productReviewsRouter.post('/', function(req, res, next) {
 });
 
 /* UPDATE ProductReviews */
-productReviewsRouter.put('/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
     ProductReviews.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -36,11 +36,11 @@ productReviewsRouter.put('/:id', function(req, res, next) {
 });
 
 /* DELETE ProductReviews */
-productReviewsRouter.delete('/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     ProductReviews.findByIdAndRemove(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
 
-module.exports = productReviewsRouter;
+module.exports = router;

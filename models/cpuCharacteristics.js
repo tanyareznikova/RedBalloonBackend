@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var CPUсharacteristicsSchema = new Schema(
+var CpuCharacteristicsSchema = new Schema(
     {
 
         //Процессор
@@ -19,11 +19,11 @@ var CPUсharacteristicsSchema = new Schema(
 );
 
 // Виртуальное свойство - URL автора
-CPUсharacteristicsSchema
+CpuCharacteristicsSchema
     .virtual('url')
     .get(function () {
         return '/catalog/cpuCharacteristics/' + this._id;
     });
 
 //Export model
-module.exports = mongoose.model('CPUсharacteristics', CPUсharacteristicsSchema);
+module.exports = mongoose.model('CpuCharacteristics', CpuCharacteristicsSchema);

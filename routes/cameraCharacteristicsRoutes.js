@@ -1,10 +1,10 @@
 var express = require('express');
-var cameraCharacteristicsRouter = express.Router();
+var router = express.Router();
 var mongoose = require('mongoose');
 var CameraCharacteristics = require('../models/cameraCharacteristics.js');
 
 /* GET ALL CameraCharacteristics */
-cameraCharacteristicsRouter.get('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
     CameraCharacteristics.find(function (err, cameraCharacteristicsRoutes) {
         if (err) return next(err);
         res.json(cameraCharacteristicsRoutes);
@@ -12,7 +12,7 @@ cameraCharacteristicsRouter.get('/', function(req, res, next) {
 });
 
 /* GET SINGLE CameraCharacteristics BY ID */
-cameraCharacteristicsRouter.get('/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     CameraCharacteristics.findById(req.params.id, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -20,7 +20,7 @@ cameraCharacteristicsRouter.get('/:id', function(req, res, next) {
 });
 
 /* SAVE CameraCharacteristics */
-cameraCharacteristicsRouter.post('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
     CameraCharacteristics.create(req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -28,7 +28,7 @@ cameraCharacteristicsRouter.post('/', function(req, res, next) {
 });
 
 /* UPDATE CameraCharacteristics */
-cameraCharacteristicsRouter.put('/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
     CameraCharacteristics.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -36,11 +36,11 @@ cameraCharacteristicsRouter.put('/:id', function(req, res, next) {
 });
 
 /* DELETE CameraCharacteristics */
-cameraCharacteristicsRouter.delete('/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     CameraCharacteristics.findByIdAndRemove(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
 
-module.exports = cameraCharacteristicsRouter;
+module.exports = router;

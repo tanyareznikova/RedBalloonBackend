@@ -1,10 +1,10 @@
 var express = require('express');
-var systemCharacteristicsRouter = express.Router();
+var router = express.Router();
 var mongoose = require('mongoose');
 var SystemCharacteristics = require('../models/systemCharacteristics.js');
 
 /* GET ALL SystemCharacteristics */
-systemCharacteristicsRouter.get('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
     SystemCharacteristics.find(function (err, systemCharacteristicsRoutes) {
         if (err) return next(err);
         res.json(systemCharacteristicsRoutes);
@@ -12,7 +12,7 @@ systemCharacteristicsRouter.get('/', function(req, res, next) {
 });
 
 /* GET SINGLE SystemCharacteristics BY ID */
-systemCharacteristicsRouter.get('/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     SystemCharacteristics.findById(req.params.id, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -20,7 +20,7 @@ systemCharacteristicsRouter.get('/:id', function(req, res, next) {
 });
 
 /* SAVE SystemCharacteristics */
-systemCharacteristicsRouter.post('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
     SystemCharacteristics.create(req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -28,7 +28,7 @@ systemCharacteristicsRouter.post('/', function(req, res, next) {
 });
 
 /* UPDATE SystemCharacteristics */
-systemCharacteristicsRouter.put('/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
     SystemCharacteristics.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -36,11 +36,11 @@ systemCharacteristicsRouter.put('/:id', function(req, res, next) {
 });
 
 /* DELETE SystemCharacteristics */
-systemCharacteristicsRouter.delete('/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     SystemCharacteristics.findByIdAndRemove(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
 
-module.exports = systemCharacteristicsRouter;
+module.exports = router;

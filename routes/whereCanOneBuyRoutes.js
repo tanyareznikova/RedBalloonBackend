@@ -1,10 +1,10 @@
 var express = require('express');
-var whereCanOneBuyRouter = express.Router();
+var router = express.Router();
 var mongoose = require('mongoose');
 var WhereCanOneBuy = require('../models/whereCanOneBuy.js');
 
 /* GET ALL WhereCanOneBuy */
-whereCanOneBuyRouter.get('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
     WhereCanOneBuy.find(function (err, whereCanOneBuyRoutes) {
         if (err) return next(err);
         res.json(whereCanOneBuyRoutes);
@@ -12,7 +12,7 @@ whereCanOneBuyRouter.get('/', function(req, res, next) {
 });
 
 /* GET SINGLE WhereCanOneBuy BY ID */
-whereCanOneBuyRouter.get('/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     WhereCanOneBuy.findById(req.params.id, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -20,7 +20,7 @@ whereCanOneBuyRouter.get('/:id', function(req, res, next) {
 });
 
 /* SAVE WhereCanOneBuy */
-whereCanOneBuyRouter.post('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
     WhereCanOneBuy.create(req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -28,7 +28,7 @@ whereCanOneBuyRouter.post('/', function(req, res, next) {
 });
 
 /* UPDATE WhereCanOneBuy */
-whereCanOneBuyRouter.put('/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
     WhereCanOneBuy.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -36,11 +36,11 @@ whereCanOneBuyRouter.put('/:id', function(req, res, next) {
 });
 
 /* DELETE WhereCanOneBuy */
-whereCanOneBuyRouter.delete('/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     WhereCanOneBuy.findByIdAndRemove(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
 
-module.exports = whereCanOneBuyRouter;
+module.exports = router;

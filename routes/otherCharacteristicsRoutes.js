@@ -1,10 +1,10 @@
 var express = require('express');
-var otherCharacteristicsRouter = express.Router();
+var router = express.Router();
 var mongoose = require('mongoose');
 var OtherCharacteristics = require('../models/otherCharacteristics.js');
 
 /* GET ALL OtherCharacteristics */
-otherCharacteristicsRouter.get('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
     OtherCharacteristics.find(function (err, otherCharacteristicsRouterRoutes) {
         if (err) return next(err);
         res.json(otherCharacteristicsRouterRoutes);
@@ -12,7 +12,7 @@ otherCharacteristicsRouter.get('/', function(req, res, next) {
 });
 
 /* GET SINGLE OtherCharacteristics BY ID */
-otherCharacteristicsRouter.get('/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     OtherCharacteristics.findById(req.params.id, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -20,7 +20,7 @@ otherCharacteristicsRouter.get('/:id', function(req, res, next) {
 });
 
 /* SAVE OtherCharacteristics */
-otherCharacteristicsRouter.post('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
     OtherCharacteristics.create(req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -28,7 +28,7 @@ otherCharacteristicsRouter.post('/', function(req, res, next) {
 });
 
 /* UPDATE OtherCharacteristics */
-otherCharacteristicsRouter.put('/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
     OtherCharacteristics.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -36,11 +36,11 @@ otherCharacteristicsRouter.put('/:id', function(req, res, next) {
 });
 
 /* DELETE OtherCharacteristics */
-otherCharacteristicsRouter.delete('/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     OtherCharacteristics.findByIdAndRemove(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
 
-module.exports = otherCharacteristicsRouter;
+module.exports = router;

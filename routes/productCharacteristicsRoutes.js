@@ -1,10 +1,10 @@
 var express = require('express');
-var productCharacteristicsRouter = express.Router();
+var router = express.Router();
 var mongoose = require('mongoose');
 var ProductCharacteristics = require('../models/productCharacteristics.js');
 
 /* GET ALL ProductCharacteristics */
-productCharacteristicsRouter.get('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
     ProductCharacteristics.find(function (err, productCharacteristicsRoutes) {
         if (err) return next(err);
         res.json(productCharacteristicsRoutes);
@@ -12,7 +12,7 @@ productCharacteristicsRouter.get('/', function(req, res, next) {
 });
 
 /* GET SINGLE ProductCharacteristics BY ID */
-productCharacteristicsRouter.get('/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     ProductCharacteristics.findById(req.params.id, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -20,7 +20,7 @@ productCharacteristicsRouter.get('/:id', function(req, res, next) {
 });
 
 /* SAVE ProductCharacteristics */
-productCharacteristicsRouter.post('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
     ProductCharacteristics.create(req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -28,7 +28,7 @@ productCharacteristicsRouter.post('/', function(req, res, next) {
 });
 
 /* UPDATE ProductCharacteristics */
-productCharacteristicsRouter.put('/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
     ProductCharacteristics.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -36,11 +36,11 @@ productCharacteristicsRouter.put('/:id', function(req, res, next) {
 });
 
 /* DELETE ProductCharacteristics */
-productCharacteristicsRouter.delete('/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     ProductCharacteristics.findByIdAndRemove(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
 
-module.exports = productCharacteristicsRouter;
+module.exports = router;

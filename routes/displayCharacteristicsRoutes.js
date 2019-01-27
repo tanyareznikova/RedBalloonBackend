@@ -1,10 +1,10 @@
 var express = require('express');
-var displayCharacteristicsRouter = express.Router();
+var router = express.Router();
 var mongoose = require('mongoose');
 var DisplayCharacteristics = require('../models/displayCharacteristics.js');
 
 /* GET ALL DisplayCharacteristics */
-displayCharacteristicsRouter.get('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
     DisplayCharacteristics.find(function (err, displayCharacteristicsRoutes) {
         if (err) return next(err);
         res.json(displayCharacteristicsRoutes);
@@ -12,7 +12,7 @@ displayCharacteristicsRouter.get('/', function(req, res, next) {
 });
 
 /* GET SINGLE DisplayCharacteristics BY ID */
-displayCharacteristicsRouter.get('/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     DisplayCharacteristics.findById(req.params.id, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -20,7 +20,7 @@ displayCharacteristicsRouter.get('/:id', function(req, res, next) {
 });
 
 /* SAVE DisplayCharacteristics */
-displayCharacteristicsRouter.post('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
     DisplayCharacteristics.create(req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -28,7 +28,7 @@ displayCharacteristicsRouter.post('/', function(req, res, next) {
 });
 
 /* UPDATE DisplayCharacteristics */
-displayCharacteristicsRouter.put('/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
     DisplayCharacteristics.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
@@ -36,11 +36,11 @@ displayCharacteristicsRouter.put('/:id', function(req, res, next) {
 });
 
 /* DELETE DisplayCharacteristics */
-displayCharacteristicsRouter.delete('/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     DisplayCharacteristics.findByIdAndRemove(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
 
-module.exports = displayCharacteristicsRouter;
+module.exports = router;
