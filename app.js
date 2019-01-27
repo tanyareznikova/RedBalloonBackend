@@ -4,11 +4,28 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//Express and Mongoose
+//Устанавливаем соединение с mongoose
+var mongoose = require('mongoose');
+//var mongoDB = 'mongodb://localhost:27017/RedBalloonDB';
+
+// img path
+//var imgPathToProduct = 'C:\\images\\img.png';
+// img path
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/RedBalloonDB')
+    .then(() =>  console.log('connection succesful'))
+    .catch((err) => console.error(err));
+
+//mongoose.connect(mongoDB);
+//var db = mongoose.connection;
+//db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var productsRouter = require('./routes/productsRoutes');
 var categoriesRouter = require('./routes/categoriesRoutes');
+var productsRouter = require('./routes/productsRoutes');
 var bindingCharacteristicsRouter = require('./routes/bindingCharacteristicsRoutes');
 var bodyCharacteristicsRouter = require('./routes/bodyCharacteristicsRoutes');
 var cameraCharacteristicsRouter = require('./routes/cameraCharacteristicsRoutes');
@@ -27,22 +44,6 @@ var whereCanOneBuyRouter = require('./routes/whereCanOneBuyRoutes');
 var app = express();
 
 
-//Express and Mongoose
-//Устанавливаем соединение с mongoose
-var mongoose = require('mongoose');
-var mongoDB = 'mongodb://localhost:27017/RedBalloonDB';
-
-// img path
-//var imgPathToProduct = 'C:\\images\\img.png';
-// img path
-
-mongoose.connect(mongoDB);
-mongoose.Promise = global.Promise;
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -56,22 +57,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.use('/productsRoutes', productsRouter);
-app.use('/categoriesRoutes', categoriesRouter);
-app.use('/bindingCharacteristicsRoutes', bindingCharacteristicsRouter);
-app.use('/bodyCharacteristicsRoutes', bodyCharacteristicsRouter);
-app.use('/cameraCharacteristicsRoutes', cameraCharacteristicsRouter);
-app.use('/cpuCharacteristicsRoutes', cpuCharacteristicsRouter);
-app.use('/displayCharacteristicsRoutes', displayCharacteristicsRouter);
-app.use('/memoryCharacteristicsRoutes', memoryCharacteristicsRouter);
-app.use('/multimediaCharacteristicsRoutes', multimediaCharacteristicsRouter);
-app.use('/otherCharacteristicsRoutes', otherCharacteristicsRouter);
-app.use('/productCharacteristicsRoutes', productCharacteristicsRouter);
-app.use('/productReviewsRoutes', productReviewsRouter);
-app.use('/simCardCharacteristicsRoutes', simCardCharacteristicsRouter);
-app.use('/supplyCharacteristicsRoutes', supplyCharacteristicsRouter);
-app.use('/systemCharacteristicsRoutes', systemCharacteristicsRouter);
-app.use('/whereCanOneBuyRoutes', whereCanOneBuyRouter);
+app.use('/categories', categoriesRouter);
+app.use('/products', productsRouter);
+app.use('/bindingCharacteristics', bindingCharacteristicsRouter);
+app.use('/bodyCharacteristics', bodyCharacteristicsRouter);
+app.use('/cameraCharacteristics', cameraCharacteristicsRouter);
+app.use('/cpuCharacteristics', cpuCharacteristicsRouter);
+app.use('/displayCharacteristics', displayCharacteristicsRouter);
+app.use('/memoryCharacteristics', memoryCharacteristicsRouter);
+app.use('/multimediaCharacteristics', multimediaCharacteristicsRouter);
+app.use('/otherCharacteristics', otherCharacteristicsRouter);
+app.use('/productCharacteristics', productCharacteristicsRouter);
+app.use('/productReviews', productReviewsRouter);
+app.use('/simCardCharacteristics', simCardCharacteristicsRouter);
+app.use('/supplyCharacteristics', supplyCharacteristicsRouter);
+app.use('/systemCharacteristics', systemCharacteristicsRouter);
+app.use('/whereCanOneBuy', whereCanOneBuyRouter);
 
 
 // catch 404 and forward to error handler

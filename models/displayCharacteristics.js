@@ -11,7 +11,7 @@ var DisplayCharacteristicsSchema = new Schema(
         //Тип дисплея
         displayType: {type: String, required: true},
         //Диагональ
-        diagonal: {type: Decimal128, required: true},
+        diagonal: {type: String, required: true},
         //Разрешение
         screenResolution: {type: String, required: true},
         //Плотность пикселей

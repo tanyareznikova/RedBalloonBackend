@@ -13,7 +13,7 @@ var MultimediaCharacteristicsSchema = new Schema(
         //Видеоплеер
         videoPlayer: {type: String, required: true, enum: ['да', 'нет']},
         //Аудиоразъем
-        audioJack: {type: Decimal128, required: true},
+        audioJack: {type: String, required: true},
 
     }
 );

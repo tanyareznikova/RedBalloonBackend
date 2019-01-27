@@ -1,6 +1,8 @@
 //Корпус
 //Входит в productCharacteristics
 
+//import {Decimal128} from "mongoose";
+
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
@@ -9,11 +11,12 @@ var BodyCharacteristicsSchema = new Schema(
     {
 
         //Высота
-        height: {type: Decimal128, required: true},
+        height: {type: String, required: true},
+        //height: {type: Decimal128},
         //Ширина
-        width: {type: Decimal128, required: true},
+        width: {type: String, required: true},
         //Толщина
-        thickness: {type: Decimal128, required: true},
+        thickness: {type: String, required: true},
         //Вес
         weight: {type: Number, required: true},
         //Материал корпуса

@@ -1,13 +1,25 @@
 var express = require('express');
+//var router = require('express').Router();
 var router = express.Router();
+//var router = express();
 var mongoose = require('mongoose');
 var Category = require('../models/category.js');
+//import category from '../models/category.js';
+
+/* GET ALL Category
+router.get('/', function(req, res, next) {
+    category.find(function (err, categoriesRoutes) {
+        if (err) return next(err);
+        res.json(categoriesRoutes);
+    });
+});
+*/
 
 /* GET ALL Category */
 router.get('/', function(req, res, next) {
-    Category.find(function (err, categoriesRoutes) {
+    Category.find(function (err, category) {
         if (err) return next(err);
-        res.json(categoriesRoutes);
+        res.json(category);
     });
 });
 
