@@ -18,13 +18,13 @@ categoryController.list = function(req, res) {
 
 //Add show single category by id function
 categoryController.show = function(req, res) {
-    Category.findOne({_id: req.params.id}).exec(function (err, categories) {
+    Category.findOne({_id: req.params.id}).exec(function (err, category) {
         if (err) {
             console.log("Error:", err);
         }
         else {
             //ИЗМЕНИТЬ
-            res.render("../views/employees/show", {categories: categories});
+            res.render("../views/employees/show", {category: category});
         }
     });
 };
@@ -46,33 +46,33 @@ categoryController.save = function(req, res) {
             res.render("../views/employees/create");
         } else {
             console.log("Successfully created an employee.");
-            res.redirect("/employees/show/"+employee._id);
+            res.redirect("/employees/show/"+category._id);
         }
     });
 };
 
 //Add edit employee by id function
 categoryController.edit = function(req, res) {
-    Category.findOne({_id: req.params.id}).exec(function (err, categories) {
+    Category.findOne({_id: req.params.id}).exec(function (err, category) {
         if (err) {
             console.log("Error:", err);
         }
         else {
             //ИЗМЕНИТЬ
-            res.render("../views/employees/edit", {categories: categories});
+            res.render("../views/employees/edit", {category: category});
         }
     });
 };
 
 //Add update employee function for updating currently edited employee
 categoryController.update = function(req, res) {
-    Category.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name, address: req.body.address, position: req.body.position, salary: req.body.salary }}, { new: true }, function (err, employee) {
+    Category.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name, address: req.body.address, position: req.body.position, salary: req.body.salary }}, { new: true }, function (err, category) {
         if (err) {
             console.log(err);
             //ИЗМЕНИТЬ
-            res.render("../views/employees/edit", {employee: req.body});
+            res.render("../views/employees/edit", {category: req.body});
         }
-        res.redirect("/employees/show/"+employee._id);
+        res.redirect("/employees/show/"+category._id);
     });
 };
 
