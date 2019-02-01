@@ -19,7 +19,9 @@
     "pug": "2.0.0-beta11"
   },
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tanyareznikova/RedBalloonBackend.git"

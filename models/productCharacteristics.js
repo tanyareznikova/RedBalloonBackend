@@ -8,7 +8,7 @@ var ProductCharacteristicsSchema = new Schema(
     {
 
             //продукт
-        productID: {type: Schema.ObjectId, ref: 'Product', required: true},
+        //productID: {type: Schema.ObjectId, ref: 'Product', required: true},
             //связь
         bindingCharacteristicsID: {type: Schema.ObjectId, ref: 'BindingCharacteristics', required: true},
             //дисплей

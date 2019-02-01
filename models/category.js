@@ -10,6 +10,7 @@ var CategorySchema = new Schema(
         categoryTitle: {type: String, required: true},
         //categoryTitle: String,
         //productID: [{type: Schema.ObjectId, ref: 'Product', required: true}],
+        //productID: [{type: Schema.ObjectId, ref: 'CategoryAndProduct', required: true}],
 
     }
 );
