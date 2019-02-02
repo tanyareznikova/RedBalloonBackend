@@ -1,3 +1,14 @@
+/*
+"scripts": {
+    "start": "node ./bin/www"
+    или
+    "watch": "nodemon ./start.js"
+},
+*/
+//block content
+//h1= title
+//p Welcome to #{title}
+
 var mongoose = require("mongoose");
 var Category = mongoose.model("Category");
 
