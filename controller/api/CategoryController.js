@@ -8,6 +8,14 @@
 //block content
 //h1= title
 //p Welcome to #{title}
+/*script.
+      window.jQuery || document.write('script src="/node_modules/jquery/dist/jquery.slim.min.js"')
+    script(src="/docs/4.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js")
+    script(src="dashboard.js")
+    link(href="/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous")
+    */
 
 var mongoose = require("mongoose");
 var Category = mongoose.model("Category");
