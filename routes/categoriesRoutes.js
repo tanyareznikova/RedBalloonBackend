@@ -2,38 +2,68 @@ var express = require('express');
 //var router = require('express').Router();
 var router = express.Router();
 //var router = express();
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 var bodyParser = require('body-parser'); //parses information from POST
 //var Category = require('../models/category.js');
-var Category = require("../controller/api/CategoryController.js");
+//var Category = require("../controller/api/CategoryController.js");
 //import category from '../models/category.js';
+var category_Controller = require("../controller/api/CategoryController.js");
 
 //ЗАПРОС REST API in Terminal
 //curl -i -X POST -d "{\"categoryTitle\": \"iPhone\"}" -H "Content-Type:application/json" localhost:3000/categories
 
-// Get all employees
-router.get('/', Category.list);
+router.use(bodyParser.urlencoded({ extended: true }))
+// GET catalog home page.
+router.get('/', category_Controller.category_list);
 
-// Get single employee by id
-router.get('/show/:id', Category.show);
+// GET request for creating a category. NOTE This must come before routes that display category (uses id).
+router.get('/category/create', category_Controller.category_create_get);
 
-// Create employee
-router.get('/create', Category.create);
+// POST request for creating category.
+router.post('/category/create', category_Controller.category_create_post);
 
-// Save employee
-router.post('/save', Category.save);
+// GET request to delete category.
+router.get('/category/:id/delete', category_Controller.category_delete_get);
 
-// Edit employee
-router.get('/edit/:id', Category.edit);
+// POST request to delete category.
+router.post('/category/:id/delete', category_Controller.category_delete_post);
 
-// Edit update
-router.post('/update/:id', Category.update);
+// GET request to update category.
+router.get('/category/:id/update', category_Controller.category_update_get);
 
-// Edit update
-router.post('/delete/:id', Category.delete);
+// POST request to update category.
+router.post('/category/:id/update', category_Controller.category_update_post);
+
+// GET request for one category.
+router.get('/category/:id', category_Controller.category_detail);
+
+// GET request for list of all category items.
+router.get('/categories', category_Controller.category_list);
 
 /*
-router.use(bodyParser.urlencoded({ extended: true }))
+// Get all categories
+router.get('/', Category.list);
+
+// Get single category by id
+router.get('/categories/:id', Category.show);
+
+// Create category
+router.get('/categories', Category.create);
+
+// Save category
+router.post('/categories', Category.save);
+
+// Edit category
+router.get('/categories/:id', Category.edit);
+
+// Edit update
+router.post('/categories/:id', Category.update);
+
+// Edit update
+router.post('/categories/:id', Category.delete);
+*/
+/*
+
 // GET ALL Category
 router.get('/', function(req, res, next) {
     Category.find(function (err, category) {

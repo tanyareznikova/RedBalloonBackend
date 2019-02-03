@@ -109,7 +109,7 @@ block content
                         h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
                 main.col-md-9.ml-sm-auto.col-lg-10.px-4(role="main")
                     .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
-                        h1.h2 REDBALLOON
+                        h1.h2 КАТЕГОРИЯ
                         .btn-toolbar.mb-2.mb-md-0
                             .btn-group.mr-2
                                 button.btn.btn-sm.btn-outline-secondary(type="button") Share
@@ -118,39 +118,26 @@ block content
                                 span(data-feather="calendar")
                                 |             This week
                     //canvas#myChart.my-4.w-100(width="900" height="380")
+                    h1 #{title}
 
-                    h2 Section title
+                        form(method='POST' action='')
+                            div.form-group
+                                label(for='categoryTitle') Название категории:
+                                input#categoryTitle.form-control(type='text', placeholder='Android, iPhone etc.' name='categoryTitle' required='true' value=(undefined === category ? '' : category.categoryTitle))
+                            button.btn.btn-primary(type='submit') Создать
+
+                        if errors
+                            ul
+                                for error in errors
+                                    li!= error.msg
+                    h2 Категории
                     .table-responsive
                         table.table.table-striped.table-sm
                             thead
                                 tr
                                     th #
-                                    th Header
-                                    th Header
-                                    th Header
-                                    th Header
+                                    th Название категории
                             tbody
-                                tr
-                                    td 1,001
-                                    td Lorem
-                                    td ipsum
-                                    td dolor
-                                    td sit
-                                tr
-                                    td 1,002
-                                    td amet
-                                    td consectetur
-                                    td adipiscing
-                                    td elit
-                                tr
-                                    td 1,003
-                                    td Integer
-                                    td nec
-                                    td odio
-                                    td Praesent
     script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous")
     script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous")
-
-
-
