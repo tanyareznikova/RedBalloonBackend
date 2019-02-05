@@ -5,7 +5,7 @@ const { sanitizeBody } = require('express-validator/filter');
 //import Category from "../../models/category.js";
 
 var Cetegory = require("../../models/category.js");
-const find = require("mongoose").find;
+//const find = require("mongoose").find;
 
 //var mongoose = require("mongoose");
 //var Category = mongoose.model("Category", CategorySchema);
@@ -104,6 +104,8 @@ categoryController.delete = function(req, res) {
 
 // Display list of all Categories.
 exports.category_list = function(req, res) {
+    res.send('NOT IMPLEMENTED: Category list: ' + req.params.id);
+    /*
     Category.find({}).exec(function (err, categories) {
     //find({Category}).exec(function (err, categories) {
         if (err) {
@@ -114,6 +116,7 @@ exports.category_list = function(req, res) {
             res.render("../views/categories", {categories: categories});
         }
     });
+    */
 };
 
 // Display detail page for a specific Category.
