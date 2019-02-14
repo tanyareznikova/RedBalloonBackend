@@ -10,7 +10,6 @@ var Cetegory = require("../../models/category.js");
 //var mongoose = require("mongoose");
 //var Category = mongoose.model("Category", CategorySchema);
 
-//npm install request cheerio
 
 /*
 var categoryController = {};
