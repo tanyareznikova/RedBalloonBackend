@@ -18,6 +18,7 @@
     "mongodb": "^3.1.10",
     "mongoose": "^5.4.4",
     "morgan": "~1.9.0",
+    "needle": "^2.2.4",
     "popper.js": "^1.14.6",
     "pug": "2.0.0-beta11",
     "request": "^2.88.0"
@@ -39,4 +40,3 @@
   "homepage": "https://github.com/tanyareznikova/RedBalloonBackend#readme",
   "description": ""
 }
-
