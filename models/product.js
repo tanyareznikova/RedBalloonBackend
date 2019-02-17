@@ -20,7 +20,7 @@ var ProductSchema = new Schema(
         //описание
         description: {type: String, required: true},
         //атрибут товара
-        //productAttribute: [ProductAttribute],
+        productAttribute:  [{type: Schema.ObjectId, ref: 'ProductAttribute', required: true}],
         //картинки
         img: [{data: Buffer, contentType: String}],
 

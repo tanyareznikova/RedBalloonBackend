@@ -17,7 +17,7 @@ controller.getCategories = ( function(req, res){
     Category.find({}, function(err, categories){
 
         if(err) return console.log(err);
-        res.send(categories)
+        res.render("../views/categories", {categories: categories})
     });
 });
 
