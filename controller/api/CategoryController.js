@@ -21,7 +21,7 @@ controller.getCategories = ( function(req, res){
     });
 });
 
-controller.getCategoryBeID = ( function(req, res){
+controller.getCategoryByID = ( function(req, res){
 
     const id = req.params.id;
     Category.findOne({_id: id}, function(err, category){

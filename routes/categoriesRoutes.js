@@ -15,10 +15,10 @@ var category_Controller = require("../controller/api/CategoryController.js");
 //router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.urlencoded({ extended: true }));
 //router.get("/categoryList", category_Controller.getCategories);
-//router.get("/categoryList/:id", category_Controller.getCategoryBeID);
-//router.post("/categoryList/create", category_Controller.postCategory);
-//router.delete("/categoryList/delete/:id", category_Controller.deleteCategory);
-//router.put("/categoryList/update/:id", category_Controller.putCategory);
+//router.get("/categoryList/:id", category_Controller.getCategoryByID);
+//router.post("/categoryList", category_Controller.postCategory);
+//router.delete("/categoryList/:id", category_Controller.deleteCategory);
+//router.put("/categoryList", category_Controller.putCategory);
 
 router.get('/categoryList', category_Controller.category_list);
 

@@ -120,7 +120,7 @@ block content
         // Добавление категории
         function CreateCategory(categoryTitle) {
             $.ajax({
-                url: "/categoryList/create",
+                url: "/categoryList",
                 contentType: "application/json",
                 method: "POST",
                 data: JSON.stringify({
@@ -135,7 +135,7 @@ block content
         // Изменение категории
         function EditCategory(categoryId, categoryTitle) {
             $.ajax({
-                url: "categoryList/update/" + id,
+                url: "/categoryList",
                 contentType: "application/json",
                 method: "PUT",
                 data: JSON.stringify({
@@ -158,7 +158,7 @@ block content
         // Удаление категории
         function DeleteCategory(id) {
             $.ajax({
-                url: "categoryList/delete/" + id,
+                url: "categoryList/" + id,
                 contentType: "application/json",
                 method: "DELETE",
                 success: function (category) {

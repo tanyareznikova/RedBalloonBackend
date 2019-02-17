@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 //import ProductAttribute from "../models/productAttribute";
-var ProductAttribute = require("../models/productAttribute");
+//var ProductAttribute = require("../models/productAttribute");
 
 var ProductSchema = new Schema(
     {
