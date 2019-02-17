@@ -4,11 +4,11 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-import ProductAttribute from "../models/productAttribute";
+//import ProductAttribute from "../models/productAttribute";
+var ProductAttribute = require("../models/productAttribute");
 
 var ProductSchema = new Schema(
     {
-
         //продукт
         title: {type: String, required: true},
         //категория
@@ -20,7 +20,7 @@ var ProductSchema = new Schema(
         //описание
         description: {type: String, required: true},
         //атрибут товара
-        productAttribute: [ProductAttribute],
+        //productAttribute: [ProductAttribute],
         //картинки
         img: [{data: Buffer, contentType: String}],
 

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var SystemCharacteristics = require('../models/systemCharacteristics.js');
+var SystemCharacteristics = require('../../models/tempModels/systemCharacteristics.js');
 
 /* GET ALL SystemCharacteristics */
 router.get('/', function(req, res, next) {

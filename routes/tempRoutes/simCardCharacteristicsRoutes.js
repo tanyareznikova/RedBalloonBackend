@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var SimCardCharacteristics = require('../models/simCardCharacteristics.js');
+var SimCardCharacteristics = require('../../models/tempModels/simCardCharacteristics.js');
 
 /* GET ALL SimCardCharacteristics */
 router.get('/', function(req, res, next) {

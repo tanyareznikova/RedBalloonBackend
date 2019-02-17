@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var CpuCharacteristics = require('../models/cpuCharacteristics.js');
+var CpuCharacteristics = require('../../models/tempModels/cpuCharacteristics.js');
 
 /* GET ALL CPUсharacteristics */
 router.get('/', function(req, res, next) {

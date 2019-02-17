@@ -4,149 +4,68 @@ block content
   doctype html
   html(lang="en")
     head
-      meta(charset="utf-8")
-      meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
-      meta(name="description" content="")
-      meta(name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors")
-      meta(name="generator" content="Jekyll v3.8.5")
-      title Dashboard Template · Bootstrap
-      // Bootstrap core CSS
-      link(href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="node_modules" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous")
-      style.
-        .bd-placeholder-img {
-          font-size: 1.125rem;
-          text-anchor: middle;
-        }
-
-        @media (min-width: 768px) {
-          .bd-placeholder-img-lg {
-            font-size: 3.5rem;
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+        meta(name="description" content="")
+        meta(name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors")
+        meta(name="generator" content="Jekyll v3.8.5")
+        title Dashboard Template · Bootstrap
+        // Bootstrap core CSS
+        link(href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="node_modules" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous")
+        style.
+          .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
           }
-        }
-      // Custom styles for this template
-      link(href="../public/stylesheet/bootstrap.css" rel="public")
+
+          @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+            }
+          }
+        // Custom styles for this template
+        link(href="../public/stylesheet/bootstrap.css" rel="public")
     body
-      nav.navbar.navbar-dark.fixed-top.bg-dark.flex-md-nowrap.p-0.shadow
-        a.navbar-brand.col-sm-3.col-md-2.mr-0(href="#") RedBalloon
-        input.form-control.form-control-dark.w-100(type="text" placeholder="Search" aria-label="Search")
-        ul.navbar-nav.px-3
-          li.nav-item.text-nowrap
-            a.nav-link(href="#") Sign out
-      .container-fluid
-        .row
-          nav.col-md-2.d-none.d-md-block.bg-light.sidebar
-            .sidebar-sticky
-              ul.nav.flex-column
-                li.nav-item
-                  a.nav-link.active(href="#")
-                    span(data-feather="home")
-                    |               RedBalloon
-                    span.sr-only (current)
-                li.nav-item
-                  a.nav-link(href="categories")
-                    span(data-feather="file")
-                    |               Категории
-                li.nav-item
-                  a.nav-link(href="#")
-                    span(data-feather="shopping-cart")
-                    |               Продукты
-                li.nav-item
-                  a.nav-link(href="#")
-                    span(data-feather="users")
-                    |               Характеристики товаров
-                li.nav-item
-                  a.nav-link(href="#")
-                    span(data-feather="bar-chart-2")
-                    |               Связь
-                li.nav-item
-                  a.nav-link(href="#")
-                    span(data-feather="layers")
-                    |               Корпус
+        nav.navbar.navbar-dark.fixed-top.bg-dark.flex-md-nowrap.p-0.shadow
+          a.navbar-brand.col-sm-3.col-md-2.mr-0(href="#") RedBalloon
+          input.form-control.form-control-dark.w-100(type="text" placeholder="Search" aria-label="Search")
+          ul.navbar-nav.px-3
+            li.nav-item.text-nowrap
+              a.nav-link(href="#") Sign out
+        .container-fluid
+          .row
+            nav.col-md-2.d-none.d-md-block.bg-light.sidebar
+              .sidebar-sticky
+                ul.nav.flex-column
                   li.nav-item
-                    a.nav-link(href="#")
+                    a.nav-link.active(href="#")
+                      span(data-feather="home")
+                      |               RedBalloon
+                      span.sr-only (current)
+                  li.nav-item
+                    a.nav-link(href="categories/categoryList")
                       span(data-feather="file")
-                      |               Камера
+                      |               Категории
                   li.nav-item
                     a.nav-link(href="#")
                       span(data-feather="shopping-cart")
-                      |               Процессор
+                      |               Продукты
                   li.nav-item
                     a.nav-link(href="#")
                       span(data-feather="users")
-                      |               Дисплей
+                      |               Атрибуты товаров
                   li.nav-item
                     a.nav-link(href="#")
                       span(data-feather="bar-chart-2")
-                      |               Память
+                      |               Отзывы о товаре
                   li.nav-item
                     a.nav-link(href="#")
-                      span(data-feather="layers")
-                      |               Мультимедиа
-                    li.nav-item
-                      a.nav-link(href="#")
-                        span(data-feather="layers")
-                        |               Прочее
-                      li.nav-item
-                        a.nav-link(href="#")
-                          span(data-feather="file")
-                          |               Сим-карта
-                      li.nav-item
-                        a.nav-link(href="#")
-                          span(data-feather="shopping-cart")
-                          |               Питание
-                      li.nav-item
-                        a.nav-link(href="#")
-                          span(data-feather="users")
-                          |               Система
-                      li.nav-item
-                        a.nav-link(href="#")
-                          span(data-feather="bar-chart-2")
-                          |               Отзывы о товаре
-                      li.nav-item
-                        a.nav-link(href="#")
-                          span(data-feather="file-text")
-                          |               Где купить
-              h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
-          main.col-md-9.ml-sm-auto.col-lg-10.px-4(role="main")
-            .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
-              h1.h2 REDBALLOON
-              .btn-toolbar.mb-2.mb-md-0
-                .btn-group.mr-2
-                  button.btn.btn-sm.btn-outline-secondary(type="button") Share
-                  button.btn.btn-sm.btn-outline-secondary(type="button") Export
-                button.btn.btn-sm.btn-outline-secondary.dropdown-toggle(type="button")
-                  span(data-feather="calendar")
-                  |             This week
-            //canvas#myChart.my-4.w-100(width="900" height="380")
-            h2 Section title
-            .table-responsive
-              table.table.table-striped.table-sm
-                thead
-                  tr
-                    th #
-                    th Header
-                    th Header
-                    th Header
-                    th Header
-                tbody
-                  tr
-                    td 1,001
-                    td Lorem
-                    td ipsum
-                    td dolor
-                    td sit
-                  tr
-                    td 1,002
-                    td amet
-                    td consectetur
-                    td adipiscing
-                    td elit
-                  tr
-                    td 1,003
-                    td Integer
-                    td nec
-                    td odio
-                    td Praesent
+                      span(data-feather="file-text")
+                      |               Где купить
+                h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted
+            main.col-md-9.ml-sm-auto.col-lg-10.px-4(role="main")
+              .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+                h1.h2 REDBALLOON
     script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous")
     script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous")

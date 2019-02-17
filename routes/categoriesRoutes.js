@@ -12,33 +12,47 @@ var category_Controller = require("../controller/api/CategoryController.js");
 //ЗАПРОС REST API in Terminal
 //curl -i -X POST -d "{\"categoryTitle\": \"iPhone\"}" -H "Content-Type:application/json" localhost:3000/categories
 
-router.use(bodyParser.urlencoded({ extended: true }))
-// GET catalog home page.
-router.get('/', category_Controller.category_list);
+//router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.urlencoded({ extended: true }));
+//router.get("/categoryList", category_Controller.getCategories);
+//router.get("/categoryList/:id", category_Controller.getCategoryBeID);
+//router.post("/categoryList/create", category_Controller.postCategory);
+//router.delete("/categoryList/delete/:id", category_Controller.deleteCategory);
+//router.put("/categoryList/update/:id", category_Controller.putCategory);
+
+router.get('/categoryList', category_Controller.category_list);
 
 // GET request for creating a category. NOTE This must come before routes that display category (uses id).
-router.get('/category/create', category_Controller.category_create_get);
+router.get('/categoryList/create', category_Controller.category_create_get);
+//router.get('/categoryList/create', category_Controller.add);
 
 // POST request for creating category.
-router.post('/category/create', category_Controller.category_create_post);
+router.post('/categoryList/create', category_Controller.category_create_post);
+
+// GET catalog home page.
+//router.get('/list', category_Controller.findAll);
+
+// GET request for creating a category. NOTE This must come before routes that display category (uses id).
+//router.get('/category/create', category_Controller.add);
+
+// POST request for creating category.
+//router.post('/category/create', category_Controller.add);
 
 // GET request to delete category.
-router.get('/category/:id/delete', category_Controller.category_delete_get);
+//router.get('/category/:id/delete', category_Controller.delete);
 
 // POST request to delete category.
-router.post('/category/:id/delete', category_Controller.category_delete_post);
+//router.delete('/category/:id/delete', category_Controller.delete);
 
 // GET request to update category.
-router.get('/category/:id/update', category_Controller.category_update_get);
+//router.get('/category/:id/update', category_Controller.update);
 
 // POST request to update category.
-router.post('/category/:id/update', category_Controller.category_update_post);
+//router.put('/category/:id/update', category_Controller.update);
 
 // GET request for one category.
-router.get('/category/:id', category_Controller.category_detail);
+//router.get('/category/:id', category_Controller.findById);
 
-// GET request for list of all category items.
-router.get('/categories', category_Controller.category_list);
 
 /*
 // Get all categories

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var SupplyCharacteristics = require('../models/supplyCharacteristics.js');
+var SupplyCharacteristics = require('../../models/tempModels/supplyCharacteristics.js');
 
 /* GET ALL SupplyCharacteristics */
 router.get('/', function(req, res, next) {

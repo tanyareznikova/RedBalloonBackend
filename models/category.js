@@ -12,14 +12,14 @@ var CategorySchema = new Schema(
         //productID: [{type: Schema.ObjectId, ref: 'Product', required: true}],
         //productID: [{type: Schema.ObjectId, ref: 'CategoryAndProduct', required: true}],
 
-    }
-);
+    },
+{ _id: false });
 
 // Виртуальное свойство - URL автора
 CategorySchema
     .virtual('url')
     .get(function () {
-        return '/categories/category' + this._id;
+        return '/categories/categoryList' + this._id;
     });
 
 //Export model

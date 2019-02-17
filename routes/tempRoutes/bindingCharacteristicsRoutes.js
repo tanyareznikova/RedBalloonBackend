@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var BindingCharacteristics = require('../models/bindingCharacteristics.js');
+var BindingCharacteristics = require('../../models/tempModels/bindingCharacteristics.js');
 
 /* GET ALL BindingCharacteristics */
 router.get('/', function(req, res, next) {

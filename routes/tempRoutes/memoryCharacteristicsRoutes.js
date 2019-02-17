@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var MemoryCharacteristics = require('../models/memoryCharacteristics.js');
+var MemoryCharacteristics = require('../../models/tempModels/memoryCharacteristics.js');
 
 /* GET ALL MemoryCharacteristics */
 router.get('/', function(req, res, next) {

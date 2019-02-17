@@ -16,5 +16,6 @@
     <orderEntry type="library" name="feather" level="application" />
     <orderEntry type="library" name="@types/mongoose" level="application" />
     <orderEntry type="library" name="@types/mongodb" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
   </component>
 </module>

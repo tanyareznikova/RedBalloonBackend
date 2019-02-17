@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var CameraCharacteristics = require('../models/cameraCharacteristics.js');
+var CameraCharacteristics = require('../../models/tempModels/cameraCharacteristics.js');
 
 /* GET ALL CameraCharacteristics */
 router.get('/', function(req, res, next) {

@@ -1,3 +1,5 @@
+//import * as bodyParser from "body-parser";
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -27,19 +29,19 @@ var usersRouter = require('./routes/users');
 
 var categoriesRouter = require('./routes/categoriesRoutes');
 var productsRouter = require('./routes/productsRoutes');
-var bindingCharacteristicsRouter = require('./routes/bindingCharacteristicsRoutes');
-var bodyCharacteristicsRouter = require('./routes/bodyCharacteristicsRoutes');
-var cameraCharacteristicsRouter = require('./routes/cameraCharacteristicsRoutes');
-var cpuCharacteristicsRouter = require('./routes/cpuCharacteristicsRoutes');
-var displayCharacteristicsRouter = require('./routes/displayCharacteristicsRoutes');
-var memoryCharacteristicsRouter = require('./routes/memoryCharacteristicsRoutes');
-var multimediaCharacteristicsRouter = require('./routes/multimediaCharacteristicsRoutes');
-var otherCharacteristicsRouter = require('./routes/otherCharacteristicsRoutes');
-var productCharacteristicsRouter = require('./routes/productCharacteristicsRoutes');
+//var bindingCharacteristicsRouter = require('./routes/tempRoutes/bindingCharacteristicsRoutes');
+//var bodyCharacteristicsRouter = require('./routes/tempRoutes/bodyCharacteristicsRoutes');
+//var cameraCharacteristicsRouter = require('./routes/tempRoutes/cameraCharacteristicsRoutes');
+//var cpuCharacteristicsRouter = require('./routes/tempRoutes/cpuCharacteristicsRoutes');
+//var displayCharacteristicsRouter = require('./routes/tempRoutes/displayCharacteristicsRoutes');
+//var memoryCharacteristicsRouter = require('./routes/tempRoutes/memoryCharacteristicsRoutes');
+//var multimediaCharacteristicsRouter = require('./routes/tempRoutes/multimediaCharacteristicsRoutes');
+//var otherCharacteristicsRouter = require('./routes/tempRoutes/otherCharacteristicsRoutes');
+//var productCharacteristicsRouter = require('./routes/tempRoutes/productCharacteristicsRoutes');
 var productReviewsRouter = require('./routes/productReviewsRoutes');
-var simCardCharacteristicsRouter = require('./routes/simCardCharacteristicsRoutes');
-var supplyCharacteristicsRouter = require('./routes/supplyCharacteristicsRoutes');
-var systemCharacteristicsRouter = require('./routes/systemCharacteristicsRoutes');
+//var simCardCharacteristicsRouter = require('./routes/tempRoutes/simCardCharacteristicsRoutes');
+//var supplyCharacteristicsRouter = require('./routes/tempRoutes/supplyCharacteristicsRoutes');
+//var systemCharacteristicsRouter = require('./routes/tempRoutes/systemCharacteristicsRoutes');
 var whereCanOneBuyRouter = require('./routes/whereCanOneBuyRoutes');
 
 var app = express();
@@ -55,24 +57,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use('/categories', categoriesRouter);
 app.use('/products', productsRouter);
-app.use('/bindingCharacteristics', bindingCharacteristicsRouter);
-app.use('/bodyCharacteristics', bodyCharacteristicsRouter);
-app.use('/cameraCharacteristics', cameraCharacteristicsRouter);
-app.use('/cpuCharacteristics', cpuCharacteristicsRouter);
-app.use('/displayCharacteristics', displayCharacteristicsRouter);
-app.use('/memoryCharacteristics', memoryCharacteristicsRouter);
-app.use('/multimediaCharacteristics', multimediaCharacteristicsRouter);
-app.use('/otherCharacteristics', otherCharacteristicsRouter);
-app.use('/productCharacteristics', productCharacteristicsRouter);
+//app.use('/bindingCharacteristics', bindingCharacteristicsRouter);
+//app.use('/bodyCharacteristics', bodyCharacteristicsRouter);
+//app.use('/cameraCharacteristics', cameraCharacteristicsRouter);
+//app.use('/cpuCharacteristics', cpuCharacteristicsRouter);
+//app.use('/displayCharacteristics', displayCharacteristicsRouter);
+//app.use('/memoryCharacteristics', memoryCharacteristicsRouter);
+//app.use('/multimediaCharacteristics', multimediaCharacteristicsRouter);
+//app.use('/otherCharacteristics', otherCharacteristicsRouter);
+//app.use('/productCharacteristics', productCharacteristicsRouter);
 app.use('/productReviews', productReviewsRouter);
-app.use('/simCardCharacteristics', simCardCharacteristicsRouter);
-app.use('/supplyCharacteristics', supplyCharacteristicsRouter);
-app.use('/systemCharacteristics', systemCharacteristicsRouter);
+//app.use('/simCardCharacteristics', simCardCharacteristicsRouter);
+//app.use('/supplyCharacteristics', supplyCharacteristicsRouter);
+//app.use('/systemCharacteristics', systemCharacteristicsRouter);
 app.use('/whereCanOneBuy', whereCanOneBuyRouter);
 
 

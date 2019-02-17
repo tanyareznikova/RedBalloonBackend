@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var ProductCharacteristics = require('../models/productCharacteristics.js');
+var ProductCharacteristics = require('../../models/tempModels/productCharacteristics.js');
 
 /* GET ALL ProductCharacteristics */
 router.get('/', function(req, res, next) {
