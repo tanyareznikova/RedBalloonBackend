@@ -14,20 +14,20 @@ var category_Controller = require("../controller/api/CategoryController.js");
 
 //router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.urlencoded({ extended: true }));
-//router.get("/categoryList", category_Controller.getCategories);
-//router.get("/categoryList/:id", category_Controller.getCategoryByID);
-//router.post("/categoryList", category_Controller.postCategory);
-//router.delete("/categoryList/:id", category_Controller.deleteCategory);
-//router.put("/categoryList", category_Controller.putCategory);
+router.get("/categoryList", category_Controller.getCategories);
+router.get("/categoryList/:id", category_Controller.getCategoryByID);
+router.post("/categoryList", category_Controller.postCategory);
+router.delete("/categoryList/:id", category_Controller.deleteCategory);
+router.put("/categoryList", category_Controller.putCategory);
 
-router.get('/categoryList', category_Controller.category_list);
+//router.get('/categoryList', category_Controller.category_list);
 
 // GET request for creating a category. NOTE This must come before routes that display category (uses id).
-router.get('/categoryList/create', category_Controller.category_create_get);
+//router.get('/categoryList/create', category_Controller.category_create_get);
 //router.get('/categoryList/create', category_Controller.add);
 
 // POST request for creating category.
-router.post('/categoryList/create', category_Controller.category_create_post);
+//router.post('/categoryList/create', category_Controller.category_create_post);
 
 // GET catalog home page.
 //router.get('/list', category_Controller.findAll);

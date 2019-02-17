@@ -6,12 +6,12 @@ const { sanitizeBody } = require('express-validator/filter');
 //const mongoose = require("mongoose");
 var Category = require("../../models/category.js");
 const find = require("mongoose").find;
-//const express = require("express");
-//const controller = express();
-//const jsonParser = express.json();
+const express = require("express");
+const controller = express();
+const jsonParser = express.json();
 //var mongoose = require("mongoose");
 //var Category = mongoose.model("Category", CategorySchema);
-/*
+
 controller.getCategories = ( function(req, res){
 
     Category.find({}, function(err, categories){
@@ -66,7 +66,7 @@ controller.putCategory = (jsonParser, function(req, res){
         res.send(category);
     });
 });
-*/
+
   /*
     // DO GET
     function ajaxGet(){
@@ -96,6 +96,7 @@ controller.putCategory = (jsonParser, function(req, res){
     }
 
 */
+  /*
 exports.category_list = function(req, res) {
     Category.find({}).exec(function (err, categories) {
         //find({Category}).exec(function (err, categories) {
@@ -103,7 +104,6 @@ exports.category_list = function(req, res) {
             console.log("Error:", err);
         }
         else {
-            //ИЗМЕНИТЬ
             res.render("../views/categories", {categories: categories});
         }
     });
@@ -132,6 +132,7 @@ module.exports.category_create_post = async function ( req , res ) {
     });
 
 };
+*/
 /*
 exports.findAll = function(req, res){
     Category.find({},function(err, categories) {
@@ -206,4 +207,4 @@ exports.import = function(req, res){
 };
 */
 
-//module.exports = controller;
+module.exports = controller;
