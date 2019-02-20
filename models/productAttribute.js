@@ -7,11 +7,13 @@ var ProductAttributeSchema = new Schema(
     {
 
         //название атрибута
-        titleAttribute: {type: String, required: true},
+        titleAttribute: {type: String, required: true, trim: true},
         //значение атрибута
         valueAttribute: {type: String, required: true},
 
-    }
+    },
+    { _id: false },
+    {timestamps: true}
 );
 
 // Виртуальное свойство - URL автора

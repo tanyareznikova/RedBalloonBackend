@@ -10,7 +10,7 @@ var Schema = mongoose.Schema;
 var ProductSchema = new Schema(
     {
         //продукт
-        title: {type: String, required: true},
+        title: {type: String, required: true, trim: true},
         //категория
         categoryID: [{type: Schema.ObjectId, ref: 'Category', required: true}],
         //цена
@@ -24,7 +24,9 @@ var ProductSchema = new Schema(
         //картинки
         img: [{data: Buffer, contentType: String}],
 
-    }
+    },
+    { _id: false },
+    {timestamps: true}
 );
 
 // Виртуальное свойство - URL автора

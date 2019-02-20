@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+
+    script( defer src="javascripts/category.js")
+
+    form.col-md-12
+        .form-group
+            label(for='categoryTitle') Название
+            input#categoryTitle.form-control(placeholder='Введите название' value=category.categoryTitle)
+        .form-group
+            #message.alert.alert-danger(style="display: none")
+
+        #updateCategoryButton.btn.btn-primary(data-category-id=category.categoryID) Обновить

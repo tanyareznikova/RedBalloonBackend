@@ -16,7 +16,9 @@ var WhereCanOneBuySchema = new Schema(
         //лого магазина
         storeLogo: [{data: Buffer, contentType: String}],
 
-    }
+    },
+    { _id: false },
+    {timestamps: true}
 );
 
 // Виртуальное свойство - URL автора
