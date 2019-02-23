@@ -13,7 +13,8 @@ var CategorySchema = new Schema(
         //productID: [{type: Schema.ObjectId, ref: 'CategoryAndProduct', required: true}],
 
     },
-    { _id: false },
+    //{ _id: false },
+    {unique:true},
     {timestamps: true}
 );
 
