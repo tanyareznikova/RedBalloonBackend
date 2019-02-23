@@ -12,7 +12,7 @@
         updateButton.addEventListener('click' , async function (){
 
             let categoryTitle = document.querySelector('#categoryTitle').value;
-            let categoryID = updateButton.dataset.categoryId;
+            let _id = updateButton.dataset.id;
 
             if(!categoryTitle.match(RegularExpressions.CategoryTitleExpression)){
 
@@ -28,13 +28,13 @@
 
             }//if
 
-            let request = await fetch( `${window.ServerAddress}panel/category/${categoryID}` , {
+            let request = await fetch( `${window.ServerAddress}panel/category/${_id}` , {
                 method: 'PUT',
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    'categoryID': categoryID,
+                    '_id': _id,
                     'categoryTitle': categoryTitle,
                 })
             });
@@ -142,7 +142,7 @@
 
     //Удаление категории
 
-    let categoryID = -1;
+    let _id = -1;
     let title = -1;
     let removeButtons = document.querySelectorAll('.alert-danger');
     let modalBody = document.querySelector('#categoryName');
@@ -152,9 +152,9 @@
         button.addEventListener('click' , async function (){
 
             title = button.dataset.categoryTitle;
-            categoryID = +button.dataset.categoryId;
+            _id = +button.dataset.id;
 
-            modalBody.textContent = title;
+            modalBody.textContent = " " + title;
             $('#confirmRemoveCategoryModal').modal();
 
         });
@@ -167,7 +167,7 @@
 
         confirmRemoveButton.addEventListener('click' , async function (){
             let data = new FormData();
-            data.append('categoryID', categoryID);
+            data.append('_id', _id);
 
             try{
 
@@ -183,7 +183,7 @@
                 if(response.code === 200){
 
                     let table = document.querySelector(`#categoriesTable`);
-                    let row = document.querySelector(`#categoriesTable tr[data-category-id='${categoryID}']`);
+                    let row = document.querySelector(`#categoriesTable tr[data-category-id='${_id}']`);
 
                     table.removeChild( row );
 
@@ -193,7 +193,7 @@
             catch (ex) {
                 console.log(ex);
             }//catch
-            console.log(categoryID + title);
+            console.log(_id + title);
           
         });
 

@@ -1,7 +1,7 @@
 "use strict";
 
-const Category = require('../../models/category');
-const Product = require('../../models/product');
+const Category = require('../../models/category').Category;
+const Product = require('../../models/product').Product;
 //const Product = require('../../models/defenitions').Product;
 //const ProductImages = require('../../models/defenitions');
 
@@ -30,9 +30,8 @@ module.exports.GetCategoriesListAction = async ( req , res )=>{
 
         }//for i
 
-        res.render('categories/categories-list',{'categories': categories});
 
-
+        res.render('../views/categories/categories-list',{'categories': categories});
     }//try
     catch(ex){
 
@@ -50,7 +49,7 @@ module.exports.GetCategoryAction = async ( req , res )=>{
 
         let category = await Category.findById( categoryID );
 
-        res.render('categories/single-category',{'category': category});
+        res.render('../views/categories/single-categories',{'category': category});
 
     }//try
     catch(ex){
@@ -178,7 +177,7 @@ module.exports.GetProductsByCategories = async(req,res)=>{
 
         }//for i
 
-        res.render('categories/products-by-categories',{'products': products});
+        res.render('../views/categories/products-by-categories',{'products': products});
 
     }//try
     catch (ex){
@@ -191,7 +190,7 @@ module.exports.GetProductsByCategories = async(req,res)=>{
 
 module.exports.AddCategoryAction = async ( req , res )=>{
 
-    res.render('categories/new-category');
+    res.render('../views/categories/new-categories');
 
 };
 

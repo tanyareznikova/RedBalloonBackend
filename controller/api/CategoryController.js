@@ -1,14 +1,14 @@
 
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
-//import Category from "/models/category";
-//import Category from "../../models/category.js";
+//import Category from "/models/categories";
+//import Category from "../../models/categories.js";
 //const mongoose = require("mongoose");
 var Category = require("../../models/category.js");
 const find = require("mongoose").find;
 const express = require("express");
 const controller = express();
-const jsonParser = express.json();
+//const jsonParser = express.json();
 //var mongoose = require("mongoose");
 //var Category = mongoose.model("Category", CategorySchema);
 
@@ -17,7 +17,8 @@ controller.getCategories = ( function(req, res){
     Category.find({}, function(err, categories){
 
         if(err) return console.log(err);
-        res.render("../views/categories", {categories: categories})
+        //res.render("../views/categories/category-list", {categories: categories})
+        res.render("../views/categories/categories-list", {categories: categories})
     });
 });
 
@@ -27,11 +28,18 @@ controller.getCategoryByID = ( function(req, res){
     Category.findOne({_id: id}, function(err, category){
 
         if(err) return console.log(err);
-        res.send(category);
+        //res.send(category);
+        res.render("../views/categories/single-category", {category: category})
     });
 });
 
-controller.postCategory = (jsonParser, function (req, res) {
+controller.AddCategoryAction =  (function ( req , res ){
+
+    res.render('../views/categories/new-category');
+
+});
+
+controller.postCategory = ( function (req, res) {
 
     if(!req.body) return res.sendStatus(400);
 
@@ -54,7 +62,7 @@ controller.deleteCategory = ( function(req, res){
     });
 });
 
-controller.putCategory = (jsonParser, function(req, res){
+controller.putCategory = ( function(req, res){
 
     if(!req.body) return res.sendStatus(400);
     const id = req.body.id;
@@ -72,13 +80,13 @@ controller.putCategory = (jsonParser, function(req, res){
     function ajaxGet(){
         $.ajax({
             type : "GET",
-            url : window.location + "categories/category/create",
+            url : window.location + "categories/categories/create",
             success: function(result){
-                $.each(result, function(i, category){
+                $.each(result, function(i, categories){
 
                     var customerRow = '<tr>' +
-                        '<td>' + category.id + '</td>' +
-                        '<td>' + category.categoryTitle.toUpperCase() + '</td>' +
+                        '<td>' + categories.id + '</td>' +
+                        '<td>' + categories.categoryTitle.toUpperCase() + '</td>' +
                         '</tr>';
 
                     $('#categoryTable tbody').append(customerRow);
@@ -121,14 +129,14 @@ module.exports.category_create_post = async function ( req , res ) {
     console.log(req.body.categoryTitle);
     res.send(req.body);
     //try { let user = await user.findAll(); } catch( ex ) { ... }
-    var category = new Category(
+    var categories = new Category(
         {categoryTitle: req.body.categoryTitle}
     );
 
-    category.save(function (err) {
+    categories.save(function (err) {
         if (err) { return next(err); }
         // Successful - redirect to new author record.
-        res.redirect(category.url);
+        res.redirect(categories.url);
     });
 
 };
@@ -147,26 +155,26 @@ exports.findAll = function(req, res){
 };
 exports.findById = function(req, res){
     var id = req.params.id;
-    Category.findOne({'_id':id},function(err, category) {
-        //return res.send(category);
+    Category.findOne({'_id':id},function(err, categories) {
+        //return res.send(categories);
         if (err) {
             console.log("Error:", err);
         }
         else {
-            res.render("../views/categories", {categories: category});
+            res.render("../views/categories", {categories: categories});
         }
     });
 };
 exports.add = function(req, res) {
-    Category.create(req.body, function (err, category) {
+    Category.create(req.body, function (err, categories) {
         if (err) return console.log(err);
-        return res.send(category);
+        return res.send(categories);
 
         if (err) {
             console.log("Error:", err);
         }
         else {
-            res.render("../views/categories", {categories: category});
+            res.render("../views/categories", {categories: categories});
         }
 
     });
@@ -184,13 +192,13 @@ exports.update = function(req, res) {
 }
 exports.delete = function(req, res){
     var id = req.params.id;
-    Category.remove({'_id':id},function(category) {
-        //return res.send(category);
+    Category.remove({'_id':id},function(categories) {
+        //return res.send(categories);
         if (err) {
             console.log("Error:", err);
         }
         else {
-            res.render("../views/categories", {categories: category});
+            res.render("../views/categories", {categories: categories});
         }
     });
 };

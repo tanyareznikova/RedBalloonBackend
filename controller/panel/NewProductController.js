@@ -180,7 +180,7 @@ module.exports.AddNewProduct = async ( req , res )=>{
 
                 await Product.create({
                     'productID': newProduct.productID,
-                    'img': `/images/${newProduct.productID}/${productImage.name}`
+                    'img': `/admin/images/${newProduct.productID}/${productImage.name}`
                 });
 
             });
@@ -338,7 +338,7 @@ module.exports.UpdateProduct = async ( req , res )=>{
 
                 await Product.create({
                     'productID': productID,
-                    'img': `/images/${productID}/${productImage.name}`
+                    'img': `/admin/images/${productID}/${productImage.name}`
                 });
 
             });

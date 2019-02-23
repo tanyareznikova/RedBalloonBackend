@@ -1,9 +1,10 @@
 extends ../layout
 
 block content
-    script( defer src="javascripts/category.js" )
+    doctype html
+    script( defer src="../../javascripts/category.js" )
 
-    a.btn.btn-primary.col-12(href="/admin/panel/category/new") Добавить категорию
+    a.btn.btn-primary.col-12(href="/panel/categories/new") Добавить категорию
 
     if categories.length === 0
         .alert.alert-info.col-12
@@ -20,18 +21,18 @@ block content
 
             tbody#categoriesTable
                 each category in categories
-                    tr(align="middle" data-category-id=category.categoryID)
-                        td= category.categoryID
+                    tr(align="middle" data-category-id=category._id)
+                        td= category._id
                         td= category.categoryTitle
                         td
-                            a(href="/panel/categories/" + category.categoryID ) #{category.productsAmount}
+                            a(href="/panel/categories/" + category._id ) #{category.productsAmount}
                         td
-                            a.alert.alert-primary(href="/admin/panel/category/"+category.categoryID style="display: inline-block;") Изменить
+                            a.alert.alert-primary(href="/panel/categories/"+category._id style="display: inline-block;") Изменить
                         td
                             button.alert.alert-danger(
                                 style="cursor: pointer"
                                 data-category-title=category.categoryTitle
-                                data-category-id=category.categoryID
+                                data-category-id=category._id
                             ) Удалить
 
             #confirmRemoveCategoryModal.modal(tabindex='-1', role='dialog')

@@ -4,9 +4,9 @@ var router = express.Router();
 //var router = express();
 //var mongoose = require('mongoose');
 var bodyParser = require('body-parser'); //parses information from POST
-//var Category = require('../models/category.js');
+//var Category = require('../models/categories.js');
 //var Category = require("../controller/api/CategoryController.js");
-//import category from '../models/category.js';
+//import categories from '../models/categories.js';
 var category_Controller = require("../controller/api/CategoryController.js");
 
 //ЗАПРОС REST API in Terminal
@@ -22,52 +22,52 @@ router.put("/categoryList", category_Controller.putCategory);
 
 //router.get('/categoryList', category_Controller.category_list);
 
-// GET request for creating a category. NOTE This must come before routes that display category (uses id).
+// GET request for creating a categories. NOTE This must come before routes that display categories (uses id).
 //router.get('/categoryList/create', category_Controller.category_create_get);
 //router.get('/categoryList/create', category_Controller.add);
 
-// POST request for creating category.
+// POST request for creating categories.
 //router.post('/categoryList/create', category_Controller.category_create_post);
 
 // GET catalog home page.
 //router.get('/list', category_Controller.findAll);
 
-// GET request for creating a category. NOTE This must come before routes that display category (uses id).
-//router.get('/category/create', category_Controller.add);
+// GET request for creating a categories. NOTE This must come before routes that display categories (uses id).
+//router.get('/categories/create', category_Controller.add);
 
-// POST request for creating category.
-//router.post('/category/create', category_Controller.add);
+// POST request for creating categories.
+//router.post('/categories/create', category_Controller.add);
 
-// GET request to delete category.
-//router.get('/category/:id/delete', category_Controller.delete);
+// GET request to delete categories.
+//router.get('/categories/:id/delete', category_Controller.delete);
 
-// POST request to delete category.
-//router.delete('/category/:id/delete', category_Controller.delete);
+// POST request to delete categories.
+//router.delete('/categories/:id/delete', category_Controller.delete);
 
-// GET request to update category.
-//router.get('/category/:id/update', category_Controller.update);
+// GET request to update categories.
+//router.get('/categories/:id/update', category_Controller.update);
 
-// POST request to update category.
-//router.put('/category/:id/update', category_Controller.update);
+// POST request to update categories.
+//router.put('/categories/:id/update', category_Controller.update);
 
-// GET request for one category.
-//router.get('/category/:id', category_Controller.findById);
+// GET request for one categories.
+//router.get('/categories/:id', category_Controller.findById);
 
 
 /*
 // Get all categories
 router.get('/', Category.list);
 
-// Get single category by id
+// Get single categories by id
 router.get('/categories/:id', Category.show);
 
-// Create category
+// Create categories
 router.get('/categories', Category.create);
 
-// Save category
+// Save categories
 router.post('/categories', Category.save);
 
-// Edit category
+// Edit categories
 router.get('/categories/:id', Category.edit);
 
 // Edit update
@@ -80,9 +80,9 @@ router.post('/categories/:id', Category.delete);
 
 // GET ALL Category
 router.get('/', function(req, res, next) {
-    Category.find(function (err, category) {
+    Category.find(function (err, categories) {
         if (err) return next(err);
-        res.json(category);
+        res.json(categories);
     });
 });
 

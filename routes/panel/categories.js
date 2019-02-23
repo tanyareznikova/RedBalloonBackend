@@ -1,20 +1,27 @@
 "use strict";
 
 const express = require('express');
-const CategoryController = require("../../controller/panel/NewCategoryController");
+//const NewCategoryController = require("../../controller/panel/NewCategoryController.js");
+const NewCategoryController = require("../../controller/api/CategoryController.js");
+
 //const AdminController = require("../../controller/panel/AdminController");
+var bodyParser = require('body-parser');
 
 const router = express.Router();
-
+const jsonParser = express.json();
+// const router = express();
 //router.use(AdminController.CheckAdminAccess);
+router.use(bodyParser.urlencoded({ extended: true }));
 
 /* Categories */
-router.get('/categories',  CategoryController.GetCategoriesListAction );
-router.get('/categories/:categoryID' ,  CategoryController.GetProductsByCategories);
-router.get('/category/new' ,  CategoryController.AddCategoryAction);
-router.get('/category/:id' ,  CategoryController.GetCategoryAction );
-router.post('/category/new' ,  CategoryController.AddCategory);
-router.put('/category/:id' ,  CategoryController.UpdateCategory );
-router.delete('/categories/delete' ,  CategoryController.RemoveCategory );
+//router.get('/categories',  NewCategoryController.GetCategoriesListAction );
+router.get('/categories',  NewCategoryController.getCategories );
+//router.get('/categories/:categoryID' ,  NewCategoryController.GetProductsByCategories);
+router.get('/categories/:id' ,  NewCategoryController.getCategoryByID);
+router.get('/categories/new' ,  NewCategoryController.AddCategoryAction);
+router.get('/categories/:id' ,  NewCategoryController.getCategoryByID );
+router.post('/categories/new' , jsonParser,  NewCategoryController.postCategory);
+router.put('/categories/:id' , jsonParser,  NewCategoryController.putCategory );
+router.delete('/categories/delete' ,  NewCategoryController.deleteCategory );
 
 module.exports = router;
