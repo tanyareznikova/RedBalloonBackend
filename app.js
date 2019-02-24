@@ -6,6 +6,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var bodyParser = require('body-parser');
 //Express and Mongoose
 //Устанавливаем соединение с mongoose
 var mongoose = require('mongoose');
@@ -19,7 +20,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/RedBalloonDB', { useNewUrlParser: true })
     .then(() =>  console.log('connection succesful'))
     .catch((err) => console.error(err));
-
+mongoose.set('useCreateIndex', true);
 //mongoose.connect(mongoDB);
 //var db = mongoose.connection;
 //db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -80,6 +81,10 @@ app.use(require('express-session')(
         resave: true,
     }
 ));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 //app.use(passport.initialize());
 //app.use(passport.session());
 
@@ -170,9 +175,9 @@ app.use('/users', usersRouter);
 
 
 // catch 404 and forward to error handler
-//app.use(function(req, res, next) {
-  //next(createError(404));
-//});
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 
 // error handler
 app.use(function(err, req, res, next) {

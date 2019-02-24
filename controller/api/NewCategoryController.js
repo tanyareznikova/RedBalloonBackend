@@ -119,11 +119,8 @@ module.exports.GetProductsWithCategory = async ( req , res )=>{
 
             let product = products[i];
             product.image = await Product.findOne({
-                attributes: [ 'img' ],
-                where: {
-                    productID: product.productID
-                }
-            });
+                type: 'img'})
+                .where('productID').gte(product.productID);
 
         }//for i
 

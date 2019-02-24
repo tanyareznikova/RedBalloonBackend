@@ -10,7 +10,7 @@ var Schema = mongoose.Schema;
 var ProductSchema = new Schema(
     {
         //продукт
-        title: {type: String, required: true, trim: true},
+        title: {type: String, required: true, trim: true, unique:true},
         //категория
         categoryID: [{type: Schema.ObjectId, ref: 'Category', required: true}],
         //цена
@@ -25,7 +25,7 @@ var ProductSchema = new Schema(
         img: [{data: Buffer, contentType: String}],
 
     },
-    { _id: false },
+    //{ _id: false },
     {timestamps: true}
 );
 

@@ -52,14 +52,17 @@ controller.postCategory = ( function (req, res) {
     });
 });
 
-controller.deleteCategory = ( function(req, res){
+controller.deleteCategory = ( function (req, res) {
 
-    const id = req.params.id;
-    Category.findByIdAndDelete(id, function(err, category){
 
-        if(err) return console.log(err);
-        res.send(category);
-    });
+        const id = req.params.id;
+
+        Category.findByIdAndDelete(id, function (err, category) {
+
+            if (err) return console.log(err);
+            res.send(category);
+        });
+
 });
 
 controller.putCategory = ( function(req, res){

@@ -193,7 +193,7 @@
             catch (ex) {
                 console.log(ex);
             }//catch
-            console.log(_id + title);
+            console.log(_id + " " + title);
           
         });
 
