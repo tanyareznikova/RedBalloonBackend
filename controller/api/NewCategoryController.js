@@ -8,11 +8,13 @@ const Category = require('../../models/category').Category;
 
 const Response = require('../../models/utils/Response');
 //const ProductImages = require('../../model/defenitions').ProductImages;
-
+const find = require("mongoose").find;
+const express = require("express");
+const controller = express();
 
 const RegularExpressions = require('../../models/utils/RegularExpressions');
 
-module.exports.GetCategories = async ( req , res )=>{
+controller.GetCategories = (async function( req , res ){
 
 
     let response = new Response();
@@ -44,9 +46,9 @@ module.exports.GetCategories = async ( req , res )=>{
     res.status(response.code);
     res.send( response );
 
-};
+});
 
-module.exports.GetProductsWithCategory = async ( req , res )=>{
+controller.GetProductsWithCategory = (async function( req , res ){
 
 
     let response = new Response();
@@ -54,10 +56,10 @@ module.exports.GetProductsWithCategory = async ( req , res )=>{
     try{
 
         let categoryID = +req.params.categoryID;
-        //let limit = +req.query.limit || 10;
-        //let offset = +req.query.offset || 0;
+        let limit = +req.query.limit || 10;
+        let offset = +req.query.offset || 0;
 
-        let limitAndSkip = +req.query.skip(0).limit(10);
+        //let limitAndSkip = +req.query.skip(0).limit(10);
 
         if( isNaN(categoryID) ){
 
@@ -90,23 +92,23 @@ module.exports.GetProductsWithCategory = async ( req , res )=>{
         }//if
 
         let products = await Product.find({
-            //limit: limit,
-            //offset: offset,
-            limitAndSkip: limitAndSkip,
+            limit: limit,
+            offset: offset,
+            //limitAndSkip: limitAndSkip,
+            type: ['_id'],
             where: {
                 categoryID: categoryID
-            },
-            attributes: [ 'productID' ]
+            }
         });
+            //.where('categoryID').gte(categoryID);
+
 
         let ids = [].map.call( products , p => p.productID );
 
         products = await Product.find({
-            order: [
-                [ 'productID' , 'DESC' ]
-            ],
-            attributes: {
-                exclude: [ 'created' , 'updated' , 'productDescription' ]
+            sort: {productID: -1},
+            type: {
+                exclude: [ 'createdAt' , 'updatedAt' , 'productDescription' ]
             },
             where:{
                 productID: {
@@ -119,8 +121,12 @@ module.exports.GetProductsWithCategory = async ( req , res )=>{
 
             let product = products[i];
             product.image = await Product.findOne({
-                type: 'img'})
-                .where('productID').gte(product.productID);
+                type: ['img'],
+                where: {
+                    productID: product.productID
+                }
+            })
+                //.where('_id').gte(product.productID);
 
         }//for i
 
@@ -144,4 +150,6 @@ module.exports.GetProductsWithCategory = async ( req , res )=>{
     res.status(response.code);
     res.send( response );
 
-};
+});
+
+module.exports = controller;

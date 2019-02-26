@@ -8,11 +8,13 @@ const Product = require('../../models/product').Product;
 const RegularExpressions = require('../../models/utils/RegularExpressions');
 
 const Response = require('../../models/utils/Response');
-
+const find = require("mongoose").find;
 const mongoose = require('mongoose').mongoose;
+const express = require("express");
+const controller = express();
 //const Op = require('sequelize').Op;
 
-module.exports.GetCategoriesListAction = async ( req , res )=>{
+controller.GetCategoriesListAction = (async function ( req , res ){
 
     try{
 
@@ -39,9 +41,9 @@ module.exports.GetCategoriesListAction = async ( req , res )=>{
 
     }//catch
 
-};
+});
 
-module.exports.GetCategoryAction = async ( req , res )=>{
+controller.GetCategoryAction = (async function ( req , res ){
 
     try{
 
@@ -58,9 +60,9 @@ module.exports.GetCategoryAction = async ( req , res )=>{
 
     }//catch
 
-};
+});
 
-module.exports.UpdateCategory = async ( req , res )=>{
+controller.UpdateCategory = (async function ( req , res ){
 
     let response = new Response();
 
@@ -127,29 +129,29 @@ module.exports.UpdateCategory = async ( req , res )=>{
 
     }//catch
 
-};
+});
 
-module.exports.GetProductsByCategories = async(req,res)=>{
+controller.GetProductsByCategories = (async function (req,res){
 
     try{
 
         let categoryID = +req.params.categoryID;
 
         let products = await Product.find({
+            type: [ 'productID'  ],
             where: {
                 categoryID: categoryID
-            },
-            attributes: [ 'productID'  ]
+            }
         });
 
         let ids = [].map.call( products , p => p.productID );
 
         products = await Product.find({
-            order: [
+            sort: [
                 [ 'productID' , 'DESC' ]
             ],
-            attributes: {
-                exclude: [ 'created' , 'updated' , 'productDescription' ]
+            type: {
+                exclude: [ 'createdAt' , 'updatedAt' , 'productDescription' ]
             },
             where:{
                 productID: {
@@ -162,13 +164,13 @@ module.exports.GetProductsByCategories = async(req,res)=>{
 
             let product = products[i];
             product.image = await Product.findOne({
-                attributes: [ 'img' ],
+                type: [ 'img' ],
                 where: {
                     productID: product.productID
                 }
             });
             product.categoryTitle = await Category.findOne({
-                attributes:['categoryTitle'],
+                type:['categoryTitle'],
                 where:{
                     categoryID : categoryID
                 }
@@ -186,15 +188,15 @@ module.exports.GetProductsByCategories = async(req,res)=>{
 
     }//catch
 
-};
+});
 
-module.exports.AddCategoryAction = async ( req , res )=>{
+controller.AddCategoryAction = (async function ( req , res ){
 
     res.render('../views/categories/new-categories');
 
-};
+});
 
-module.exports.AddCategory = async ( req , res )=>{
+controller.AddCategory = (async function ( req , res ){
 
     let response = new Response();
 
@@ -234,9 +236,9 @@ module.exports.AddCategory = async ( req , res )=>{
 
     }//catch
 
-};
+});
 
-module.exports.RemoveCategory = async ( req , res )=>{
+controller.RemoveCategory = (async function ( req , res ){
 
     let response = new Response();
 
@@ -286,4 +288,6 @@ module.exports.RemoveCategory = async ( req , res )=>{
 
     }//catch
 
-};
+});
+
+module.exports = controller;
