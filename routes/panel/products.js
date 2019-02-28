@@ -1,27 +1,33 @@
 "use strict";
 
 const express = require('express');
-const ProductController = require("../../controller/panel/NewProductController");
+const NewProductController = require("../../controller/api/ProductController.js");
 //const AdminController = require("../../controller/panel/AdminController");
 
 const router = express.Router();
+
+var bodyParser = require('body-parser');
+
+const jsonParser = express.json();
+
+router.use(bodyParser.urlencoded({ extended: true }));
 
 /* Products */
 
 //router.use(AdminController.CheckAdminAccess);
 
-router.get('/products', ProductController.GetProductsListAction );
-router.get('/products/attributes',ProductController.GetAttributesAction );
+router.get('/products', NewProductController.getProducts );
+//router.get('/products/attributes',NewProductController.GetAttributesAction );
 
-router.get('/products/new'  ,ProductController.AddNewProductAction );
-router.post('/products/new' , ProductController.AddNewProduct );
+router.get('/products/new'  ,NewProductController.AddNewProductAction );
+router.post('/products/new' , jsonParser, NewProductController.postProduct );
 
-router.get('/products/:id', ProductController.GetProductAction );
-router.put('/products/:id',ProductController.UpdateProduct );
+router.get('/products/:id', NewProductController.getProductByID );
+router.put('/products/:id', jsonParser, NewProductController.putProduct );
 
-router.get('/products/attributes/new', ProductController.AddNewAttributeAction );
-router.post('/products/attributes/new', ProductController.AddNewAttribute );
+//router.get('/products/attributes/new', NewProductController.AddNewAttributeAction );
+//router.post('/products/attributes/new', jsonParser, NewProductController.AddNewAttribute );
 
-router.delete('/products/delete' , ProductController.RemoveProduct );
+router.delete('/products/delete' , NewProductController.deleteProduct );
 
 module.exports = router;

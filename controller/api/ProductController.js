@@ -27,9 +27,12 @@ controller.getProductByID = ( function(req, res){
     });
 });
 
-controller.AddProductAction =  (function ( req , res ){
+controller.AddNewProductAction = (async function (req , res){
 
-    res.render('../views/products/new-product');
+    let attributes = await ProductAttributes.find();
+    let categories = await Category.find();
+
+    res.render('../views/products/new-product' , { attributes: attributes , categories: categories });
 
 });
 
@@ -84,3 +87,5 @@ controller.putProduct = ( function(req, res){
         res.send(product);
     });
 });
+
+module.exports = controller;
