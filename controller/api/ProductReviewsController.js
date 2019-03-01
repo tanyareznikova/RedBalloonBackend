@@ -1,17 +1,15 @@
-//Product
+//Product Reviews
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
-var Product = require("../../models/product.js").Product;
-var ProductAttribute = require("../../models/productAttribute.js").ProductAttribute;
-var Category = require("../../models/category.js").Category;
+var ProductReviews = require("../../models/productReviews.js").ProductReviews;
 const find = require("mongoose").find;
 const express = require("express");
 const controller = express();
 
 controller.getProducts = ( function(req, res){
 
-    Product.find({}, function(err, products){
+    ProductReviews.find({}, function(err, products){
 
         if(err) return console.log(err);
         res.render("../views/products/products-list", {products: products})
@@ -21,7 +19,7 @@ controller.getProducts = ( function(req, res){
 controller.getProductByID = ( function(req, res){
 
     const id = req.params.id;
-    Product.findOne({_id: id}, function(err, product){
+    ProductReviews.findOne({_id: id}, function(err, product){
 
         if(err) return console.log(err);
         //res.send(category);
@@ -49,7 +47,7 @@ controller.postProduct = ( function (req, res) {
     const productDescription = req.body.description;
     const attribute = req.body.productAttribute;
     const productImg = req.body.img;
-    const product = new Product({title: productTitle, categoryID: id, price: productPrice, quantity: productQuantity,
+    const product = new ProductReviews({title: productTitle, categoryID: id, price: productPrice, quantity: productQuantity,
         description: productDescription, productAttribute: attribute, img: productImg});
 
     product.save(function(err){
@@ -60,7 +58,7 @@ controller.postProduct = ( function (req, res) {
 
 controller.getProductAttributes = ( function(req, res){
 
-    ProductAttribute.find({}, function(err, attributes){
+    ProductReviews.find({}, function(err, attributes){
 
         if(err) return console.log(err);
         res.render("../views/products/attributes/attributes-list", {attributes: attributes})
@@ -80,11 +78,11 @@ controller.postProductAttribute = ( function (req, res) {
     const titleAttribute = req.body.titleAttribute;
     const valueAttribute = req.body.valueAttribute;
 
-    const productAttributes = new ProductAttribute({titleAttribute: titleAttribute, valueAttribute: valueAttribute});
+    const product = new ProductReviews({titleAttribute: titleAttribute, valueAttribute: valueAttribute});
 
-    productAttributes.save(function(err){
+    product.save(function(err){
         if(err) return console.log(err);
-        res.send(productAttributes);
+        res.send(product);
     });
 });
 
@@ -92,7 +90,7 @@ controller.deleteProduct = ( function (req, res) {
 
     const id = req.params.id;
 
-    Product.findByIdAndDelete(id, function (err, product) {
+    ProductReviews.findByIdAndDelete(id, function (err, product) {
 
         if (err) return console.log(err);
         res.send(product);
@@ -114,7 +112,7 @@ controller.putProduct = ( function(req, res){
     const newProduct = {title: productTitle, categoryID: categoryId, price: productPrice, quantity: productQuantity,
         description: productDescription, productAttribute: attribute, img: productImg};
 
-    Product.findOneAndUpdate({_id: prodId}, newProduct, {new: true}, function(err, product){
+    ProductReviews.findOneAndUpdate({_id: prodId}, newProduct, {new: true}, function(err, product){
         if(err) return console.log(err);
         res.send(product);
     });
