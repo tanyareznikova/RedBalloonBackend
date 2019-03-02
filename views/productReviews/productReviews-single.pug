@@ -1,13 +1,13 @@
 extends ../layout
 
 block content
-    script( defer src="javascripts/feedback.js" )
+    script( defer src="../../javascripts/productReviews.js" )
 
 
     .card(align="middle")
         .card-body
-            h5.card-title= fBack.created
-            if fBack.fProcessed
+            h5.card-title= productReview.created
+            if productReview.fProcessed
                 p(style="color: green;").card-text
                     |Обработано
             else
@@ -18,19 +18,19 @@ block content
 
             li.list-group-item
                 |UserName:
-                h4.card-title= fBack.fUserName
+                h4.card-title= productReview.fUserName
 
             li.list-group-item
                 | Message:
-                p(style="font-size: 24px;").card-text= fBack.fMessage
+                p(style="font-size: 24px;").card-text= productReview.fMessage
 
             li.list-group-item
                 |UserEmail:
-                p.card-text= fBack.fUserEmail
+                p.card-text= productReview.fUserEmail
 
             li.list-group-item
                 |UserPhone:
-                p.card-text= fBack.fUserPhone
+                p.card-text= productReview.fUserPhone
 
         .card-body
 
@@ -39,5 +39,5 @@ block content
 
         .card-body
 
-            #responseButton.btn.btn-primary( style="margin-right: 10px; display: inline-block;" data-fbacks-id= fBack.feedBackID) Ответить
-            #processedButton.btn.btn-primary(style="margin-left: 10px; display: inline-block;" data-fbacks-id= fBack.feedBackID) Обработано
+            #responseButton.btn.btn-primary( style="margin-right: 10px; display: inline-block;" data-fbacks-id= productReview.feedBackID) Ответить
+            #processedButton.btn.btn-primary(style="margin-left: 10px; display: inline-block;" data-fbacks-id= productReview.feedBackID) Обработано

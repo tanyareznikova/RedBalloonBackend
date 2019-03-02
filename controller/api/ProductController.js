@@ -2,9 +2,9 @@
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
-var Product = require("../../models/product.js").Product;
-var ProductAttribute = require("../../models/productAttribute.js").ProductAttribute;
-var Category = require("../../models/category.js").Category;
+var Product = require("../../models/product.js");
+var ProductAttribute = require("../../models/productAttribute.js");
+var Category = require("../../models/category.js");
 const find = require("mongoose").find;
 const express = require("express");
 const controller = express();
@@ -31,7 +31,7 @@ controller.getProductByID = ( function(req, res){
 
 controller.AddNewProductAction = (async function (req , res){
 
-    let attributes = await ProductAttributes.find();
+    let attributes = await ProductAttribute.find();
     let categories = await Category.find();
 
     res.render('../views/products/new-product' , { attributes: attributes , categories: categories });

@@ -7,114 +7,74 @@ const find = require("mongoose").find;
 const express = require("express");
 const controller = express();
 
-controller.getProducts = ( function(req, res){
+controller.getProductReviews = ( function(req, res){
 
-    ProductReviews.find({}, function(err, products){
+    ProductReviews.find({}, function(err, productReviews){
 
         if(err) return console.log(err);
-        res.render("../views/products/products-list", {products: products})
+        res.render("../views/productReviews/productReviews-list", {productReviews: productReviews})
     });
 });
 
-controller.getProductByID = ( function(req, res){
+controller.getProductReviewByID = ( function(req, res){
 
     const id = req.params.id;
-    ProductReviews.findOne({_id: id}, function(err, product){
+    ProductReviews.findOne({_id: id}, function(err, productReview){
 
         if(err) return console.log(err);
         //res.send(category);
-        res.render("../views/products/single-product", {product: product})
+        res.render("../views/productReviews/productReviews-single", {productReview: productReview})
     });
 });
 
-controller.AddNewProductAction = (async function (req , res){
-
-    let attributes = await ProductAttributes.find();
-    let categories = await Category.find();
-
-    res.render('../views/products/new-product' , { attributes: attributes , categories: categories });
-
-});
-
-controller.postProduct = ( function (req, res) {
+controller.postProductReview = ( function (req, res) {
 
     if(!req.body) return res.sendStatus(400);
 
-    const productTitle = req.body.title;
-    const id = req.body.categoryID;
-    const productPrice = req.body.price;
-    const productQuantity = req.body.quantity;
-    const productDescription = req.body.description;
-    const attribute = req.body.productAttribute;
-    const productImg = req.body.img;
-    const product = new ProductReviews({title: productTitle, categoryID: id, price: productPrice, quantity: productQuantity,
-        description: productDescription, productAttribute: attribute, img: productImg});
+    const name = req.body.name;
+    const plus = req.body.plus;
+    const minus = req.body.minus;
+    const message = req.body.message;
+    const productID = req.body.productID;
 
-    product.save(function(err){
+    const productReview = new ProductReviews({name: name, plus: plus, minus: minus, message: message,
+        productID: productID});
+
+    productReview.save(function(err){
         if(err) return console.log(err);
-        res.send(product);
+        res.send(productReview);
     });
 });
 
-controller.getProductAttributes = ( function(req, res){
-
-    ProductReviews.find({}, function(err, attributes){
-
-        if(err) return console.log(err);
-        res.render("../views/products/attributes/attributes-list", {attributes: attributes})
-    });
-});
-
-controller.AddNewAttributeAction = (async function (req , res){
-
-    res.render('../views/products/attributes/new-attribute');
-
-});
-
-controller.postProductAttribute = ( function (req, res) {
-
-    if(!req.body) return res.sendStatus(400);
-
-    const titleAttribute = req.body.titleAttribute;
-    const valueAttribute = req.body.valueAttribute;
-
-    const product = new ProductReviews({titleAttribute: titleAttribute, valueAttribute: valueAttribute});
-
-    product.save(function(err){
-        if(err) return console.log(err);
-        res.send(product);
-    });
-});
-
-controller.deleteProduct = ( function (req, res) {
+controller.deleteProductReview = ( function (req, res) {
 
     const id = req.params.id;
 
-    ProductReviews.findByIdAndDelete(id, function (err, product) {
+    ProductReviews.findByIdAndDelete(id, function (err, productReview) {
 
         if (err) return console.log(err);
-        res.send(product);
+        res.send(productReview);
     });
 
 });
 
-controller.putProduct = ( function(req, res){
+controller.putProductReview = ( function(req, res){
 
     if(!req.body) return res.sendStatus(400);
-    const prodId = req.body.id;
-    const productTitle = req.body.title;
-    const categoryId = req.body.categoryID;
-    const productPrice = req.body.price;
-    const productQuantity = req.body.quantity;
-    const productDescription = req.body.description;
-    const attribute = req.body.productAttribute;
-    const productImg = req.body.img;
-    const newProduct = {title: productTitle, categoryID: categoryId, price: productPrice, quantity: productQuantity,
-        description: productDescription, productAttribute: attribute, img: productImg};
 
-    ProductReviews.findOneAndUpdate({_id: prodId}, newProduct, {new: true}, function(err, product){
+    const id = req.body.id;
+    const name = req.body.name;
+    const plus = req.body.plus;
+    const minus = req.body.minus;
+    const message = req.body.message;
+    const productID = req.body.productID;
+
+    const newProductReview = {name: name, plus: plus, minus: minus, message: message,
+        productID: productID};
+
+    ProductReviews.findOneAndUpdate({_id: id}, newProductReview, {new: true}, function(err, productReview){
         if(err) return console.log(err);
-        res.send(product);
+        res.send(productReview);
     });
 });
 
