@@ -1,16 +1,15 @@
 "use strict";
 
 const express = require('express');
-const FeedBackController = require("../../controller/panel/FeedBackController");
-const AdminController = require("../../controller/panel/AdminController");
+const FeedBackController = require("../../controller/api/ProductReviewsController");
 
 const router = express.Router();
 
 
-router.get('/feedbacks-list', FeedBackController.GetFeedBacksListAction );
-router.get('/singl-feedback/:id' , FeedBackController.GetSinglFeedBackAction);
-router.put('/feedback/:id', FeedBackController.ProcessedFeedBack );
-router.post('/feedback-response/', FeedBackController.SendMessage );
+router.get('/productReviews-list', FeedBackController.getProductReviews );
+router.get('/single-productReviews/:id' , FeedBackController.getProductReviewByID);
+router.put('/productReviews/:id', FeedBackController.ProcessedFeedBack );
+router.post('/productReviews-response/', FeedBackController.SendMessage );
 
 
 module.exports = router;

@@ -16,7 +16,7 @@ var ProductSchema = new Schema(
         //цена
         price: {type: Number, required: true},
         //количество
-        quantity: {type: Number, required: true},
+        amount: {type: Number, required: true},
         //описание
         description: {type: String, required: true},
         //атрибут товара

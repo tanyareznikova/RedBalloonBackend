@@ -9,9 +9,10 @@
 
         addAttributeButton.addEventListener('click' , async function (){
 
-            let attributeTitle = document.querySelector('#attributeTitle').value;
+            let titleAttribute = document.querySelector('#titleAttribute').value;
+            let valueAttribute = document.querySelector('#valueAttribute').value;
 
-            if(!attributeTitle.match(RegularExpressions.CategoryTitleExpression)){
+            if(!titleAttribute.match(RegularExpressions.CategoryTitleExpression) && !valueAttribute.match(RegularExpressions.CategoryTitleExpression)){
 
                 if( messageBlock.classList.contains('alert-success') ){
                     messageBlock.classList.remove('alert-success');
@@ -31,7 +32,8 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    'attributeTitle': attributeTitle,
+                    'titleAttribute': titleAttribute,
+                    'valueAttribute': valueAttribute,
                 })
             });
 

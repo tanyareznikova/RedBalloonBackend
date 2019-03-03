@@ -22,17 +22,17 @@ block content
             tbody
                 each productReview in productReviews
                     tr(align="middle")
-                        td= productReview.feedBackID
+                        td= productReview.id
                         td= productReview.fUserName
                         td= productReview.created
                         td= productReview.fProcessed? "Обработано":"Не обработано"
                         td
-                            a.alert.alert-primary(href="/panel/singl-feedback/" + productReview.feedBackID style="display: inline-block;") Просмотреть
+                            a.alert.alert-primary(href="/panel/singl-feedback/" + productReview.id style="display: inline-block;") Просмотреть
                         td
                             button#removeFBButton.alert.alert-danger(
                             style="cursor: pointer"
                             data-feedback-title=productReview.fMessage
-                            data-feedback-id=productReview.feedBackID
+                            data-feedback-id=productReview.id
                             ) Удалить
 
             #confirmRemoveMessageModal.modal(tabindex='-1', role='dialog')

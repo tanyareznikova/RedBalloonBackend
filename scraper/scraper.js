@@ -53,23 +53,21 @@ Scraper.prototype.loadWebPage = function () {
 **/
 Scraper.prototype.parsePage = function (html) {
     var $ = cheerio.load(html);
-    var address = $('#address').text();
-    var tel = $('#tel').text();
-    var cell = $('#cell').text();
-    var fax = $('#fax').text();
-    var email = $('#email').text();
-    var website = $('#website').attr('href');
-    var postal =  $('#postal').text();
+    var title = $('#title').text();
+    var categoryID = $('#categoryID').text();
+    var price = $('#price').text();
+    var amount = $('#amount').text();
+    var description = $('#description').text();
+    var productAttribute = $('#productAttribute').text();
+    var img = $('#img').text();
     var model = {
-        title: address.trim().split('\n'),
-        email: email.trim(),
-        cell: cell.trim().split('\n'),
-        telephone: tel.trim().split('\n'),
-        fax: fax.trim().split('\n'),
-        website: website || '',
-        postalAddress: postal.trim().split('\n'),
-        address: address.trim().split('\n'),
-        url: this.url
+        title: title.trim().split('\n'),
+        categoryID: categoryID.trim(),
+        price: price.trim().split('\n'),
+        amount: amount.trim().split('\n'),
+        description: description.trim().split('\n'),
+        productAttribute: productAttribute.trim().split('\n'),
+        img: img.trim().split('\n'),
     };
     return model;
 };

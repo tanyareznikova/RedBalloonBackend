@@ -8,18 +8,23 @@ var Category = require("../../models/category.js");
 const find = require("mongoose").find;
 const express = require("express");
 const controller = express();
+const mongoose = require('mongoose').mongoose;
+
 //const jsonParser = express.json();
 //var mongoose = require("mongoose");
 //var Category = mongoose.model("Category", CategorySchema);
 
 controller.getCategories = ( function(req, res){
 
-    Category.find({}, function(err, categories){
 
-        if(err) return console.log(err);
-        //res.render("../views/categories/category-list", {categories: categories})
-        res.render("../views/categories/categories-list", {categories: categories})
-    });
+        Category.find({}, function (err, categories) {
+
+                //res.render("../views/categories/categories-list", {categories: categories})
+                if (err) return console.log(err);
+                //res.render("../views/categories/category-list", {categories: categories})
+                res.render("../views/categories/categories-list", {categories: categories})
+        });
+
 });
 
 controller.getCategoryByID = ( function(req, res){
@@ -31,6 +36,65 @@ controller.getCategoryByID = ( function(req, res){
         //res.send(category);
         res.render("../views/categories/single-category", {category: category})
     });
+});
+
+controller.GetProductsByCategories = (async function(req, res){
+
+    try{
+
+        let CategoryId = +req.params.id;
+
+        let products = await Product.find({
+            where: {
+                id: CategoryId
+            },
+            type: [ '_id'  ]
+        });
+
+        let ids = [].map.call( products , p => p._id );
+
+        products = await Product.find({
+            sort: [
+                [ '_id' , -1 ]
+            ],
+            type: {
+                exclude: [ 'createdAt' , 'updatedAt' , 'description' ]
+            },
+            where:{
+                _id: {
+                    [mongoose.in]: ids
+                }
+            }
+        });
+
+        for ( let i = 0 ; i < products.length ; i++ ){
+
+            let product = products[i];
+            product.image = await Product.findOne({
+                type: [ 'img' ],
+                where: {
+                    _id: product._id
+                }
+            });
+            product.categoryTitle = await Category.findOne({
+                type:['categoryTitle'],
+                where:{
+                    _id : CategoryId
+                }
+            });
+            console.log(product);
+
+        }//for i
+
+        res.render('../views/categories/products-by-categories',{products: products});
+
+    }//try
+    catch (ex){
+
+        res.render('error',{'error': ex});
+
+    }//catch
+
 });
 
 controller.AddCategoryAction =  (function ( req , res ){

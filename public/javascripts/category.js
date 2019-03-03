@@ -146,6 +146,7 @@
     let title = -1;
     let removeButtons = document.querySelectorAll('.alert-danger');
     let modalBody = document.querySelector('#categoryName');
+      //let modalBody = document.querySelector('#categoryName');
 
     [].forEach.call( removeButtons , ( button )=>{
 

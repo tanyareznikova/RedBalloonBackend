@@ -14,22 +14,24 @@ block content
                 tr(align="middle")
                     th(scope='col') #
                     th(scope='col') Название
+                    th(scope='col') Значение
                     th(scope='col') Товаров
                     th(scope='col') Изменить
                     th(scope='col') Удалить
             tbody
                 each attribute in attributes
                     tr(align="middle")
-                        td= attribute.attributeID
-                        td= attribute.attributeTitle
+                        td= attribute._id
+                        td= attribute.titleAttribute
+                        td= attribute.valueAttribute
                         td 0
                         td
-                            a.alert.alert-primary(href="/panel/products/attribute/"+attribute.attributeID style="display: inline-block;") Изменить
+                            a.alert.alert-primary(href="/panel/products/attribute/"+attribute._id style="display: inline-block;") Изменить
                         td
                             button.alert.alert-danger(
                                 style="cursor: pointer"
-                                data-attributes-title=attribute.attributeTitle
-                                data-attributes-id=attribute.attributeID
+                                data-attributes-title=attribute.titleAttribute
+                                data-attributes-id=attribute._id
                             ) Удалить
 
             #confirmRemoveCategoryModal.modal(tabindex='-1', role='dialog')
@@ -42,7 +44,7 @@ block content
                         .modal-body
                             div
                                 | Вы действительно хотите удалить атрибут
-                                b#attributeTitle
+                                b#titleAttribute
                         .modal-footer
                             button.btn.btn-secondary(type='button', data-dismiss='modal') Нет
                             button#confirmRemoveAttributeButton.btn.btn-primary(type='button' data-dismiss='modal') Удалить

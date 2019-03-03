@@ -38,7 +38,7 @@ const categoriesRoutes = require('./routes/panel/categories');
 //const newsRoutes = require('./routes/panel/news');
 //const promoRoutes = require('./routes/panel/promo-codes');
 //const coordRoutes = require('./routes/panel/coord');
-//const feedBackRoutes = require('./routes/panel/feedback');
+//const productReviewsRoutes = require('./routes/panel/productReviews');
 //const aboutRoutes = require('./routes/panel/about');
 
 const productsApiRoutes = require('./routes/api/products');
@@ -100,7 +100,7 @@ app.use('/panel' , categoriesRoutes);
 //app.use('/panel' , localeRoutes);
 //app.use('/panel' , newsRoutes);
 //app.use('/panel' , promoRoutes);
-//app.use('/panel' , feedBackRoutes);
+//app.use('/panel' , productReviewsRoutes);
 //app.use('/panel' , ordersRoutes);
 //app.use('/panel' , coordRoutes);
 //app.use('/panel' , aboutRoutes);
@@ -121,57 +121,8 @@ app.use('/api' , categoriesApiRoutes);
 //var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-//var categoriesRouter = require('./routes/categoriesRoutes');
-//var productsRouter = require('./routes/productsRoutes');
-//var bindingCharacteristicsRouter = require('./routes/tempRoutes/bindingCharacteristicsRoutes');
-//var bodyCharacteristicsRouter = require('./routes/tempRoutes/bodyCharacteristicsRoutes');
-//var cameraCharacteristicsRouter = require('./routes/tempRoutes/cameraCharacteristicsRoutes');
-//var cpuCharacteristicsRouter = require('./routes/tempRoutes/cpuCharacteristicsRoutes');
-//var displayCharacteristicsRouter = require('./routes/tempRoutes/displayCharacteristicsRoutes');
-//var memoryCharacteristicsRouter = require('./routes/tempRoutes/memoryCharacteristicsRoutes');
-//var multimediaCharacteristicsRouter = require('./routes/tempRoutes/multimediaCharacteristicsRoutes');
-//var otherCharacteristicsRouter = require('./routes/tempRoutes/otherCharacteristicsRoutes');
-//var productCharacteristicsRouter = require('./routes/tempRoutes/productCharacteristicsRoutes');
-//var productReviewsRouter = require('./routes/productReviewsRoutes');
-//var simCardCharacteristicsRouter = require('./routes/tempRoutes/simCardCharacteristicsRoutes');
-//var supplyCharacteristicsRouter = require('./routes/tempRoutes/supplyCharacteristicsRoutes');
-//var systemCharacteristicsRouter = require('./routes/tempRoutes/systemCharacteristicsRoutes');
-//var whereCanOneBuyRouter = require('./routes/whereCanOneBuyRoutes');
-
-//var app = express();
-
-
-// view engine setup
-//app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'pug');
-
-//app.use(logger('dev'));
-//app.use(express.json());
-//app.use(express.urlencoded({ extended: false }));
-//app.use(cookieParser());
-//app.use(express.static(path.join(__dirname, 'public')));
-
-
-
 //app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-//app.use('/categories', categoriesRouter);
-//app.use('/products', productsRouter);
-//app.use('/bindingCharacteristics', bindingCharacteristicsRouter);
-//app.use('/bodyCharacteristics', bodyCharacteristicsRouter);
-//app.use('/cameraCharacteristics', cameraCharacteristicsRouter);
-//app.use('/cpuCharacteristics', cpuCharacteristicsRouter);
-//app.use('/displayCharacteristics', displayCharacteristicsRouter);
-//app.use('/memoryCharacteristics', memoryCharacteristicsRouter);
-//app.use('/multimediaCharacteristics', multimediaCharacteristicsRouter);
-//app.use('/otherCharacteristics', otherCharacteristicsRouter);
-//app.use('/productCharacteristics', productCharacteristicsRouter);
-//app.use('/productReviews', productReviewsRouter);
-//app.use('/simCardCharacteristics', simCardCharacteristicsRouter);
-//app.use('/supplyCharacteristics', supplyCharacteristicsRouter);
-//app.use('/systemCharacteristics', systemCharacteristicsRouter);
-//app.use('/whereCanOneBuy', whereCanOneBuyRouter);
 
 
 // catch 404 and forward to error handler

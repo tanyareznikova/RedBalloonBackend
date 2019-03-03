@@ -9,7 +9,15 @@ const controller = express();
 
 controller.getProductReviews = ( function(req, res){
 
-    ProductReviews.find({}, function(err, productReviews){
+    let limit = req.query.limit || 10;
+    let skip = req.query.skip || 0;
+
+    ProductReviews.find({
+        skip: skip,
+        limit: limit,
+        sort: [
+            ['_id' , -1]
+        ]}, function(err, productReviews){
 
         if(err) return console.log(err);
         res.render("../views/productReviews/productReviews-list", {productReviews: productReviews})
