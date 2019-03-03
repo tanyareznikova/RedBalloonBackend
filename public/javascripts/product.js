@@ -52,6 +52,7 @@ function AddRemoveAttributeListeners( attributes ){
 
             let attributeID = +this.value;
             let attributeTitle = this.querySelector(`option[data-attribute-id='${attributeID}']`).textContent;
+            let attributeValue = this.querySelector(`option[data-attribute-id='${attributeID}']`).textContent;
 
             if(attributeID === -1){
                 return;
@@ -66,8 +67,10 @@ function AddRemoveAttributeListeners( attributes ){
             attributes.push( {
                 attributeID: attributeID,
                 attributeTitle: attributeTitle,
-                attributeValue: ''
+                attributeValue: attributeValue
+                //attributeValue: ''
             } );
+
 
         });
 
@@ -129,21 +132,22 @@ function AddRemoveAttributeListeners( attributes ){
 
             let categoriesIds = [].map.call(  selectedCategoriesOptions , ( opt )=> { return +opt.value; } );
 
-            let productTitle = document.querySelector('#productTitle').value;
-            let productPrice = document.querySelector('#productPrice').value;
-            let productDescription = document.querySelector('#productDescription').value;
+            let productTitle = document.querySelector('#title').value;
+            let productPrice = document.querySelector('#price').value;
+            let productAmount = document.querySelector('#amount').value;
+            let productDescription = document.querySelector('#description').value;
 
-            let productImage = document.querySelector('#productImage');
+            let productImage = document.querySelector('#img');
 
             let data = new FormData();
 
-            data.append('image', productImage.files[0]);
+            data.append('img', productImage.files[0]);
             data.append('categories', JSON.stringify(categoriesIds));
             data.append('attributes' , JSON.stringify(attributes));
-            data.append('productTitle' , productTitle);
-            data.append('productDescription' , productDescription);
-            data.append('productPrice' , productPrice);
-
+            data.append('title' , productTitle);
+            data.append('description' , productDescription);
+            data.append('price' , productPrice);
+            data.append('amount' , productAmount);
 
             try{
 
@@ -233,23 +237,25 @@ function AddRemoveAttributeListeners( attributes ){
 
             let categoriesIds = [].map.call(  selectedCategoriesOptions , ( opt )=> { return +opt.value; } );
 
-            let productTitle = document.querySelector('#productTitle').value;
-            let productPrice = document.querySelector('#productPrice').value;
-            let productDescription = document.querySelector('#productDescription').value;
+            let productTitle = document.querySelector('#title').value;
+            let productPrice = document.querySelector('#price').value;
+            let productAmount = document.querySelector('#amount').value;
+            let productDescription = document.querySelector('#description').value;
 
-            let productImage = document.querySelector('#productImage');
+            let productImage = document.querySelector('#img');
 
             let data = new FormData();
 
             if( productImage.files.length !== 0 ){
-                data.append('image', productImage.files[0]);
+                data.append('img', productImage.files[0]);
             }//if
 
             data.append('categories', JSON.stringify(categoriesIds));
             data.append('attributes' , JSON.stringify(attributes));
-            data.append('productTitle' , productTitle);
-            data.append('productDescription' , productDescription);
-            data.append('productPrice' , productPrice);
+            data.append('title' , productTitle);
+            data.append('description' , productDescription);
+            data.append('price' , productPrice);
+            data.append('amount' , productAmount);
 
 
             try{
@@ -286,7 +292,7 @@ function AddRemoveAttributeListeners( attributes ){
 
         button.addEventListener('click' , async function (){
 
-            let title = button.dataset.productTitle;
+            let title = button.dataset.producttitle;
             productID = +button.dataset.productId;
 
             modalBody.textContent = title;

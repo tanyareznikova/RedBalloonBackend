@@ -3,7 +3,7 @@ extends ../layout
 block content
     script( defer src="../../javascripts/product.js" )
 
-    form(data-product-id=product.productID).col-md-12
+    form(data-product-id=product._id).col-md-12
         .form-group
             label(for='productTitle') Название
             input#productTitle.form-control(placeholder='Введите название' value=product.productTitle)

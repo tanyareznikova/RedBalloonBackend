@@ -23,17 +23,17 @@ block content
 
             tbody#productTable
                 each product in products
-                    tr(align="middle" data-product-id=product.productID)
-                        td= product.productID
-                        td= product.productTitle
-                        td= product.productPrice
+                    tr(align="middle" data-product-id=product._id)
+                        td= product._id
+                        td= product.title
+                        td= product.price
                         td
-                            a.alert.alert-primary(href="/panel/products/" + product.productID style="display: inline-block;") Изменить
+                            a.alert.alert-primary(href="/panel/products/" + product._id style="display: inline-block;") Изменить
                         td
                             button.alert.alert-danger(
                             style="cursor: pointer"
-                            data-product-title=product.productTitle
-                            data-product-id=product.productID
+                            data-product-title=product.title
+                            data-product-id=product._id
                             ) Удалить
 
             #confirmRemoveProductModal.modal(tabindex='-1', role='dialog')
