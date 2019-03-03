@@ -1,0 +1,50 @@
+extends ../../layout
+
+block content
+    script( defer src="../../javascripts/attributes.js" )
+
+    a.btn.btn-primary.col-12(href="/panel/products/attributes/new") Добавить атрибут
+
+    if attributes.length === 0
+        .alert.alert-info.col-12
+            | Атрибуты не найдены
+    else
+        table.table
+            thead
+                tr(align="middle")
+                    th(scope='col') #
+                    th(scope='col') Название
+                    th(scope='col') Значение
+                    th(scope='col') Товаров
+                    th(scope='col') Изменить
+                    th(scope='col') Удалить
+            tbody
+                each attribute in attributes
+                    tr(align="middle")
+                        td= attribute._id
+                        td= attribute.titleAttribute
+                        td= attribute.valueAttribute
+                        td 0
+                        td
+                            a.alert.alert-primary(href="/panel/products/attribute/"+attribute._id style="display: inline-block;") Изменить
+                        td
+                            button.alert.alert-danger(
+                                style="cursor: pointer"
+                                data-attributes-title=attribute.titleAttribute
+                                data-attributes-id=attribute._id
+                            ) Удалить
+
+            #confirmRemoveCategoryModal.modal(tabindex='-1', role='dialog')
+                .modal-dialog(role='document')
+                    .modal-content
+                        .modal-header
+                            h5.modal-title Удаление атрибута
+                            button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                span(aria-hidden='true') ×
+                        .modal-body
+                            div
+                                | Вы действительно хотите удалить атрибут
+                                b#titleAttribute
+                        .modal-footer
+                            button.btn.btn-secondary(type='button', data-dismiss='modal') Нет
+                            button#confirmRemoveAttributeButton.btn.btn-primary(type='button' data-dismiss='modal') Удалить

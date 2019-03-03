@@ -1,0 +1,16 @@
+extends ../../layout
+
+block content
+    script( defer src="../../javascripts/attributes.js" )
+
+    form.col-md-12
+        .form-group
+            label(for='titleAttribute') Название
+            input#titleAttribute.form-control(placeholder='Введите название')
+        .form-group
+            label(for='valueAttribute') Значение
+            input#valueAttribute.form-control(placeholder='Введите значение')
+        .form-group
+            #message.alert.alert-danger(style="display: none")
+
+        #addAttributeButton.btn.btn-primary Добавить атрибут

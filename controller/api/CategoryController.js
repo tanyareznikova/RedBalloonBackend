@@ -1,124 +1,187 @@
 
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
-//import Category from "/models/category";
-//import Category from "../../models/category.js";
-
-const Category = require("../../models/category");
+//import Category from "/models/categories";
+//import Category from "../../models/categories.js";
+//const mongoose = require("mongoose");
+var Category = require("../../models/category.js");
 const find = require("mongoose").find;
+const express = require("express");
+const controller = express();
+const mongoose = require('mongoose').mongoose;
 
+//const jsonParser = express.json();
 //var mongoose = require("mongoose");
 //var Category = mongoose.model("Category", CategorySchema);
 
+controller.getCategories = ( function(req, res){
 
-/*
-var categoryController = {};
 
-//Add show list of category function
-categoryController.categories = function(req, res) {
-    Category.find({}).exec(function (err, categories) {
-        if (err) {
-            console.log("Error:", err);
-        }
-        else {
-            //ИЗМЕНИТЬ
-            res.render("../views/categories", {categories: categories});
-        }
+        Category.find({}, function (err, categories) {
+
+                //res.render("../views/categories/categories-list", {categories: categories})
+                if (err) return console.log(err);
+                //res.render("../views/categories/category-list", {categories: categories})
+                res.render("../views/categories/categories-list", {categories: categories})
+        });
+
+});
+
+controller.getCategoryByID = ( function(req, res){
+
+    const id = req.params.id;
+    Category.findOne({_id: id}, function(err, category){
+
+        if(err) return console.log(err);
+        //res.send(category);
+        res.render("../views/categories/single-category", {category: category})
     });
-};
+});
 
-//Add show single category by id function
-categoryController.show = function(req, res) {
-    Category.findOne({_id: req.params.id}).exec(function (err, category) {
-        if (err) {
-            console.log("Error:", err);
-        }
-        else {
-            //ИЗМЕНИТЬ
-            res.render("../views/categories", {category: category});
-        }
+controller.GetProductsByCategories = (async function(req, res){
+
+    try{
+
+        let CategoryId = +req.params.id;
+
+        let products = await Product.find({
+            where: {
+                id: CategoryId
+            },
+            type: [ '_id'  ]
+        });
+
+        let ids = [].map.call( products , p => p._id );
+
+        products = await Product.find({
+            sort: [
+                [ '_id' , -1 ]
+            ],
+            type: {
+                exclude: [ 'createdAt' , 'updatedAt' , 'description' ]
+            },
+            where:{
+                _id: {
+                    [mongoose.in]: ids
+                }
+            }
+        });
+
+        for ( let i = 0 ; i < products.length ; i++ ){
+
+            let product = products[i];
+            product.image = await Product.findOne({
+                type: [ 'img' ],
+                where: {
+                    _id: product._id
+                }
+            });
+            product.categoryTitle = await Category.findOne({
+                type:['categoryTitle'],
+                where:{
+                    _id : CategoryId
+                }
+            });
+            console.log(product);
+
+        }//for i
+
+        res.render('../views/categories/products-by-categories',{products: products});
+
+    }//try
+    catch (ex){
+
+        res.render('error',{'error': ex});
+
+    }//catch
+
+});
+
+controller.AddCategoryAction =  (function ( req , res ){
+
+    res.render('../views/categories/new-category');
+
+});
+
+controller.postCategory = ( function (req, res) {
+
+    if(!req.body) return res.sendStatus(400);
+
+    const categoryTitle = req.body.categoryTitle;
+    const category = new Category({categoryTitle: categoryTitle});
+
+    category.save(function(err){
+        if(err) return console.log(err);
+        res.send(category);
     });
-};
+});
 
-//Add create employee function
-categoryController.create = function(req, res) {
-    //ИЗМЕНИТЬ
-    res.render("../views/categories");
-};
+controller.deleteCategory = ( function (req, res) {
 
-//Add save new employee function
-categoryController.save = function(req, res) {
-    var category = new Category(req.body);
 
-    category.save(function(err) {
-        if(err) {
-            console.log(err);
-            //ИЗМЕНИТЬ
-            res.render("../views/categories");
-        } else {
-            console.log("Successfully created an employee.");
-            res.redirect("/categories/"+category._id);
-        }
+        const id = req.params.id;
+
+        Category.findByIdAndDelete(id, function (err, category) {
+
+            if (err) return console.log(err);
+            res.send(category);
+        });
+
+});
+
+controller.putCategory = ( function(req, res){
+
+    if(!req.body) return res.sendStatus(400);
+    const id = req.body.id;
+    const categoryTitle = req.body.categoryTitle;
+    const newCategory = {categoryTitle: categoryTitle};
+
+    Category.findOneAndUpdate({_id: id}, newCategory, {new: true}, function(err, category){
+        if(err) return console.log(err);
+        res.send(category);
     });
-};
+});
 
-//Add edit employee by id function
-categoryController.edit = function(req, res) {
-    Category.findOne({_id: req.params.id}).exec(function (err, category) {
-        if (err) {
-            console.log("Error:", err);
-        }
-        else {
-            //ИЗМЕНИТЬ
-            res.render("../views/categories", {category: category});
-        }
-    });
-};
+  /*
+    // DO GET
+    function ajaxGet(){
+        $.ajax({
+            type : "GET",
+            url : window.location + "categories/categories/create",
+            success: function(result){
+                $.each(result, function(i, categories){
 
-//Add update employee function for updating currently edited employee
-categoryController.update = function(req, res) {
-    Category.findByIdAndUpdate(req.params.id, { $set: { title: req.body.categoryTitle}}, { new: true }, function (err, category) {
-        if (err) {
-            console.log(err);
-            //ИЗМЕНИТЬ
-            res.render("../views/categories", {category: req.body});
-        }
-        res.redirect("/categories/"+category._id);
-    });
-};
+                    var customerRow = '<tr>' +
+                        '<td>' + categories.id + '</td>' +
+                        '<td>' + categories.categoryTitle.toUpperCase() + '</td>' +
+                        '</tr>';
 
-//Add delete employee by id function for remove single employee data
-categoryController.delete = function(req, res) {
-    Category.remove({_id: req.params.id}, function(err) {
-        if(err) {
-            console.log(err);
-        }
-        else {
-            //ИЗМЕНИТЬ
-            console.log("Category deleted!");
-            res.redirect("/categories");
-        }
-    });
-};
+                    $('#categoryTable tbody').append(customerRow);
+
+                });
+
+                $( "#categoryTable tbody tr:odd" ).addClass("info");
+                $( "#categoryTable tbody tr:even" ).addClass("success");
+            },
+            error : function(e) {
+                alert("ERROR: ", e);
+                console.log("ERROR: ", e);
+            }
+        });
+    }
+
 */
-
-// Display list of all Categories.
+  /*
 exports.category_list = function(req, res) {
     Category.find({}).exec(function (err, categories) {
-    //find({Category}).exec(function (err, categories) {
+        //find({Category}).exec(function (err, categories) {
         if (err) {
             console.log("Error:", err);
         }
         else {
-            //ИЗМЕНИТЬ
             res.render("../views/categories", {categories: categories});
         }
     });
-};
-
-// Display detail page for a specific Category.
-exports.category_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Category detail: ' + req.params.id);
 };
 
 // Display Category create form on GET.
@@ -127,95 +190,96 @@ exports.category_create_get = function(req, res) {
     res.render('categories', { title: 'Создание категории' });
 };
 
-module.exports.category_create_post2 = async function ( req , res ) {
+module.exports.category_create_post = async function ( req , res ) {
 
     console.log(req.body);
     console.log(req.body.categoryTitle);
     res.send(req.body);
-    // try { let user = await user.findAll(); } catch( ex ) { ... }
+    //try { let user = await user.findAll(); } catch( ex ) { ... }
+    var categories = new Category(
+        {categoryTitle: req.body.categoryTitle}
+    );
 
+    categories.save(function (err) {
+        if (err) { return next(err); }
+        // Successful - redirect to new author record.
+        res.redirect(categories.url);
+    });
 
 };
-
-// Handle Category create on POST.
-exports.category_create_post = [
-    //res.send('NOT IMPLEMENTED: Category create POST');
-    // Validate that the name field is not empty.
-    body('categoryTitle', 'Category name required').isLength({ min: 1 }).trim(),
-
-        // Sanitize (trim and escape) the name field.
-        sanitizeBody('categoryTitle').trim().escape(),
-
-        // Process request after validation and sanitization.
-        (req, res, next) => {
-
-            // Extract the validation errors from a request.
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                // There are errors. Render the form again with sanitized values/error messages.
-                res.render('categories', { title: 'Создание категории', categoryTitle: category, errors: errors.array()});
-                return;
-            }
-
-            else {
-                // Data from form is valid.
-                // Check if Genre with same name already exists.
-
-                // Create a category object with escaped and trimmed data.
-                var category = new Category(
-                    {categoryTitle: req.body.categoryTitle}
-                );
-
-                category.save(function (err) {
-                    if (err) { return next(err); }
-                    // Successful - redirect to new author record.
-                    res.redirect(category.url);
-                });
-
-                /*
-                Category.findOne({ 'categoryTitle': req.body.categoryTitle })
-                    .exec( function(err, found_category) {
-                        if (err) { return next(err); }
-
-                        if (found_category) {
-                            // Genre exists, redirect to its detail page.
-                            res.redirect(found_category.url);
-                        }
-                        else {
-
-                            category.save(function (err) {
-                                if (err) { return next(err); }
-                                // Genre saved. Redirect to genre detail page.
-                                res.redirect(category.url);
-                            });
-
-                        }
-
-                    });
-                    */
-
-            }
+*/
+/*
+exports.findAll = function(req, res){
+    Category.find({},function(err, categories) {
+        //return res.send(categories);
+        if (err) {
+            console.log("Error:", err);
         }
-];
+        else {
+            res.render("../views/categories", {categories: categories});
+        }
+    });
+};
+exports.findById = function(req, res){
+    var id = req.params.id;
+    Category.findOne({'_id':id},function(err, categories) {
+        //return res.send(categories);
+        if (err) {
+            console.log("Error:", err);
+        }
+        else {
+            res.render("../views/categories", {categories: categories});
+        }
+    });
+};
+exports.add = function(req, res) {
+    Category.create(req.body, function (err, categories) {
+        if (err) return console.log(err);
+        return res.send(categories);
 
-// Display Category delete form on GET.
-exports.category_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Category delete GET');
+        if (err) {
+            console.log("Error:", err);
+        }
+        else {
+            res.render("../views/categories", {categories: categories});
+        }
+
+    });
+}
+exports.update = function(req, res) {
+    var id = req.params.id;
+    var updates = req.body;
+
+    Category.update({"_id":id}, req.body,
+        function (err, numberCategories) {
+            if (err) return console.log(err);
+            console.log('Updated %d categories', numberCategories);
+            res.send(202);
+        });
+}
+exports.delete = function(req, res){
+    var id = req.params.id;
+    Category.remove({'_id':id},function(categories) {
+        //return res.send(categories);
+        if (err) {
+            console.log("Error:", err);
+        }
+        else {
+            res.render("../views/categories", {categories: categories});
+        }
+    });
 };
 
-// Handle Category delete on POST.
-exports.category_delete_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Category delete POST');
+exports.import = function(req, res){
+    Category.create(
+        { "categoryTitle": "Xiaomi"},
+        { "categoryTitle": "Huawei"},
+        { "categoryTitle": "OPPO"}
+        , function (err) {
+            if (err) return console.log(err);
+            return res.send(202);
+        });
 };
+*/
 
-// Display Category update form on GET.
-exports.category_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Category update GET');
-};
-
-// Handle Category update on POST.
-exports.category_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Category update POST');
-};
-
-//module.exports = categoryController;
+module.exports = controller;

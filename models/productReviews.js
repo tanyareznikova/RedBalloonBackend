@@ -7,13 +7,15 @@ var Schema = mongoose.Schema;
 var ProductReviewsSchema = new Schema(
     {
 
-        name: {type: String, required: true, max: 100},
-        plus: {type: String, required: true},
-        minus: {type: String, required: true},
-        message: {type: String, required: true},
+        name: {type: String, required: true, max: 100, trim: true},
+        plus: {type: String, required: true, trim: true},
+        minus: {type: String, required: true, trim: true},
+        message: {type: String, required: true, trim: true},
         productID: {type: Schema.ObjectId, ref: 'Product', required: true},
 
-    }
+    },
+    { _id: false },
+    {timestamps: true}
 );
 
 // Виртуальное свойство для отзыва о товаре
