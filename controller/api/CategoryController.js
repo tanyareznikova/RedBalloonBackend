@@ -4,7 +4,7 @@ const { sanitizeBody } = require('express-validator/filter');
 //import Category from "/models/category";
 //import Category from "../../models/category.js";
 
-var Cetegory = require("../../models/category.js");
+const Category = require("../../models/category");
 const find = require("mongoose").find;
 
 //var mongoose = require("mongoose");
@@ -127,6 +127,16 @@ exports.category_create_get = function(req, res) {
     res.render('categories', { title: 'Создание категории' });
 };
 
+module.exports.category_create_post2 = async function ( req , res ) {
+
+    console.log(req.body);
+    console.log(req.body.categoryTitle);
+    res.send(req.body);
+    // try { let user = await user.findAll(); } catch( ex ) { ... }
+
+
+};
+
 // Handle Category create on POST.
 exports.category_create_post = [
     //res.send('NOT IMPLEMENTED: Category create POST');
@@ -161,7 +171,8 @@ exports.category_create_post = [
                     // Successful - redirect to new author record.
                     res.redirect(category.url);
                 });
-/*
+
+                /*
                 Category.findOne({ 'categoryTitle': req.body.categoryTitle })
                     .exec( function(err, found_category) {
                         if (err) { return next(err); }
@@ -182,6 +193,7 @@ exports.category_create_post = [
 
                     });
                     */
+
             }
         }
 ];

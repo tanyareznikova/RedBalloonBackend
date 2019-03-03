@@ -44,3 +44,37 @@ ProductCharacteristicsSchema
 
 //Export model
 module.exports = mongoose.model('ProductCharacteristics', ProductCharacteristicsSchema);
+
+const Attribute = {
+        name: 'string',
+        value: 'string'
+};
+
+mongoose.model('Attribute' , Attribute);
+
+const Product = {
+        //...
+        attributes: {
+                collection: 'Attribute',
+                type: 'array'
+        }
+
+};
+
+
+mongoose.model('Product' , Product);
+
+const camera = new Attribute('Камера');
+const camera = new Attribute('Камера');
+const camera = new Attribute('Камера');
+const camera = new Attribute('Камера');
+const camera = new Attribute('Камера');
+const camera = new Attribute('Камера');
+const camera = new Attribute('Камера');
+
+const sony = new Product();
+//sony.attributes.push(camera , '12mp');
+//sony.attributes.push(color , 'red');
+//sony.attributes.push( corpus , 'steel' );
+
+//sony.save();

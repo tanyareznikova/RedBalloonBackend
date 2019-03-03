@@ -14,13 +14,13 @@ var category_Controller = require("../controller/api/CategoryController.js");
 
 router.use(bodyParser.urlencoded({ extended: true }))
 // GET catalog home page.
-router.get('/', category_Controller.category_list);
+router.get('/list', category_Controller.category_list);
 
 // GET request for creating a category. NOTE This must come before routes that display category (uses id).
 router.get('/category/create', category_Controller.category_create_get);
 
 // POST request for creating category.
-router.post('/category/create', category_Controller.category_create_post);
+router.post('/category/create', category_Controller.category_create_post2);
 
 // GET request to delete category.
 router.get('/category/:id/delete', category_Controller.category_delete_get);
@@ -38,7 +38,7 @@ router.post('/category/:id/update', category_Controller.category_update_post);
 router.get('/category/:id', category_Controller.category_detail);
 
 // GET request for list of all category items.
-router.get('/categories', category_Controller.category_list);
+//router.get('/categories', category_Controller.category_list);
 
 /*
 // Get all categories
