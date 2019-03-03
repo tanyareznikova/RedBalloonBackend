@@ -17,17 +17,22 @@ const mongoose = require('mongoose').mongoose;
 controller.getCategories = ( function(req, res){
 
 
-        Category.find({}, function (err, categories) {
+    Category.find({}, function (err, categories) {
 
-                //res.render("../views/categories/categories-list", {categories: categories})
-                if (err) return console.log(err);
-                //res.render("../views/categories/category-list", {categories: categories})
-                res.render("../views/categories/categories-list", {categories: categories})
-        });
+        //res.send({...});
+        //res.json();
+        //res.render("../views/categories/categories-list", {categories: categories})
+        if (err) return console.log(err);
+        //res.render("../views/categories/category-list", {categories: categories})
+        res.render("../views/categories/categories-list", {categories: categories})
+    });
 
 });
 
 controller.getCategoryByID = ( function(req, res){
+
+
+
 
     const id = req.params.id;
     Category.findOne({_id: id}, function(err, category){
@@ -119,13 +124,14 @@ controller.postCategory = ( function (req, res) {
 controller.deleteCategory = ( function (req, res) {
 
 
-        const id = req.params.id;
+    const id = req.body._id;
 
-        Category.findByIdAndDelete(id, function (err, category) {
+    Category.findByIdAndDelete(id, function (err, category) {
 
-            if (err) return console.log(err);
-            res.send(category);
-        });
+        if (err)
+            return console.log(err);
+        res.send(category);
+    });
 
 });
 
@@ -142,69 +148,69 @@ controller.putCategory = ( function(req, res){
     });
 });
 
-  /*
-    // DO GET
-    function ajaxGet(){
-        $.ajax({
-            type : "GET",
-            url : window.location + "categories/categories/create",
-            success: function(result){
-                $.each(result, function(i, categories){
+/*
+  // DO GET
+  function ajaxGet(){
+      $.ajax({
+          type : "GET",
+          url : window.location + "categories/categories/create",
+          success: function(result){
+              $.each(result, function(i, categories){
 
-                    var customerRow = '<tr>' +
-                        '<td>' + categories.id + '</td>' +
-                        '<td>' + categories.categoryTitle.toUpperCase() + '</td>' +
-                        '</tr>';
+                  var customerRow = '<tr>' +
+                      '<td>' + categories.id + '</td>' +
+                      '<td>' + categories.categoryTitle.toUpperCase() + '</td>' +
+                      '</tr>';
 
-                    $('#categoryTable tbody').append(customerRow);
+                  $('#categoryTable tbody').append(customerRow);
 
-                });
+              });
 
-                $( "#categoryTable tbody tr:odd" ).addClass("info");
-                $( "#categoryTable tbody tr:even" ).addClass("success");
-            },
-            error : function(e) {
-                alert("ERROR: ", e);
-                console.log("ERROR: ", e);
-            }
-        });
-    }
+              $( "#categoryTable tbody tr:odd" ).addClass("info");
+              $( "#categoryTable tbody tr:even" ).addClass("success");
+          },
+          error : function(e) {
+              alert("ERROR: ", e);
+              console.log("ERROR: ", e);
+          }
+      });
+  }
 
 */
-  /*
+/*
 exports.category_list = function(req, res) {
-    Category.find({}).exec(function (err, categories) {
-        //find({Category}).exec(function (err, categories) {
-        if (err) {
-            console.log("Error:", err);
-        }
-        else {
-            res.render("../views/categories", {categories: categories});
-        }
-    });
+  Category.find({}).exec(function (err, categories) {
+      //find({Category}).exec(function (err, categories) {
+      if (err) {
+          console.log("Error:", err);
+      }
+      else {
+          res.render("../views/categories", {categories: categories});
+      }
+  });
 };
 
 // Display Category create form on GET.
 exports.category_create_get = function(req, res) {
-    //res.send('NOT IMPLEMENTED: Category create GET');
-    res.render('categories', { title: 'Создание категории' });
+  //res.send('NOT IMPLEMENTED: Category create GET');
+  res.render('categories', { title: 'Создание категории' });
 };
 
 module.exports.category_create_post = async function ( req , res ) {
 
-    console.log(req.body);
-    console.log(req.body.categoryTitle);
-    res.send(req.body);
-    //try { let user = await user.findAll(); } catch( ex ) { ... }
-    var categories = new Category(
-        {categoryTitle: req.body.categoryTitle}
-    );
+  console.log(req.body);
+  console.log(req.body.categoryTitle);
+  res.send(req.body);
+  //try { let user = await user.findAll(); } catch( ex ) { ... }
+  var categories = new Category(
+      {categoryTitle: req.body.categoryTitle}
+  );
 
-    categories.save(function (err) {
-        if (err) { return next(err); }
-        // Successful - redirect to new author record.
-        res.redirect(categories.url);
-    });
+  categories.save(function (err) {
+      if (err) { return next(err); }
+      // Successful - redirect to new author record.
+      res.redirect(categories.url);
+  });
 
 };
 */

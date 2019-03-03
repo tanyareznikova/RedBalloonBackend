@@ -1,10 +1,9 @@
 extends ../layout
 
 block content
-    doctype html
     script( defer src="../../javascripts/category.js" )
 
-    a.btn.btn-primary.col-12(href="/panel/categories/new") Добавить категорию
+    a.btn.btn-primary.col-12(href="/panel/category/new") Добавить категорию
 
     if categories.length === 0
         .alert.alert-info.col-12

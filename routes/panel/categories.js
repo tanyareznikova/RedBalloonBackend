@@ -14,8 +14,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get('/categories',  NewCategoryController.getCategories );
 router.get('/categories/:id' ,  NewCategoryController.getCategoryByID);
-router.get('/categories/new' ,  NewCategoryController.AddCategoryAction);
-router.get('/categories/:id' ,  NewCategoryController.getCategoryByID );
+router.get('/category/new' ,  NewCategoryController.AddCategoryAction);
 router.post('/categories/new' , jsonParser,  NewCategoryController.postCategory);
 router.put('/categories/:id' , jsonParser,  NewCategoryController.putCategory );
 router.delete('/categories/delete' ,  NewCategoryController.deleteCategory );

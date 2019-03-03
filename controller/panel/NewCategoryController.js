@@ -12,26 +12,12 @@ const find = require("mongoose").find;
 const mongoose = require('mongoose').mongoose;
 const express = require("express");
 const controller = express();
-//const Op = require('sequelize').Op;
 
 controller.GetCategoriesListAction = (async function ( req , res ){
 
     try{
 
         let categories = await Category.find();
-
-        for ( let i = 0 ; i < categories.length ; i++ ){
-
-            let category = categories[i];
-
-            category.productsAmount = await Product.count({
-                where: {
-                    categoryID: category.categoryID
-                }
-            });
-
-        }//for i
-
 
         res.render('../views/categories/categories-list',{'categories': categories});
     }//try

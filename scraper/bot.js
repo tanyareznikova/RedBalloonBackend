@@ -1,6 +1,10 @@
-var Model = require('../models/product.js');
-var Scraper = require('../scraper'/scraper.js);
-var Pages = [];
+"use strict";
+
+const Model = require('../models/product');
+const Scraper = require('./scraper');
+
+let Pages = [];
+
 function generateUrls(limit) {
     var url = 'http://localyellowpages.com/listing/';
     var urls = [];

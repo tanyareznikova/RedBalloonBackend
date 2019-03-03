@@ -97,7 +97,7 @@
 
             }//if
 
-            let request = await fetch( `${window.ServerAddress}panel/category/new` , {
+            let request = await fetch( `${window.ServerAddress}panel/categories/new` , {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
@@ -153,7 +153,9 @@
         button.addEventListener('click' , async function (){
 
             title = button.dataset.categoryTitle;
-            _id = +button.dataset.id;
+            _id = button.dataset.categoryId;
+
+            console.log('ID:' , _id);
 
             modalBody.textContent = " " + title;
             $('#confirmRemoveCategoryModal').modal();
@@ -168,7 +170,7 @@
 
         confirmRemoveButton.addEventListener('click' , async function (){
             let data = new FormData();
-            data.append('_id', _id);
+            data.append('_id', String(_id));
 
             try{
 
