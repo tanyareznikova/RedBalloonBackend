@@ -45,11 +45,11 @@ controller.postProduct = ( function (req, res) {
     const productTitle = req.body.title;
     const id = req.body.categoryID;
     const productPrice = req.body.price;
-    const productQuantity = req.body.quantity;
+    //const productQuantity = req.body.quantity;
     const productDescription = req.body.description;
     const attribute = req.body.productAttribute;
     const productImg = req.body.img;
-    const product = new Product({title: productTitle, categoryID: id, price: productPrice, quantity: productQuantity,
+    const product = new Product({title: productTitle, categoryID: id, price: productPrice,
         description: productDescription, productAttribute: attribute, img: productImg});
 
     product.save(function(err){
@@ -78,9 +78,9 @@ controller.postProductAttribute = ( function (req, res) {
     if(!req.body) return res.sendStatus(400);
 
     const titleAttribute = req.body.titleAttribute;
-    const valueAttribute = req.body.valueAttribute;
+    //const valueAttribute = req.body.valueAttribute;
 
-    const productAttributes = new ProductAttribute({titleAttribute: titleAttribute, valueAttribute: valueAttribute});
+    const productAttributes = new ProductAttribute({titleAttribute: titleAttribute});
 
     productAttributes.save(function(err){
         if(err) return console.log(err);
@@ -107,11 +107,11 @@ controller.putProduct = ( function(req, res){
     const productTitle = req.body.title;
     const categoryId = req.body.categoryID;
     const productPrice = req.body.price;
-    const productQuantity = req.body.quantity;
+    //const productQuantity = req.body.quantity;
     const productDescription = req.body.description;
     const attribute = req.body.productAttribute;
     const productImg = req.body.img;
-    const newProduct = {title: productTitle, categoryID: categoryId, price: productPrice, quantity: productQuantity,
+    const newProduct = {title: productTitle, categoryID: categoryId, price: productPrice,
         description: productDescription, productAttribute: attribute, img: productImg};
 
     Product.findOneAndUpdate({_id: prodId}, newProduct, {new: true}, function(err, product){

@@ -17,7 +17,7 @@ var WhereCanOneBuySchema = new Schema(
         storeLogo: [{data: Buffer, contentType: String}],
 
     },
-    { _id: false },
+    //{ _id: false },
     {timestamps: true}
 );
 

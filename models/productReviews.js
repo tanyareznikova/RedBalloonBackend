@@ -14,7 +14,7 @@ var ProductReviewsSchema = new Schema(
         productID: {type: Schema.ObjectId, ref: 'Product', required: true},
 
     },
-    { _id: false },
+    //{ _id: false },
     {timestamps: true}
 );
 
