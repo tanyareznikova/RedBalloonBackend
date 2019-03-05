@@ -9,6 +9,9 @@ const find = require("mongoose").find;
 const express = require("express");
 const controller = express();
 
+const fs = require('fs');
+const rimraf = require('rimraf');
+
 controller.getProducts = ( function(req, res){
 
     Product.find({}, function(err, products){

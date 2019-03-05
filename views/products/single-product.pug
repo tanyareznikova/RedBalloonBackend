@@ -5,20 +5,20 @@ block content
 
     form(data-product-id=product._id).col-md-12
         .form-group
-            label(for='productTitle') Название
-            input#productTitle.form-control(placeholder='Введите название' value=product.productTitle)
+            label(for='title') Название
+            input#title.form-control(placeholder='Введите название' value=product.productTitle)
         .form-group
-            label(for='productPrice') Цена
-            input#productPrice.form-control(placeholder='Введите цену' value=product.productPrice )
+            label(for='price') Цена
+            input#price.form-control(placeholder='Введите цену' value=product.productPrice )
         .custom-file
-            input#productImage.custom-file-input(type='file')
-            label.custom-file-label(for='productImage') Добавить изображение
+            input#img.custom-file-input(type='file')
+            label.custom-file-label(for='img') Добавить изображение
         .form-group
             if product.image !== null
                 .card(style="width: 16em")
-                    img.card-img-top(src=product.image.imagePath, alt='Card image cap')
+                    img.card-img-top(src=product.image.img, alt='Card image cap')
                     .card-body
-                        p.card-text #{product.image.imagePath}
+                        p.card-text #{product.image.img}
         .form-group
             select#productCategories( hidden )
                 each productCategory in product.categories
@@ -40,7 +40,7 @@ block content
                     option(
                     value=attribute.attributeID
                     data-attribute-id=attribute.attributeID
-                    ) #{attribute.attributeTitle}
+                    ) #{attribute.titleAttribute}
         .form-group
             label(for='currentAttributeValue') Значение атрибута
             input#currentAttributeValue.form-control(placeholder='Введите значение')
@@ -64,13 +64,13 @@ block content
                                 data-attribute-id=attribute.attributeID
                             )
                             td #{attribute.attributeID}
-                            td #{attribute.attributeTitle}
+                            td #{attribute.titleAttribute}
                             td #{attribute.pAttributes.attributeValue}
                             td
                                 .btn.btn-danger(data-attribute-id=attribute.attributeID) Удалить
         .form-group
-            label(for='productDescription') Описание
-            textarea#productDescription.form-control(placeholder='Введите описание') #{product.productDescription}
+            label(for='description') Описание
+            textarea#description.form-control(placeholder='Введите описание') #{product.productDescription}
         .form-group
             #message.alert.alert-danger(style="display: none")
 

@@ -52,7 +52,7 @@ function AddRemoveAttributeListeners( attributes ){
 
             let attributeID = +this.value;
             let attributeTitle = this.querySelector(`option[data-attribute-id='${attributeID}']`).textContent;
-            let attributeValue = this.querySelector(`option[data-attribute-id='${attributeID}']`).textContent;
+            //let attributeValue = this.querySelector(`option[data-attribute-id='${attributeID}']`).textContent;
 
             if(attributeID === -1){
                 return;
@@ -66,9 +66,9 @@ function AddRemoveAttributeListeners( attributes ){
 
             attributes.push( {
                 attributeID: attributeID,
-                attributeTitle: attributeTitle,
-                attributeValue: attributeValue
-                //attributeValue: ''
+                titleAttribute: attributeTitle,
+                //attributeValue: attributeValue
+                attributeValue: ''
             } );
 
 
@@ -103,7 +103,7 @@ function AddRemoveAttributeListeners( attributes ){
                 attributesTable.innerHTML += `
                 <tr align="middle">
                     <td>${attr.attributeID}</td>
-                    <td>${attr.attributeTitle}</td>
+                    <td>${attr.titleAttribute}</td>
                     <td>${attr.attributeValue}</td>
                     <td><div class="btn btn-danger" data-attribute-id=${attr.attributeID} >Удалить</div></td>
                 </tr>
@@ -132,9 +132,10 @@ function AddRemoveAttributeListeners( attributes ){
 
             let categoriesIds = [].map.call(  selectedCategoriesOptions , ( opt )=> { return +opt.value; } );
 
+            //let productTitle = ((document.querySelector('#title')||{}).value)||"";
             let productTitle = document.querySelector('#title').value;
             let productPrice = document.querySelector('#price').value;
-            let productAmount = document.querySelector('#amount').value;
+            //let productAmount = ((document.querySelector('#amount')||{}).value)||"";
             let productDescription = document.querySelector('#description').value;
 
             let productImage = document.querySelector('#img');
@@ -147,7 +148,7 @@ function AddRemoveAttributeListeners( attributes ){
             data.append('title' , productTitle);
             data.append('description' , productDescription);
             data.append('price' , productPrice);
-            data.append('amount' , productAmount);
+            //data.append('amount' , productAmount);
 
             try{
 
@@ -204,7 +205,7 @@ function AddRemoveAttributeListeners( attributes ){
 
             let attribute = {
                 attributeID: +childRows[0].textContent,
-                attributeTitle: childRows[1].textContent,
+                titleAttribute: childRows[1].textContent,
                 attributeValue: childRows[2].textContent,
             };
 
@@ -239,7 +240,7 @@ function AddRemoveAttributeListeners( attributes ){
 
             let productTitle = document.querySelector('#title').value;
             let productPrice = document.querySelector('#price').value;
-            let productAmount = document.querySelector('#amount').value;
+            ///let productAmount = document.querySelector('#amount').value;
             let productDescription = document.querySelector('#description').value;
 
             let productImage = document.querySelector('#img');
@@ -255,7 +256,7 @@ function AddRemoveAttributeListeners( attributes ){
             data.append('title' , productTitle);
             data.append('description' , productDescription);
             data.append('price' , productPrice);
-            data.append('amount' , productAmount);
+            //data.append('amount' , productAmount);
 
 
             try{
