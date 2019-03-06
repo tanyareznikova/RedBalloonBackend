@@ -52,6 +52,7 @@ controller.postProduct = ( function (req, res) {
     const productDescription = req.body.description;
     const attribute = req.body.productAttribute;
     const productImg = req.body.img;
+    //const productImg = req.file.path;
     const product = new Product({title: productTitle, categoryID: id, price: productPrice,
         description: productDescription, productAttribute: attribute, img: productImg});
 
@@ -114,6 +115,7 @@ controller.putProduct = ( function(req, res){
     const productDescription = req.body.description;
     const attribute = req.body.productAttribute;
     const productImg = req.body.img;
+    //const productImg = req.file.path;
     const newProduct = {title: productTitle, categoryID: categoryId, price: productPrice,
         description: productDescription, productAttribute: attribute, img: productImg};
 
