@@ -13,11 +13,21 @@ const fs = require('fs');
 //const rimraf = require('rimraf');
 var multer = require('multer');
 const path   = require('path');
+//var upload = multer({ dest: 'uploads/' })
 //var upload    = require('../../public/javascripts/upload');
 //var upload = multer({ dest: 'uploads/' });
 
 var async = require("async");
-
+/*
+//var server = express.createServer();
+controller.getUpload = (async function (req, res, next) {
+    await Product.findById(a, function (err, doc) {
+        if (err) return next(err);
+        res.contentType(doc.img.contentType);
+        res.send(doc.img.data);
+    });
+});
+*/
 controller.getProducts = (async function(req, res){
 
     await Product.find({}, function(err, products){
@@ -47,10 +57,20 @@ controller.AddNewProductAction = (async function (req , res){
 
 });
 
-controller.postProduct = ( async function (req, res) {
+controller.postProduct = ( function (req, res) {
 
     if(!req.body) return res.sendStatus(400);
 
+    //var nProd = new Product({title: req.body.title});
+/*
+    async.each(req ,function(x,callback){
+        async.each(listhash, function(y,callback) {
+            if (x.item.toLowerCase().replace(/\s/g, '') == y) {
+                nProd.categoryID.push(x);
+            }
+        })
+
+*/
     const productTitle = req.body.title;
     const id = req.body.categoryID;
     const productPrice = req.body.price;
@@ -58,23 +78,44 @@ controller.postProduct = ( async function (req, res) {
     const productDescription = req.body.description;
     const attribute = req.body.productAttribute;
 
+
     // img path
     var imgPath = 'D:\\Диплом\\ДИПЛОМ\\Project\\RedBalloonBackend\\public\\images\\productImg\\huawei\\huawei_mate-20.jpg';
 
-    var prod = await new Product;
+    //var newPath = "files/"+req.file.data;
+    //var uploadProd = await new Product;
+    //uploadProd.img.data = req.body.data;
+    //uploadProd.img.contentType = 'image/jpg';
 
+    var prod = new Product();
+
+        //prod.img.data = fs.readFileSync(req.file.path);
+        //prod.img.data = fs.readFileSync(req.files[0].path);
         prod.img.data = fs.readFileSync(imgPath);
         prod.img.contentType = 'image/jpg';
 
-    const product = await new Product({title: productTitle, categoryID: id, price: productPrice,
+        //prod.img.data = fs.readFileSync(imgPath);
+        //prod.img.contentType = 'image/jpg';
+
+    //res.contentType(prod.img.contentType);
+    //res.send(prod.img.data);
+
+    //var uProd = req.body;
+    //uProd.img.data = fs.readFileSync(req.file.path);
+    //uProd.img.contentType = req.file.mimetype;
+
+
+    const product = new Product({title: productTitle, categoryID: id, price: productPrice,
         description: productDescription, productAttribute: attribute,
         img: prod});
 
         product.save(function(err) {
             if(err) return console.log(err);
             res.send(product);
+
         });
 
+    //"multer": "^1.4.1",
 
 });
 

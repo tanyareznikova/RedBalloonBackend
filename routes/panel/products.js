@@ -7,7 +7,8 @@ const router = express.Router();
 
 var bodyParser = require('body-parser');
 var multer = require('multer');
-var upload    = require('../../public/javascripts/upload');
+//var upload = multer({ dest: '/uploads' })
+//var upload    = require('../../public/javascripts/upload');
 const jsonParser = express.json();
 
 router.use(bodyParser.urlencoded({ extended: true }));
