@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var bodyParser = require('body-parser');
+var multer = require('multer');
 //Express and Mongoose
 //Устанавливаем соединение с mongoose
 var mongoose = require('mongoose');
@@ -84,7 +85,7 @@ app.use(require('express-session')(
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+//app.use(multer());
 //app.use(passport.initialize());
 //app.use(passport.session());
 

@@ -6,7 +6,8 @@ const NewProductController = require("../../controller/api/ProductController.js"
 const router = express.Router();
 
 var bodyParser = require('body-parser');
-
+var multer = require('multer');
+var upload    = require('../../public/javascripts/upload');
 const jsonParser = express.json();
 
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -17,7 +18,7 @@ router.get('/products', NewProductController.getProducts );
 router.get('/products/attributes',NewProductController.getProductAttributes );
 
 router.get('/products/new'  ,NewProductController.AddNewProductAction );
-router.post('/products/new' , jsonParser, NewProductController.postProduct );
+router.post( '/products/new' , jsonParser, NewProductController.postProduct );
 
 router.get('/products/:id', NewProductController.getProductByID );
 router.put('/products/:id', jsonParser, NewProductController.putProduct );

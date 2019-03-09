@@ -3,7 +3,7 @@ extends ../layout
 block content
     script( defer src="../../javascripts/product.js" )
 
-    form.col-md-12
+    form(enctype="multipart/form-data").col-md-12
         .form-group
             label(for='title') Название
             input#title.form-control(placeholder='Введите название')

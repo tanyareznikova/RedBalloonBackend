@@ -10,11 +10,17 @@ const express = require("express");
 const controller = express();
 
 const fs = require('fs');
-const rimraf = require('rimraf');
+//const rimraf = require('rimraf');
+var multer = require('multer');
+const path   = require('path');
+//var upload    = require('../../public/javascripts/upload');
+//var upload = multer({ dest: 'uploads/' });
 
-controller.getProducts = ( function(req, res){
+var async = require("async");
 
-    Product.find({}, function(err, products){
+controller.getProducts = (async function(req, res){
+
+    await Product.find({}, function(err, products){
 
         if(err) return console.log(err);
         res.render("../views/products/products-list", {products: products})
@@ -41,7 +47,7 @@ controller.AddNewProductAction = (async function (req , res){
 
 });
 
-controller.postProduct = ( function (req, res) {
+controller.postProduct = ( async function (req, res) {
 
     if(!req.body) return res.sendStatus(400);
 
@@ -51,15 +57,25 @@ controller.postProduct = ( function (req, res) {
     //const productQuantity = req.body.quantity;
     const productDescription = req.body.description;
     const attribute = req.body.productAttribute;
-    const productImg = req.body.img;
-    //const productImg = req.file.path;
-    const product = new Product({title: productTitle, categoryID: id, price: productPrice,
-        description: productDescription, productAttribute: attribute, img: productImg});
 
-    product.save(function(err){
-        if(err) return console.log(err);
-        res.send(product);
-    });
+    // img path
+    var imgPath = 'D:\\Диплом\\ДИПЛОМ\\Project\\RedBalloonBackend\\public\\images\\productImg\\huawei\\huawei_mate-20.jpg';
+
+    var prod = await new Product;
+
+        prod.img.data = fs.readFileSync(imgPath);
+        prod.img.contentType = 'image/jpg';
+
+    const product = await new Product({title: productTitle, categoryID: id, price: productPrice,
+        description: productDescription, productAttribute: attribute,
+        img: prod});
+
+        product.save(function(err) {
+            if(err) return console.log(err);
+            res.send(product);
+        });
+
+
 });
 
 controller.getProductAttributes = ( function(req, res){
