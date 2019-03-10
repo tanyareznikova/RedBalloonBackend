@@ -22,7 +22,12 @@ var ProductSchema = new Schema(
         //атрибут товара
         productAttribute:  [{type: Schema.ObjectId, ref: 'ProductAttribute', required: true}],
         //картинки
-        img: [{data: Buffer, contentType: String}],
+        //img: [{type: Schema.ObjectId, ref: 'Image', required: true}],
+        img: [{
+            path: {type: String, required: true, trim: true},
+            originalname: {type: String, required: true}
+        }],
+
 
     },
     //{ _id: false },

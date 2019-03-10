@@ -5,6 +5,7 @@ const { sanitizeBody } = require('express-validator/filter');
 var Product = require("../../models/product.js");
 var ProductAttribute = require("../../models/productAttribute.js");
 var Category = require("../../models/category.js");
+var Image = require("../../models/image.js");
 const find = require("mongoose").find;
 const express = require("express");
 const controller = express();
@@ -16,8 +17,25 @@ const path   = require('path');
 //var upload = multer({ dest: 'uploads/' })
 //var upload    = require('../../public/javascripts/upload');
 //var upload = multer({ dest: 'uploads/' });
-
 var async = require("async");
+
+var router = express.Router();
+var bodyParser = require("body-parser");
+var mongoose = require('mongoose');
+
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+var upload = multer({
+    storage: storage
+});
+
 /*
 //var server = express.createServer();
 controller.getUpload = (async function (req, res, next) {
@@ -57,9 +75,125 @@ controller.AddNewProductAction = (async function (req , res){
 
 });
 
-controller.postProduct = ( function (req, res) {
+controller.postImage = ( function (req, res) {
+    upload(req, res, (err) => {
+        if (err) {
+            return res.end('error request file');
+        }
+        var data = new Product({
+
+            title: req.body.title,
+            categoryID: req.body.categoryID,
+            price: req.body.price,
+            description: req.body.description,
+            productAttribute: req.body.productAttribute,
+            path: req.body.path,
+            originalname: req.file.originalname
+        });
+        data.save().then((result) => {
+            res.send(result);
+        });
+        console.log(req.file);
+        res.end('upload file success');
+        console.log('success');
+    });
+});
+
+controller.postProduct = ( upload.any(), async function (req, res) {
+
+    //res.send(req.files);
 
     if(!req.body) return res.sendStatus(400);
+
+    //const images = new Image.create({
+        //'path': path,
+       // 'originalname': imageName
+    //});
+
+    //res.send(req.files);
+    //res.send(req.files);
+
+
+
+    const productTitle = req.body.title;
+    const productPrice = req.body.price;
+    //const productQuantity = req.body.quantity;
+    const productDescription = req.body.description;
+    //const categories = JSON.parse(req.body.categories);
+    //const attributes = JSON.parse(req.body.attributes);
+    const categories = req.body.categories;
+    const attributes = req.body.attributes;
+    const img = req.files;
+
+    var path = req.files[0].path;
+    var imageName = req.files[0].originalname;
+
+    //const newImage = req.body.images;
+    //res.send(req.files);
+/*
+    for ( let i = 0 ; i < categories ; i++ ){
+
+        await Category.create({
+            'categoryTitle': categories[i].categoryTitle
+        });
+
+    }//for i
+
+    for ( let i = 0 ; i < attributes ; i++ ){
+
+        await ProductAttribute.create({
+            'titleAttribute': attributes[i].titleAttribute
+        });
+
+    }//for i
+
+    if( req.files ){
+
+        //var path = req.files[0].path;
+        //var imageName = req.files[0].originalname;
+
+        let imageName = req.files.image;
+        let path = `public/images/newImage`;
+
+        try{
+
+            fs.mkdirSync(path);
+
+        }//try
+        catch(ex){ }
+
+        // fs.existsSync()
+        Image.mv( `${path}/${imageName.name}` ,async function(err) {
+
+            if (err){
+                console.log('FILE UPLOAD ERROR:' , err);
+                return;
+            }//if
+
+            await Image.create({
+                //'imagePath': `/images/${newProduct.productID}/${imageName.name}`,
+                'path' : path,
+                'originalname' : imageName
+
+            });
+
+        });
+
+    }//if
+*/
+
+    var imagepath = {};
+    imagepath['path'] = path;
+    imagepath['originalname'] = imageName;
+
+    const product = await new Product({title: productTitle,
+        categories: categories, price: productPrice,
+        description: productDescription, attributes: attributes, files: img
+    });
+
+    //var imagepath = {};
+    //imagepath['path'] = path;
+    //imagepath['originalname'] = imageName;
 
     //var nProd = new Product({title: req.body.title});
 /*
@@ -71,28 +205,25 @@ controller.postProduct = ( function (req, res) {
         })
 
 */
-    const productTitle = req.body.title;
-    const id = req.body.categoryID;
-    const productPrice = req.body.price;
-    //const productQuantity = req.body.quantity;
-    const productDescription = req.body.description;
-    const attribute = req.body.productAttribute;
+
 
 
     // img path
-    var imgPath = 'D:\\Диплом\\ДИПЛОМ\\Project\\RedBalloonBackend\\public\\images\\productImg\\huawei\\huawei_mate-20.jpg';
+    //var imgPath = 'D:\\Диплом\\ДИПЛОМ\\Project\\RedBalloonBackend\\public\\images\\productImg\\huawei\\huawei_mate-20.jpg';
 
     //var newPath = "files/"+req.file.data;
     //var uploadProd = await new Product;
     //uploadProd.img.data = req.body.data;
     //uploadProd.img.contentType = 'image/jpg';
-
-    var prod = new Product();
-
+/*
+    var prod = new Product({
+        data: fs.readFileSync(imgPath),
+        contentType: 'image/jpg'
+    });
+*/
         //prod.img.data = fs.readFileSync(req.file.path);
         //prod.img.data = fs.readFileSync(req.files[0].path);
-        prod.img.data = fs.readFileSync(imgPath);
-        prod.img.contentType = 'image/jpg';
+
 
         //prod.img.data = fs.readFileSync(imgPath);
         //prod.img.contentType = 'image/jpg';
@@ -105,9 +236,6 @@ controller.postProduct = ( function (req, res) {
     //uProd.img.contentType = req.file.mimetype;
 
 
-    const product = new Product({title: productTitle, categoryID: id, price: productPrice,
-        description: productDescription, productAttribute: attribute,
-        img: prod});
 
         product.save(function(err) {
             if(err) return console.log(err);
@@ -115,7 +243,6 @@ controller.postProduct = ( function (req, res) {
 
         });
 
-    //"multer": "^1.4.1",
 
 });
 

@@ -2,7 +2,7 @@
 
 function AddRemoveAttributeListeners( attributes ){
 
-    let buttons = document.querySelectorAll('#productAttributes .btn-danger');
+    let buttons = document.querySelectorAll('#productAttribute .btn-danger');
 
     [].forEach.call( buttons , btn => {
 
@@ -20,7 +20,7 @@ function AddRemoveAttributeListeners( attributes ){
 
                 let tr = btn.parentElement.parentElement;
 
-                document.querySelector('#productAttributes').removeChild( tr );
+                document.querySelector('#productAttribute').removeChild( tr );
 
             }//if
 
@@ -36,7 +36,7 @@ function AddRemoveAttributeListeners( attributes ){
 (function (){
 
     let attributesSelect = document.querySelector('#attributesSelect');
-    let attributesTable = document.querySelector('#productAttributes');
+    let attributesTable = document.querySelector('#productAttribute');
     let addAttributeValue = document.querySelector('#addAttributeValue');
     let attributeValueInput = document.querySelector('#currentAttributeValue');
     let addProductButton = document.querySelector('#addProductButton');
