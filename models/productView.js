@@ -1,4 +1,4 @@
-//Товар
+// Просмотр продукта
 
 var mongoose = require('mongoose');
 
@@ -7,14 +7,14 @@ var Schema = mongoose.Schema;
 //import ProductAttribute from "../models/productAttribute";
 //var ProductAttribute = require("../models/productAttribute");
 
-var ProductSchema = new Schema(
+var ProductViewSchema = new Schema(
     {
         //продукт
-            title: {type: String, required: true, trim: true, index: true},
-            productIdOnSite: {type: String, trim: true, unique:true},
+        productTitle: {type: String, required: true, trim: true, index: true},
+        productIdOnSite: {type: String, trim: true, unique:true},
         //категория
         //categoryID: [{type: Schema.ObjectId, ref: 'Category', required: true}],
-        category: {type: String},
+        //category: {type: String},
         //цена
         price: {type: Number, required: true},
         //количество
@@ -23,6 +23,7 @@ var ProductSchema = new Schema(
         //description: {type: String, required: true},
         description: {type: String, default: "Описание не найдено"},
         //атрибут товара
+        attribute: {type: String, default: "Атрибуты не найдены"},
         //productAttribute:  [{type: Schema.ObjectId, ref: 'ProductAttribute', required: true}],
         //картинки
         //img: [{type: Schema.ObjectId, ref: 'Image', required: true}],
@@ -32,7 +33,7 @@ var ProductSchema = new Schema(
             originalname: {type: String, required: true}
         }],
         */
-        imgUrl: {type: String},
+        images: [{type: String}],
         link: {type: String},
         isSaved: {type: Boolean, default: false},
         buttonStatus: { type: String, default: " Сохранить " },
@@ -44,11 +45,11 @@ var ProductSchema = new Schema(
 );
 
 // Виртуальное свойство - URL автора
-ProductSchema
+ProductViewSchema
     .virtual('url')
     .get(function () {
-        return '/catalog/product/' + this._id;
+        return '/catalog/productView/' + this._id;
     });
 
 //Export model
-module.exports = mongoose.model('Product', ProductSchema);
+module.exports = mongoose.model('ProductView', ProductViewSchema);

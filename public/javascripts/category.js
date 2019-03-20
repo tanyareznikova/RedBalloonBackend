@@ -3,77 +3,6 @@
 
 ;(function (){
 
-    let updateButton = document.querySelector('#updateCategoryButton');
-    let messageBlock = document.querySelector('#message');
-
-    //Обновление категории
-    if( updateButton ){
-
-        updateButton.addEventListener('click' , async function (){
-
-            let categoryTitle = document.querySelector('#categoryTitle').value;
-            let _id = updateButton.dataset.id;
-
-            if(!categoryTitle.match(RegularExpressions.CategoryTitleExpression)){
-
-                if( messageBlock.classList.contains('alert-success') ){
-                    messageBlock.classList.remove('alert-success');
-                }//if
-
-                messageBlock.classList.add('alert-danger');
-
-                messageBlock.textContent = "Название категории некорректно!";
-                messageBlock.style.display = 'block';
-                return;
-
-            }//if
-
-            let request = await fetch( `${window.ServerAddress}panel/category/${_id}` , {
-                method: 'PUT',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    '_id': _id,
-                    'categoryTitle': categoryTitle,
-                })
-            });
-
-            let responseJSON = await request.json();
-
-            messageBlock.textContent = responseJSON.message;
-
-            if( responseJSON.code === 200 ){
-
-                if( messageBlock.classList.contains('alert-danger') ){
-                    messageBlock.classList.remove('alert-danger');
-                }//if
-
-                messageBlock.classList.add('alert-success');
-
-                messageBlock.style.display = 'block';
-
-            }//if
-            else{
-
-                if( messageBlock.classList.contains('alert-success') ){
-                    messageBlock.classList.remove('alert-success');
-                }//if
-
-                messageBlock.classList.add('alert-danger');
-
-                messageBlock.style.display = 'block';
-
-            }//else
-
-            console.log(responseJSON);
-
-
-        });
-
-
-    }//if
-
     //Добавление категории
     let addCategoryButton = document.querySelector("#addCategoryButton");
 
@@ -139,6 +68,79 @@
         } );
 
     }//if
+
+      let updateButton = document.querySelector('#updateCategoryButton');
+      let messageBlock = document.querySelector('#message');
+
+      //Обновление категории
+      if( updateButton ){
+
+          updateButton.addEventListener('click' , async function (){
+
+              let categoryTitle = document.querySelector('#categoryTitle').value;
+              let _id = updateButton.dataset.id;
+
+              console.log('ID:' , _id);//undefined?!
+
+              if(!categoryTitle.match(RegularExpressions.CategoryTitleExpression)){
+
+                  if( messageBlock.classList.contains('alert-success') ){
+                      messageBlock.classList.remove('alert-success');
+                  }//if
+
+                  messageBlock.classList.add('alert-danger');
+
+                  messageBlock.textContent = "Название категории некорректно!";
+                  messageBlock.style.display = 'block';
+                  return;
+
+              }//if
+
+              let request = await fetch( `${window.ServerAddress}panel/category/${_id}` , {
+                  method: 'PUT',
+                  headers: {
+                      "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify({
+                      '_id': _id,
+                      'categoryTitle': categoryTitle,
+                  })
+              });
+
+              let responseJSON = await request.json();
+
+              messageBlock.textContent = responseJSON.message;
+
+              if( responseJSON.code === 200 ){
+
+                  if( messageBlock.classList.contains('alert-danger') ){
+                      messageBlock.classList.remove('alert-danger');
+                  }//if
+
+                  messageBlock.classList.add('alert-success');
+
+                  messageBlock.style.display = 'block';
+
+              }//if
+              else{
+
+                  if( messageBlock.classList.contains('alert-success') ){
+                      messageBlock.classList.remove('alert-success');
+                  }//if
+
+                  messageBlock.classList.add('alert-danger');
+
+                  messageBlock.style.display = 'block';
+
+              }//else
+
+              console.log(responseJSON);
+
+
+          });
+
+
+      }//if
 
     //Удаление категории
 

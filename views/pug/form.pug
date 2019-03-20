@@ -1,0 +1,18 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(http-equiv='X-UA-Compatible', content='ie=edge')
+        title Image Upload Form
+        link(rel='stylesheet', href='../../public/stylesheets/styleforhtml.css')
+    body
+        .page
+            .page__content
+                // Anytime you are uploading files make sure the browser will send the form data as a multipart
+                form.form(action='/upload-image', method='POST', enctype='multipart/form-data', autocomplete='on')
+                    // For/id attributes links the label to the input. Can click either to open image selector.
+                    label.form__label(for='file')
+                        p.form__label__text Choose an Image File...
+                        input#file.form__upload-input(type='file', name='image', accept='image/gif, image/png, image/jpeg')
+                    button.form__button(type='submit') Submit

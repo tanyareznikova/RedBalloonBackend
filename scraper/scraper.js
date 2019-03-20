@@ -49,7 +49,7 @@ Scraper.prototype.loadWebPage = function () {
         });
 };
 /*
- * Parse html and return an object
+ * Parse pug and return an object
 **/
 Scraper.prototype.parsePage = function (html) {
     var $ = cheerio.load(html);

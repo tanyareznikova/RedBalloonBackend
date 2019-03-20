@@ -1,7 +1,7 @@
 "use strict";
 
 const express = require('express');
-const FeedBackController = require("../../controller/api/ProductReviewsController");
+const FeedBackController = require("../../controller/old/api/ProductReviewsController");
 
 const router = express.Router();
 

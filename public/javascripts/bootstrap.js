@@ -3225,7 +3225,7 @@
       };
 
       _proto.setContent = function setContent() {
-        var $tip = $$$1(this.getTipElement()); // We use append for html objects to maintain js events
+        var $tip = $$$1(this.getTipElement()); // We use append for pug objects to maintain js events
 
         this.setElementContent($tip.find(Selector.TITLE), this.getTitle());
 

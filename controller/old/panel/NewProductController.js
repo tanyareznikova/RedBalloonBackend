@@ -1,9 +1,9 @@
 "use strict";
 
-const Product = require('../../models/product').Product;
-const Category = require('../../models/category').Category;
-const Response = require('../../models/utils/Response');
-const ProductAttributes = require('../../models/productAttribute').ProductAttributes;
+const Product = require('../../../models/product').Product;
+const Category = require('../../../models/category').Category;
+const Response = require('../../../models/utils/Response');
+const ProductAttributes = require('../../../models/productAttribute').ProductAttributes;
 
 //const ProductAndAttributes = require('../../model/defenitions').ProductAndAttributes;
 
@@ -12,7 +12,7 @@ const ProductAttributes = require('../../models/productAttribute').ProductAttrib
 const fs = require('fs');
 
 const rimraf = require('rimraf');
-const RegularExpressions = require('../../models/utils/RegularExpressions');
+const RegularExpressions = require('../../../models/utils/RegularExpressions');
 
 module.exports.GetProductsListAction = async ( req , res )=>{
 

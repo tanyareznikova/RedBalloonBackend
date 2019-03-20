@@ -2,7 +2,7 @@
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
-var ProductReviews = require("../../models/productReviews.js").ProductReviews;
+var ProductReviews = require("../../../models/productReviews.js").ProductReviews;
 const find = require("mongoose").find;
 const express = require("express");
 const controller = express();

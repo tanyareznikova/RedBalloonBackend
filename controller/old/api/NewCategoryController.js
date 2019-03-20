@@ -3,16 +3,16 @@
 //const Op = require('sequelize').Op;
 const mongoose = require('mongoose').mongoose;
 
-const Product = require('../../models/product').Product;
-const Category = require('../../models/category').Category;
+const Product = require('../../../models/product').Product;
+const Category = require('../../../models/category').Category;
 
-const Response = require('../../models/utils/Response');
+const Response = require('../../../models/utils/Response');
 //const ProductImages = require('../../model/defenitions').ProductImages;
 const find = require("mongoose").find;
 const express = require("express");
 const controller = express();
 
-const RegularExpressions = require('../../models/utils/RegularExpressions');
+const RegularExpressions = require('../../../models/utils/RegularExpressions');
 
 controller.GetCategories = (async function( req , res ){
 

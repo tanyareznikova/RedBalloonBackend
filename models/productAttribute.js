@@ -9,7 +9,8 @@ var ProductAttributeSchema = new Schema(
         //название атрибута
         titleAttribute: {type: String, required: true, trim: true, unique:true},
         //значение атрибута
-        //valueAttribute: {type: String, required: true},
+        valueAttribute: {type: String, required: true},
+        productID: {type: String, required: true}
 
     },
     //{ _id: false },

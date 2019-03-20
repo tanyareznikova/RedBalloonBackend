@@ -5,7 +5,7 @@ const { sanitizeBody } = require('express-validator/filter');
 var Product = require("../../models/product.js");
 var ProductAttribute = require("../../models/productAttribute.js");
 var Category = require("../../models/category.js");
-var Image = require("../../models/image.js");
+//var Image = require("../../models/old/image.js");
 const find = require("mongoose").find;
 const express = require("express");
 const controller = express();
@@ -99,9 +99,13 @@ controller.postImage = ( function (req, res) {
     });
 });
 
-controller.postProduct = ( upload.any(), async function (req, res) {
+controller.postProduct = (upload.any(),  async function (req, res) {
 
+    //if(!req.files) return res.sendStatus(444);
     //res.send(req.files);
+
+    var path = req.files[0].path;
+    var imageName = req.files[0].originalname;
 
     if(!req.body) return res.sendStatus(400);
 
@@ -113,8 +117,6 @@ controller.postProduct = ( upload.any(), async function (req, res) {
     //res.send(req.files);
     //res.send(req.files);
 
-
-
     const productTitle = req.body.title;
     const productPrice = req.body.price;
     //const productQuantity = req.body.quantity;
@@ -123,10 +125,12 @@ controller.postProduct = ( upload.any(), async function (req, res) {
     //const attributes = JSON.parse(req.body.attributes);
     const categories = req.body.categories;
     const attributes = req.body.attributes;
-    const img = req.files;
+    //const img = req.files;
 
-    var path = req.files[0].path;
-    var imageName = req.files[0].originalname;
+    //var path = req.files[0].path;
+    //var imageName = req.files[0].originalname;
+
+
 
     //const newImage = req.body.images;
     //res.send(req.files);
@@ -185,10 +189,15 @@ controller.postProduct = ( upload.any(), async function (req, res) {
     var imagepath = {};
     imagepath['path'] = path;
     imagepath['originalname'] = imageName;
-
+/*
+    var image = [{
+        ['path'] : pathImage,
+        ['originalname'] : imageName
+    }];
+*/
     const product = await new Product({title: productTitle,
         categories: categories, price: productPrice,
-        description: productDescription, attributes: attributes, files: img
+        description: productDescription, attributes: attributes, img: imagepath
     });
 
     //var imagepath = {};
@@ -239,6 +248,7 @@ controller.postProduct = ( upload.any(), async function (req, res) {
 
         product.save(function(err) {
             if(err) return console.log(err);
+            //req.send(req.files);
             res.send(product);
 
         });

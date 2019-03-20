@@ -1,13 +1,13 @@
 "use strict";
 
-const Category = require('../../models/category').Category;
-const Product = require('../../models/product').Product;
+const Category = require('../../../models/category').Category;
+const Product = require('../../../models/product').Product;
 //const Product = require('../../models/defenitions').Product;
 //const ProductImages = require('../../models/defenitions');
 
-const RegularExpressions = require('../../models/utils/RegularExpressions');
+const RegularExpressions = require('../../../models/utils/RegularExpressions');
 
-const Response = require('../../models/utils/Response');
+const Response = require('../../../models/utils/Response');
 const find = require("mongoose").find;
 const mongoose = require('mongoose').mongoose;
 const express = require("express");

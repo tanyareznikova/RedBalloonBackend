@@ -11,6 +11,9 @@ var multer = require('multer');
 //Express and Mongoose
 //Устанавливаем соединение с mongoose
 var mongoose = require('mongoose');
+
+//const Logo = require("../../../controller//LogoController.js");
+
 //var mongoDB = 'mongodb://localhost:27017/RedBalloonDB';
 
 // img path
@@ -31,6 +34,8 @@ mongoose.set('useCreateIndex', true);
 //const Connection = require('./routes/connection');
 
 const indexRouter = require('./routes/index');
+
+const imageRouter = require('./routes/panel/logo');
 
 const productsRoutes = require('./routes/panel/products');
 const categoriesRoutes = require('./routes/panel/categories');
@@ -58,6 +63,9 @@ const fileUpload = require('express-fileupload');
 
 const app = express();
 
+//app.use(express.static("public"));
+//app.use("/", require("./routes/panel/image"));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -83,8 +91,23 @@ app.use(require('express-session')(
     }
 ));
 
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(multer({
+    //dest: path.join(__dirname, 'public/uploads')}).single('file'));
+//app.use('./routes/api/products/uploads/', express.static(path.join(__dirname, '../uploads')));
+//app.use('./routes/api/products/uploads', express.static(__dirname + '/uploads'));
+
+//app.use('/picture/uploads', express.static(__dirname + '/uploads'));
+app.use('/logo/picture/uploads', express.static(__dirname + '/uploads'));
+
+//app.use('/picture/uploads', express.static(__dirname + '/uploads'));
+
 app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+
+//var imgRoutes = require('./controller/panel/ImagefileController');
+
+//app.use('/panel', imgRoutes);
 
 //app.use(multer());
 //app.use(passport.initialize());
@@ -95,8 +118,10 @@ app.use(bodyParser.json());
 //const localStrategy = require('./passport/local-strategy');
 //ocalStrategy(passport);
 
+
 //ADMIN PANEL ROUTES
 app.use('/',  indexRouter);
+app.use('/panel' , imageRouter);
 app.use('/panel' , productsRoutes);
 app.use('/panel' , categoriesRoutes);
 //app.use('/panel' , localeRoutes);
@@ -126,11 +151,12 @@ var usersRouter = require('./routes/users');
 //app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+
 
 // error handler
 app.use(function(err, req, res, next) {

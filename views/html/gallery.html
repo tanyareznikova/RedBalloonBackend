@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Image Uploader</title>
+    <link rel="stylesheet" href="../../public/stylesheets/styleforhtml.css">
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="page">
+    <div class="page__content" id="photoAlbum">
+    </div>
+</div>
+
+<script>
+    $.ajax({
+        method: "GET",
+        url: "/image/getImages"
+    })
+        .done(function(res) {
+            createGallery(res);
+        })
+        .catch(function(err) {
+            console.log(err)
+        });
+    function createGallery(res) {
+
+        // Loop over each photo and add it to the template
+        res.data.map(function(photo) {
+            console.log(photo)
+            let box = $(
+                `<span class="gallery-item">
+          <a href="uploads/${photo.image}"><img src="uploads/${photo.image}" alt="${photo._id}"></a>
+        </span>`
+            );
+
+            // Append each photo to #photoAlbum
+            $("#photoAlbum").append(box);
+        });
+    }
+</script>
+</body>
+</html>

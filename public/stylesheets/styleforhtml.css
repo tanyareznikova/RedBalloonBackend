@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: arial;
+    font-size: 16px;
+}
+
+body, html {
+    height: 100%;
+}
+
+.page {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+.page__content {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    min-height: 50%;
+    width: 80%;
+    max-width: 80%;
+    box-shadow: 15px 25px 50px 2px #ddd;
+}
+
+.page__content > a {
+    margin: 20px;
+    text-decoration-line: none;
+}
+
+.form {
+    /* border: 1px solid green; */
+}
+
+.form__label {
+    background-color: #4682b4;
+    color: #fff;
+    margin: 0 10px;
+    padding: 10px;
+    height: 40px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.form__label__text {
+    font-weight: 700;
+}
+
+/* Input field is invisble, only the style label can be seen by user.
+*  Avoid using display: none or visibility: hidden because it can't be seen by browser. */
+.form__upload-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.form__button {
+    background-color: #4682b4;
+    color: #fff;
+    font-weight: 700;
+    margin: 0 10px;
+    padding: 10px;
+    height: 40px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 7px;
+    height: 300px;
+}
+
+img:hover {
+    box-shadow: 0 0 2px 1px #cff;
+}

@@ -13,7 +13,8 @@ var mongoose = require('mongoose');
 //var upload    = require('../../public/javascripts/upload');
 const jsonParser = express.json();
 
-
+//router.use('/products/uploads', express.static(__dirname + '/uploads'));
+//router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 /*
 var storage = multer.diskStorage({

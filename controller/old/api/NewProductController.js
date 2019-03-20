@@ -2,10 +2,10 @@
 
 //const Op = require('sequelize').Op;
 const mongoose = require('mongoose').mongoose;
-const Product = require('../../models/product').Product;
-const Category = require('../../models/category').Category;
-const Response = require('../../models/utils/Response');
-const ProductAttributes = require('../../models/productAttribute').ProductAttributes;
+const Product = require('../../../models/product').Product;
+const Category = require('../../../models/category').Category;
+const Response = require('../../../models/utils/Response');
+const ProductAttributes = require('../../../models/productAttribute').ProductAttributes;
 
 //const ProductAndAttributes = require('../../model/defenitions').ProductAndAttributes;
 
@@ -13,7 +13,7 @@ const ProductAttributes = require('../../models/productAttribute').ProductAttrib
 //const ProductImages = require('../../model/defenitions').ProductImages;
 const fs = require('fs');
 
-const RegularExpressions = require('../../models/utils/RegularExpressions');
+const RegularExpressions = require('../../../models/utils/RegularExpressions');
 
 module.exports.GetProducts = async ( req , res )=>{
 

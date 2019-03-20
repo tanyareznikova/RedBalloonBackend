@@ -11,6 +11,8 @@ var WhereCanOneBuySchema = new Schema(
 
         //продукт
         productID: [{type: Schema.ObjectId, ref: 'Product', required: true}],
+        productTitle: {type: String, required: true, trim: true, index: true, unique:true},
+        productPrice: {type: Number, required: true},
         //ссылка на магазин
         linkToStore: [{data: Buffer, contentType: String}],
         //лого магазина

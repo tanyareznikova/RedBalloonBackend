@@ -4,7 +4,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const ProductController = require('../../controller/api/NewProductController');
+const ProductController = require('../../controller/old/api/NewProductController');
 
 router.get('/products/list' , ProductController.GetProducts );
 router.get('/products/:id' ,ProductController.GetProduct );

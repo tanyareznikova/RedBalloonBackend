@@ -7,11 +7,12 @@ var Schema = mongoose.Schema;
 var ProductReviewsSchema = new Schema(
     {
 
-        name: {type: String, required: true, max: 100, trim: true},
-        plus: {type: String, required: true, trim: true},
-        minus: {type: String, required: true, trim: true},
+        name: {type: String, required: true, trim: true},
+        //plus: {type: String, required: true, trim: true},
+        //minus: {type: String, required: true, trim: true},
         message: {type: String, required: true, trim: true},
-        productID: {type: Schema.ObjectId, ref: 'Product', required: true},
+        //productID: {type: Schema.ObjectId, ref: 'Product', required: true},
+        productID: {type: String, required: true}
 
     },
     //{ _id: false },

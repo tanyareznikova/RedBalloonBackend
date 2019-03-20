@@ -27,7 +27,7 @@ var SimCardCharacteristics = require('./models/tempModels/simCardCharacteristics
 var SupplyCharacteristics = require('./models/tempModels/supplyCharacteristics')
 var BodyCharacteristics = require('./models/tempModels/bodyCharacteristics')
 var OtherCharacteristics = require('./models/tempModels/otherCharacteristics')
-var WhereCanOneBuy = require('./models/whereCanOneBuy')
+var WhereCanOneBuy = require('./models/old/whereCanOneBuy')
 
 
 var mongoose = require('mongoose');
