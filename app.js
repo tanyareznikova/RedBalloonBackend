@@ -20,8 +20,17 @@ var mongoose = require('mongoose');
 //var imgPathToProduct = 'C:\\images\\img.png';
 // img path
 mongoose.Promise = global.Promise;
+
+// Connect to the Mongo DB
+const OPTS = {
+    family: 4,
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true
+};
+
 //mongoose.connect('mongodb://localhost:27017/RedBalloonDB', { useNewUrlParser: true })
-mongoose.connect('mongodb://localhost:27017/RedBalloonDB', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/RedBalloonDB', OPTS)
     .then(() =>  console.log('connection succesful'))
     .catch((err) => console.error(err));
 mongoose.set('useCreateIndex', true);
@@ -36,6 +45,7 @@ mongoose.set('useCreateIndex', true);
 const indexRouter = require('./routes/index');
 
 const imageRouter = require('./routes/panel/logo');
+const scraperRouter = require('./routes/panel/productScraper');
 
 const productsRoutes = require('./routes/panel/products');
 const categoriesRoutes = require('./routes/panel/categories');
@@ -122,6 +132,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //ADMIN PANEL ROUTES
 app.use('/',  indexRouter);
 app.use('/panel' , imageRouter);
+app.use('/panel', scraperRouter);
 app.use('/panel' , productsRoutes);
 app.use('/panel' , categoriesRoutes);
 //app.use('/panel' , localeRoutes);

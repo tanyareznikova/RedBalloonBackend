@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Product = require("../../models/product");
 var ProductReviews = require("../../models/productReviews");
+var post = require("../../public/javascripts/seed/post-seeder");
 
 const controller = express();
 
@@ -14,7 +15,7 @@ var cheerio = require("cheerio");
 /* GET home page. */
 controller.getAllPosts = (function(req, res, next) {
     Product.find({})
-        .sort([["scrapedAt", -1]])
+        .sort([["createdAt", -1]])
         .exec(function(err, docs) {
             var totalArticles = docs.length;
             var articleChunks = [];
@@ -23,17 +24,19 @@ controller.getAllPosts = (function(req, res, next) {
                 articleChunks.push(docs.slice(i, i + chunkSize));
             }
 
-            res.render("../views/hbs/shop/index.hbs", {
-                title: "NYT Article Scraper",
+            res.render("../views/productScraper/shop.pug", {
+                title: "СВЯЗНОЙ + ",
                 articles: articleChunks,
-                qty: totalArticles
+                qty: totalArticles,
+                //post: post
+                products: docs
             });
         });
 });
 
 controller.getAllSavedPosts = (function(req, res, next) {
     Product.find({ isSaved: true })
-        .sort([["scrapedAt", -1]])
+        .sort([["createdAt", -1]])
         .exec(function(err, docs) {
             var totalSavedArticles = docs.length;
             var articleChunks = [];
@@ -42,36 +45,41 @@ controller.getAllSavedPosts = (function(req, res, next) {
                 articleChunks.push(docs.slice(i, i + chunkSize));
             }
 
-            res.render("../views/hbs/saved/index.hbs", {
-                title: "Saved",
+            res.render("../views/productScraper/saved.pug", {
+                title: "Сохраненные",
                 articles: articleChunks,
-                qty: totalSavedArticles
+                qty: totalSavedArticles,
+                //post: post
+                products: docs
             });
         });
 });
+
+//each item in newPost
+//each newProduct in products
 
 // Clean up databased by removing unsaved articles
 controller.getDeletePosts = (function(req, res, next) {
     Product.deleteMany({ isSaved: false }, function(err, data) {
         if (err) return handleError(err);
-        res.redirect("/");
+        res.redirect("/panel/productScraper");
     });
 });
 
 controller.getSavePostsById = ( function(req, res) {
-    var articleId = req.params.id;
-    Product.findById(articleId, function(err, article) {
+    var productID = req.params.id;
+    Product.findById(productID, function(err, article) {
         if (article.isSaved) {
             Product.findByIdAndUpdate(
                 // id
                 req.params.id,
                 // update
-                { isSaved: false, buttonStatus: "Save" },
+                { isSaved: false, buttonStatus: "Сохранить" },
                 // options:  set 'new' to 'true' to return the modified document rather than the original
                 { new: true },
                 // callback
                 function(err, data) {
-                    res.redirect("/");
+                    res.redirect("/panel/productScraper");
                 }
             );
         } else {
@@ -79,12 +87,12 @@ controller.getSavePostsById = ( function(req, res) {
                 // id
                 req.params.id,
                 // update
-                { isSaved: true, buttonStatus: "Remove" },
+                { isSaved: true, buttonStatus: "Удалить" },
                 // option
                 { new: true },
                 // callback
                 function(err, data) {
-                    res.redirect("../views/hbs/saved");
+                    res.redirect("../views/productScraper/saved.pug");
                 }
             );
         }
@@ -93,67 +101,75 @@ controller.getSavePostsById = ( function(req, res) {
 
 controller.getScrapeCategory = ( function(req, res) {
     var section = req.params.section;
-    var sectionUrl = "";
+    var categoryUrl = "";
 
-    switch (section) {
-        case "us":
-            sectionUrl = "https://www.nytimes.com/section/us";
-            break;
-        case "business":
-            sectionUrl = "https://www.nytimes.com/section/business";
-            break;
-        case "tech":
-            sectionUrl = "https://www.nytimes.com/section/technology";
-            break;
-        case "travel":
-            sectionUrl = "https://www.nytimes.com/section/travel";
-            break;
-        case "style":
-            sectionUrl = " https://www.nytimes.com/section/style";
-            break;
-        default:
-        // code block
-    }
-    axios.get(sectionUrl).then(function(response) {
+        switch (section) {
+            case "all":
+                categoryUrl = "https://www.svyaznoy.ru/catalog/phone/225";
+                //categoryUrl = "https://www.mvideo.ru/smartfony-i-svyaz/smartfony-205?reff=menu_main";
+                break;
+            case "huawei":
+                categoryUrl = "https://www.svyaznoy.ru/catalog/phone/225/huawei";
+                break;
+            case "honor":
+                categoryUrl = "https://www.svyaznoy.ru/catalog/phone/225/honor";
+                break;
+            case "apple":
+                categoryUrl = "https://www.svyaznoy.ru/catalog/phone/225/apple";
+                break;
+            case "samsung":
+                categoryUrl = "https://www.svyaznoy.ru/catalog/phone/225/samsung";
+                break;
+            default:
+            // code block
+        }//switch
+
+    axios.get(categoryUrl).then(function(response) {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
         var $ = cheerio.load(response.data);
         var result = {};
-        $("div.css-4jyr1y").each(function(i, element) {
+        $("div.b-offer-conteiner__inner").each(function(i, element) {
+            var imgUrl = $(element)
+                .parent()
+                .find("div.slick-offer-img__slide")
+                .find("img")
+                .attr("src");
+            var title = $(element)
+                .find("h1.b-offer-title")
+                .text()
+                .trim();
+            /*
+            var productIdOnSite = $(element)
+                .find("div.data-key")
+                .text()
+                .trim();
+                */
+            var price = $(element)
+                .find("div.b-offer-box__price")
+                .text()
+                .trim();
             var link = $(element)
                 .find("a")
                 .attr("href");
-            var title = $(element)
-                .find("h2.e1xfvim30")
-                .text()
-                .trim();
-            var description = $(element)
-                .find("p.e1xfvim31")
-                .text()
-                .trim();
-            var imagePath = $(element)
-                .parent()
-                .find("figure.css-196wev6")
-                .find("img")
-                .attr("src");
-            var baseURL = "https://www.nytimes.com";
+            var baseURL = "https://www.svyaznoy.ru";
             result.link = baseURL + link;
             result.title = title;
-            if (description) {
-                result.description = description;
+            //result.productIdOnSite = productIdOnSite;
+            //result.category = "Все смартфоны";
+            if (price) {
+                result.price = price;
             }
-            if (imagePath) {
-                result.imagePath = imagePath;
+            if (imgUrl) {
+                result.imgUrl = imgUrl;
             } else {
-                result.imagePath =
-                    "https://via.placeholder.com/205x137.png?text=No%20Image%20from%20NYTimes";
+                result.imgUrl =
+                    "https://via.placeholder.com/307x224.jpg?text=No%20Image%20from%20Svyaznoy";
             }
-
-            if (section !== "us") {
+            if (section !== "all") {
                 result.section = section;
             } else {
-                result.section = "U.S.";
+                result.section = "Все смартфоны";
             }
-
             // Create a new Article using the `result` object built from scraping
             Product.create(result)
                 .then(function(dbArticle) {
@@ -166,9 +182,12 @@ controller.getScrapeCategory = ( function(req, res) {
                     console.log(err);
                 });
         });
+
         console.log("Scrape Complete");
-        res.redirect("/");
+        res.redirect("/panel/productScraper");
     });
+
+
 });
 
 // Route for grabbing a specific Article by id, populate it with it's note
@@ -176,33 +195,35 @@ controller.getPostsById = (function(req, res) {
     // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
     Product.findOne({ _id: req.params.id })
     // ..and populate all of the comments associated with it
-        .populate("comments")
+        .populate("reviews")
         .then(function(dbArticle) {
             // If there are comments in the article
             var commentsToDisplay = [];
 
-            if (dbArticle.comments === undefined || dbArticle.comments.length == 0) {
+            if (dbArticle.reviews === undefined || dbArticle.reviews.length === 0) {
                 commentsToDisplay = [
                     {
-                        commentBody: "Your are the first person to comment.",
-                        username: "N/A"
+                        message: "Your are the first person to comment.",
+                        name: "N/A"
                     }
                 ];
             } else {
-                commentsToDisplay = dbArticle.comments;
+                commentsToDisplay = dbArticle.reviews;
             }
 
-            res.render("../views/hbs/article/index.hbs", {
-                articleId: dbArticle._id,
-                imagePath: dbArticle.imagePath,
+            res.render("../views/productScraper/post.pug", {
+                productID: dbArticle._id,
+                imgUrl: dbArticle.imgUrl,
                 title: dbArticle.title,
-                description: dbArticle.description,
+                //productIdOnSite: dbArticle.productIdOnSite,
+                //description: dbArticle.description,
+                price: dbArticle.price,
                 section: dbArticle.section,
                 link: dbArticle.link,
-                comments: commentsToDisplay,
-                date: dbArticle.date,
+                reviews: commentsToDisplay,
                 isSaved: dbArticle.isSaved,
                 buttonStatus: dbArticle.buttonStatus
+
             });
         })
         .catch(function(err) {
@@ -212,16 +233,16 @@ controller.getPostsById = (function(req, res) {
 
 // Route for saving/updating an Article's associated Comment
 controller.postNewPosts = ( function(req, res) {
-    var redirectBackToArticle = `/articles/${req.params.id}`;
-    var articleId = req.params.id;
+    var redirectBackToArticle = `/panel/productScraper/posts/${req.params.id}`;
+    var productID = req.params.id;
 
     // Grab the request body
     var body = req.body;
     // Each property on the body all represent our text boxes in article/index.hbs as specified by the name attribute on each of those input fields
     var res_body = {
-        commentBody: body.new_comment_body,
-        username: body.new_comment_username,
-        articleId: articleId
+        message: body.new_comment_body,
+        name: body.new_comment_username,
+        productID: productID
     };
 
     // Create a new note and pass the req.body to the entry
@@ -232,7 +253,7 @@ controller.postNewPosts = ( function(req, res) {
             // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
             return Product.findOneAndUpdate(
                 { _id: req.params.id },
-                { $push: { comments: dbComment._id } },
+                { $push: { reviews: dbComment._id } },
                 { new: true }
             );
         })
@@ -248,14 +269,14 @@ controller.postNewPosts = ( function(req, res) {
 
 // Clean up databased by removing unsaved articles
 controller.getDeleteReviews = ( function(req, res, next) {
-    var articleId = "";
+    var productID = "";
 
     // Grab article Id from the database
     ProductReviews.findById({ _id: req.params.id }).exec(function(err, doc) {
         console.log(doc);
-        articleId = doc.articleId;
+        productID = doc.productID;
 
-        var redirectBackToArticle = `/articles/${articleId}`;
+        var redirectBackToArticle = `/panel/productScraper/posts/${productID}`;
         console.log(redirectBackToArticle);
 
         ProductReviews.deleteOne({ _id: req.params.id }, function(err, data) {

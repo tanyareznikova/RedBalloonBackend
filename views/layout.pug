@@ -5,6 +5,7 @@ html
     base(href="/")
     link(rel='stylesheet', href='../../stylesheets/bootstrap.css')
     link(rel='stylesheet', href='../../stylesheets/style.css')
+    link(rel='stylesheet', href='../../stylesheets/styleforhbs.css')
     //link(href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="node_modules" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous")
     script( src="../../javascripts/jquery.js" )
     script( src="../../javascripts/bootstrap.js" )
@@ -13,6 +14,41 @@ html
     script( src="../../javascripts/main.js" )
 
   body
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      a.navbar-brand.newspaper-font(href="/panel/productScraper") Связной!
+      button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarSupportedContent", aria-controls="navbarSupportedContent", aria-expanded="false", aria-label="Toggle navigation")
+        span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse.show(style="")
+        ul.navbar-nav.mr-0
+          li.nav-item
+            a.nav-link(href='/panel/productScraper')
+              | Home
+              span.sr-only #{(current)}
+          li.nav-item.dropdown
+            a#navbarDropdown.nav-link.dropdown-toggle(href="#", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
+              i.far.fa-newspaper
+              |  Actions
+            .dropdown-menu(aria-labelledby="navbarDropdown")
+              a.dropdown-item(href="/panel/productScraper/saved")
+                i.far.fa-newspaper
+                |  Просмотр сохраненных телефонов
+              .dropdown-divider
+              a.dropdown-item(href="/panel/productScraper/scrape/all")
+                i.fas.fa-flag-usa
+                |  Scrape Все телефоны
+              a.dropdown-item(href="/panel/productScraper/scrape/huawei")
+                i.fas.fa-shopping-basket
+                |  Scrape Huawei
+              a.dropdown-item(href="/panel/productScraper/scrape/honor")
+                i.fas.fa-user-astronaut
+                |  Scrape Honor
+              a.dropdown-item(href="/panel/productScraper/scrape/apple")
+                i.fas.fa-plane-departure
+                |  Scrape Apple
+              a.dropdown-item(href="/panel/productScraper/scrape/samsung")
+                i.fas.fa-glass-martini-alt
+                |  Scrape Samsung
+
     nav.navbar.navbar-dark.fixed-top.bg-dark.flex-md-nowrap.p-0.shadow
       a.navbar-brand.col-sm-3.col-md-2.mr-0(href='#') Company name
       input.form-control.form-control-dark.w-100(placeholder='Search', aria-label='Search', type='text')
@@ -60,12 +96,12 @@ html
                     line(x1='6', y1='20', x2='6', y2='14')
                   |                   Отзывы о товаре
               li.nav-item
-                a.nav-link(href='panel/news/news-list')
+                a.nav-link(href='panel/productScraper')
                   svg.feather.feather-layers(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewBox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
                     polygon(points='12 2 2 7 12 12 22 7 12 2')
                     polyline(points='2 17 12 22 22 17')
                     polyline(points='2 12 12 17 22 12')
-                  |                   Новости
+                  |                   Скрапер
                 a.nav-link(href='panel/about')
                   svg.feather.feather-layers(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewBox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
                     polygon(points='12 2 2 7 12 12 22 7 12 2')

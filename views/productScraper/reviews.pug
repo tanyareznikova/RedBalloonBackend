@@ -1,0 +1,28 @@
+extends ../layout
+
+
+block content
+    //script( defer src="../../javascripts/post-seeder.js" )
+    a.newspaper-headline(href='/panel/productScraper')
+        h1.newspaper-font.text-center Связной
+    .d-flex.intro-bar
+        .p-2.flex-grow-1
+            h5.newspaper-font.text-capitalize #{section}
+            p.card-text.intro-text
+                | You are reading
+                span.content-title #{title}
+        .p-2
+            a.btn.btn-sm.btn-outline-dark(href='/panel/productScraper')
+                i.fas.fa-home
+                |  Back to Home
+    .content-bar
+        each comments in reviews
+        .comment-display
+            .card.border-info.mb-3(style='max-width: 80%;')
+                .card-body.text-info
+                    h5.card-title #{comments.message}
+                    p.card-text - #{comments.name}
+                    a(href='/panel/productScraper/delete-post/#{comments._id}')
+                        class="btn(btn-sm='', round='', btn-outline-danger='')"
+                        i.far.fa-trash-alt
+                        |             Delete

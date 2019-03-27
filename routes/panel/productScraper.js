@@ -1,8 +1,8 @@
 var express = require("express");
-var router = express.Router();
 var ProductScraper = require("../../controller/panel/NewProductScraperController.js");
+var router = express.Router();
 
-
+const jsonParser = express.json();
 
 router.get('/productScraper', ProductScraper.getAllPosts);
 router.post('/productScraper/saved', ProductScraper.getAllSavedPosts);

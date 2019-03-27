@@ -1,0 +1,70 @@
+extends ../layout
+
+
+block content
+    //script( defer src="../../javascripts/post-seeder.js" )
+    //script( defer src="../../javascripts/cart.js" )
+    a.newspaper-headline(href='/panel/productScraper')
+        h1.newspaper-font.text-center Связной
+    .d-flex.intro-bar
+        .p-2.flex-grow-1
+            p
+                | Добро пожаловать в #{title}
+                span#datetime
+            p
+                i.fas.fa-cut
+                |  Scraper Tools:
+            a.btn.btn-sm.btn-outline-info.mr-2.mb-2(href='/panel/productScraper/scrape/all')
+                i.fas.fa-flag-usa
+                |  Все телефоны
+            a.btn.btn-sm.btn-outline-info.mr-2.mb-2(href='/panel/productScraper/scrape/huawei')
+                i.fas.fa-shopping-basket
+                |  Huawei
+            a.btn.btn-sm.btn-outline-info.mr-2.mb-2(href='/panel/productScraper/scrape/honor')
+                i.fas.fa-user-astronaut
+                |  Honor
+            a.btn.btn-sm.btn-outline-info.mr-2.mb-2(href='/panel/productScraper/scrape/apple')
+                i.fas.fa-plane-departure
+                |  Apple
+            a.btn.btn-sm.btn-outline-info.mr-2.mb-2(href='/panel/productScraper/scrape/samsung')
+                i.fas.fa-glass-martini-alt
+                |  Samsung
+        .p-2
+            p
+                i.fas.fa-database
+                |  База данных:
+            p Сейчас #{qty} телефонов scraped с сайта Связной.
+            a(href='/panel/productScraper/saved')
+                button#del-btn.btn.btn-sm.round.btn-outline-success.mb-2.mr-2
+                    i.far.fa-newspaper
+                    |         Просмотр сохраненных телефонов
+            a(href='/panel/productScraper/delete')
+                button#del-btn2.btn.btn-sm.round.btn-outline-danger
+                    i.far.fa-trash-alt
+                    |         Удаление телефонов
+    .content-bar
+        each newPost in products
+            .row
+                .col-12.col-md-4
+                    .card.mx-auto.mb-3.text-center(style='width: 90%;')
+                        a(href='/panel/productScraper/posts/'+newPost._id)
+                            img.card-img-top.img-fluid.div-483.mx-auto.mt-2(src= "https://static.svyaznoy.ru/upload/iblock/fa2/img_3671.jpg/resize/483x483/hq/", alt='Card image cap')
+                        .card-body
+                            p
+                            a.card-title.news-title(href='/panel/productScraper/posts/'+newPost._id, target=' _blank') #{newPost.title}
+                            p.card-text.text-left
+                                | #{newPost.price}
+                                |
+                                a(href= '#{newPost.link}', target='_blank')
+                                    pan.text-info
+                                    | Read more...
+                        .row
+                            .col-6
+                                p.text-center
+                                    a.view-comments.btn.btn-link(href='/panel/productScraper/posts/#{newPost._id}')
+                                        i.far.fa-comments
+                                        |                 Отзывы
+                            .col-6
+                                p.text-center
+                                    a.btn.btn-sm.round(href='/panel/productScraper/save-post/#{newPost._id}', class='btn{#{newPost.isSaved}-outline{#{newPost.isSaved}}-dark')
+                                        | #{newPost.buttonStatus}

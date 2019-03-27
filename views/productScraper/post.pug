@@ -1,0 +1,57 @@
+extends ../layout
+
+
+block content
+    //script( defer src="../../javascripts/post-seeder.js" )
+    a.newspaper-headline(href='/panel/productScraper')
+        h1.newspaper-font.text-center Связной
+    .d-flex.intro-bar
+        .p-2.flex-grow-1
+            h5.newspaper-font.text-capitalize #{section}
+            p.card-text.intro-text
+                | You are reading
+                span.content-title #{title}
+        .p-2
+            a.btn.btn-sm.btn-outline-dark(href='/panel/productScraper')
+                i.fas.fa-home
+                |  Back to Home
+    .content-bar
+        row
+            .col-12.col-md-4
+                .card.mx-auto.mb-3(style='width: 90%;')
+                    img.card-img-top.img-fluid.div-307.mx-auto.mt-2(src='#{newPost.imgUrl}', alt='Card image cap')
+                    .card-body
+                        a.card-title.news-title(href='#{newPost.link}', target='_blank') #{newPost.title}
+                        p.card-text.mt-2 #{newPost.price}
+                        a.view-comments.btn.btn-link(href='#{newPost.link}', target='_blank')
+                            i.far.fa-newspaper
+                            |             Read full article
+                        a.btn.btn-sm.round(href='/panel/productScraper/save-post/'+newPost.productID, class='btn{#{newPost.isSaved}}-outline{#{newPost.isSaved}}-dark')
+                            | #{newPost.buttonStatus}
+            .col-12.col-md-8
+                #view-response.d-flex.justify-content-center
+                    #comment-display
+                        p
+                            | Responses for
+                            span#article-title.content-title #{newPost.title}
+                            each comments in reviews
+                                .comment-display
+                                    .card.border-info.mb-3(style='width: 90%;')
+                                        .card-body.text-info
+                                            h5.card-title #{comments.message}
+                                            p.card-text - #{comments.name}
+                                            |                 #{comments._id}
+                                            .text-right
+                                                a.btn.btn-sm.round.btn-light.delete-comment(href='/panel/productScraper/delete-post/'+comments._id)
+                                                    i.far.fa-trash-alt
+                                                    |                     Delete
+                                p
+                                    i.fas.fa-user-edit
+                                    |  Comment
+                                form(action='/panel/productScraper/posts/'+comments.productID, method='post', style='width: 90%;')
+                                    #save-comment.justify-content-center
+                                        .form-group
+                                            textarea#new-comment-body.form-control.mb-2(name='new_comment_body', rows='3', placeholder='Tell us what you think about this article...')
+                                        .form-group
+                                            input#new-comment-username.form-control.mb-2(type='text', name='new_comment_username', placeholder='Your public name')
+                                        button.btn.btn-info.btn-sm.round(type='submit') Send

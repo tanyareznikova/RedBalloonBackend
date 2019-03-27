@@ -1,0 +1,39 @@
+extends ../layout
+include mixins
+
+block content
+    //script( defer src="../../javascripts/post-seeder.js" )
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        a.navbar-brand.newspaper-font(href="/panel/productScraper") Связной!
+        button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarSupportedContent", aria-controls="navbarSupportedContent", aria-expanded="false", aria-label="Toggle navigation")
+            span.navbar-toggler-icon
+        #navbarSupportedContent.collapse.navbar-collapse.show(style="")
+            ul.navbar-nav.mr-0
+                li.nav-item
+                    a.nav-link(href='/panel/productScraper')
+                        | Home
+                        span.sr-only (current)
+                li.nav-item.dropdown
+                    a#navbarDropdown.nav-link.dropdown-toggle(href="#", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
+                        i.far.fa-newspaper
+                        |  Actions
+                    .dropdown-menu(aria-labelledby="navbarDropdown")
+                        a.dropdown-item(href="/panel/productScraper/saved")
+                            i.far.fa-newspaper
+                            |  Просмотр сохраненных телефонов
+                        .dropdown-divider
+                        a.dropdown-item(href="/panel/productScraper/scrape/all")
+                            i.fas.fa-flag-usa
+                            |  Scrape Все телефоны
+                        a.dropdown-item(href="/panel/productScraper/scrape/huawei")
+                            i.fas.fa-shopping-basket
+                            |  Scrape Huawei
+                        a.dropdown-item(href="/panel/productScraper/scrape/honor")
+                            i.fas.fa-user-astronaut
+                            |  Scrape Honor
+                        a.dropdown-item(href="/panel/productScraper/scrape/apple")
+                            i.fas.fa-plane-departure
+                            |  Scrape Apple
+                        a.dropdown-item(href="/panel/productScraper/scrape/samsung")
+                            i.fas.fa-glass-martini-alt
+                            |  Scrape Samsung

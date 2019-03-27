@@ -1,0 +1,31 @@
+extends ../layout
+
+
+block content
+    //script( defer src="../../javascripts/post-seeder.js" )
+    a.newspaper-headline(href='/panel/productScraper')
+        h1.newspaper-font.text-center Связной
+    .d-flex.intro-bar
+        .p-2.flex-grow-1
+            h5.newspaper-font.text-capitalize #{title}
+            p.card-text.intro-text There are #{qty} articles saved in the database.
+        .p-2
+            a.btn.btn-sm.btn-outline-dark(href='/panel/productScraper')
+                i.fas.fa-home
+                |  Back to Home
+    .content-bar
+        each articles in products
+        .row
+            each item in articles
+            .col-12.col-md-4
+                .card.mx-auto.mb-3(style='width: 90%;')
+                    img.card-img-top.img-fluid.div-205.mx-auto.mt-2(src='#{item.imgUrl}', alt='Card image cap')
+                    .card-body
+                        a.card-title.news-title(href='#{item.link}', target='_blank') #{item.title}
+                        p.card-text.mt-2 #{item.price}
+                        a.view-comments.btn.btn-link(href='/panel/productScraper/posts/'+item._id)
+                            i.far.fa-comments
+                            |  View
+                            |             Comments
+                        a.btn.btn-sm.round(href='/panel/productScraper/save-post/'+item._id, class='btn{#{item.isSaved}}-outline{#{item.isSaved}}-dark')
+                            | #{item.buttonStatus}
